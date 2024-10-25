@@ -1,0 +1,63 @@
+/* Container for Match Image Section */
+.today-match {
+  text-align: center;
+  background-color: #333;
+  margin: 15px auto;
+  padding: 20px;
+  max-width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for modern look */
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #ffffff !important; /* Change text color to white */
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 28px; /* Consolidated to avoid duplication */
+  margin-bottom: 20px;
+}
+
+.match-image-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Style for message when no image is selected */
+.match-image-container p {
+  font-size: 18px;
+  color: #d7cfcf;
+  margin-top: 20px;
+}
+
+/* Grid layout for displaying match images */
+.match-image-container img {
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border: 3px solid #3498db;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effects for the match images */
+.match-image-container img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
+  .match-image-container {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+    gap: 10px;
+  }
+
+  .match-image-container h2 {
+    font-size: 24px; /* Smaller font for mobile */
+  }
+
+  .match-image-container img {
+    max-width: 100%; /* Smaller images on mobile */
+  }
+}

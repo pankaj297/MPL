@@ -1,0 +1,158 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #f9f9f9;
+}
+
+/* Container for full background */
+.admin-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('/path/to/your/sport-bg.jpg') no-repeat center center/cover;
+  position: relative;
+}
+
+.admin-login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+   background-color: rgba(255, 255, 255, 0.1); /* Transparent white */
+}
+
+/* Login Form Styling */
+.login-form {
+  position: relative;
+  padding: 30px;
+   background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+ 
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  z-index: 1;
+}
+
+.login-form h2 {
+  font-size: 28px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 16px;
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+}
+
+.error-msg {
+  color: #e74c3c;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Welcome Page Styling */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome-msg {
+  font-size: 32px;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #3498db;
+  margin-top: 20px;
+}
+
+/* Additional Content Styling */
+.additional-content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+}
+
+.additional-content h3 {
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.additional-content p {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .login-form, .additional-content {
+    padding: 20px;
+    max-width: 300px;
+  }
+
+  .login-form h2, .welcome-msg, .additional-content h3 {
+    font-size: 24px;
+  }
+
+  .input-field,
+  .login-button,
+  .additional-content p {
+    font-size: 14px;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+}

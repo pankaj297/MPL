@@ -1,0 +1,118 @@
+/* PlayerProfile Component Styling */
+
+.live-player-profile{
+  text-align: center;
+  width: 100%;
+  padding: 10px 0 10px;
+  background-color: #333;
+  color: white;
+}
+.player-profile {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .player-profile {
+  max-width: 90%;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  /* border-radius: 50%; */
+  margin-right: 10px;
+  border: 1px solid #3498db;
+}
+}
+
+.player-profile:hover {
+  transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  /* border-radius: 50%; */
+  margin-right: 20px;
+  border: 1px solid #3498db;
+}
+
+.profile-info h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.player-position {
+  font-weight: bold;
+  color: #e67e22; /* Position color (orange) */
+}
+
+.bidding-price {
+  font-weight: bold;
+  color: #3498db; /* Bidding price color (blue) */
+}
+
+.last-team {
+  font-style: italic;
+  color: #888;
+}
+
+/* Final Bid Button */
+.final-bid-btn {
+  background-color: #2ecc71; /* Green color for final bid button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.final-bid-btn:hover {
+  background-color: #27ae60;
+}
+
+/* Final Bidding Details */
+.final-bid {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.final-bid h3 {
+  font-size: 22px;
+  color: #333;
+}
+
+.final-bid p {
+  font-size: 18px;
+  margin: 5px 0;
+  color: #444;
+}
+
+.final-bid p:last-child {
+  font-weight: bold;
+  color: #e74c3c; /* Red for final price */
+}

@@ -1,0 +1,193 @@
+/* Teams Component Styling */
+.participating-teams{
+  background-color: #333;
+ 
+  width: 100%;
+}
+.teams-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  
+  box-sizing: border-box; /* Ensures padding is included in width/height */
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Team List - Responsive Layout */
+.team-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile-first single column */
+  gap: 20px;
+}
+
+/* Team Profile Styling */
+.team-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.team-profile:hover {
+  transform: scale(1.02); /* Slight zoom effect */
+}
+
+/* Responsive Profile Content */
+.profile-content {
+  width: 100%;
+}
+
+/* Responsive Table Content */
+.table-content {
+  width: 100%;
+}
+
+/* Team Logo */
+.team-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px; /* Margin adjusted for centered layout */
+  /* border-radius: 50%; */
+  border: 3px solid #3498db;
+}
+
+.team-info {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.team-info h3 {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
+}
+
+.team-info p {
+  margin: 5px 0;
+  color: #626161;
+}
+
+.team-details-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.team-details-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Team Details Section */
+.team-details {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-details h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.players-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.players-table th,
+.players-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.players-table th {
+  background-color: #3498db;
+  color: white;
+}
+
+.players-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive Design - Grid layout changes on different screens */
+@media (min-width: 576px) {
+  /* Small screens like larger mobiles and small tablets */
+  .team-list {
+    grid-template-columns: 1fr; /* Two-column layout for small screens */
+  }
+}
+
+@media (min-width: 768px) {
+  /* Medium screens like tablets */
+  .team-list {
+    grid-template-columns: 1fr; /* Three-column layout */
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Large screens like laptops and desktops */
+  .team-list {
+    grid-template-columns: 1fr; /* Four-column layout */
+  }
+}
+
+/* Responsive Typography */
+h2 {
+  font-size: 2rem; /* Responsive font size */
+}
+
+.team-info h3 {
+  font-size: 1.5rem;
+}
+
+.team-info p {
+  font-size: 1rem;
+}
+
+/* Button Responsive Padding */
+.team-details-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px; /* Modern button styling */
+}
+
+/* Responsive Padding and Margins */
+.team-profile {
+  padding: 20px;
+}
+
+.team-details {
+  padding: 30px;
+}
+
+/* Enhancing the table for readability on mobile */
+.players-table th, .players-table td {
+  padding: 15px; /* Increased padding for better readability on mobile */
+}
+
+/* Accessibility - Focus State for Buttons */
+.team-details-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.5); /* Focus state for better accessibility */
+}

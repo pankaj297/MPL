@@ -1,0 +1,127 @@
+.footer-section {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+
+.footer-bigcard {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+.info-me {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.info-me2 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8rem;
+}
+
+ .logo{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+  
+}
+ .logo .pankaj{
+      background-color: skyblue;
+      font-weight: bold;
+      border-radius: 5px;
+      margin: 5px;
+      padding: 2px 2px 2px 2px;
+    
+}
+.authors{
+    color: skyblue;
+}
+ .logo .naik{
+    color: #fff;
+}
+.info-me p {
+    font-size: 15px;
+    color: rgb(111, 109, 109);
+    margin-top: 1rem;
+}
+
+.call-me {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mpl-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mpl-logo-img {
+    width: 80px; /* Adjust as necessary */
+    height: auto;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.social-links h3 {
+    font-size: 20px;
+    margin-bottom: 1rem;
+    color: skyblue;
+}
+
+.social-link-content {
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15%;
+    gap: .2rem;
+}
+
+.icon1{
+     font-size: 20px;
+    color: #eaeaea;
+    transition: color 0.3s;
+}
+
+.icon {
+    font-size: 25px;
+    color: #eaeaea;
+    transition: color 0.3s;
+}
+
+.icon:hover {
+    color: skyblue;
+}
+
+@media (max-width: 768px) {
+    .footer-bigcard {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+.info-me2 {
+    padding-left: 10px;
+}
+
+    .social-link-content {
+        grid-template-columns: 10% 10% 10% 10%;
+        gap: .5rem;
+    }
+}
+
