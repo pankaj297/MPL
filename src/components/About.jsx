@@ -1,21 +1,9 @@
 import React from "react";
 import "./design/Home.css";
-import { Gallery } from "./Gallery";
 
-export const Home = () => {
+const About = () => {
   return (
-    <>
-      <div className="home-container">
-        <video
-          className="background-video"
-          src="./images/video1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        ></video>
-      </div>
-
+    <div>
       {/* About Section */}
       <div className="about-section">
         <div className="about-content">
@@ -38,7 +26,8 @@ export const Home = () => {
           <img src="./images/trophy.jpg" alt="About Image" />
         </div>
       </div>
-      <Gallery />
-    </>
+    </div>
   );
 };
+
+export default About;
