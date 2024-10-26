@@ -1,55 +1,53 @@
-/* PlayerProfile Component Styling */
+/* Player Profile Component Styling */
 
-.live-player-profile{
+.live-auction-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   background-color: #333;
+    height: 90vh;
+}
+.live-player-profile {
   text-align: center;
   width: 100%;
-  padding: 10px 0 10px;
-  background-color: #333;
+  padding: 20px 0;
   color: white;
+ 
 }
+
 .player-profile {
   background-color: #f8f9fa;
   border-radius: 12px;
   padding: 20px;
   margin: 20px auto;
-  max-width: 50%;
+  max-width: 600px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .player-profile {
-  max-width: 90%;
-}
-
-.profile-img {
-  width: 100px;
-  height: 100px;
-  /* border-radius: 50%; */
-  margin-right: 10px;
-  border: 1px solid #3498db;
-}
-}
-
 .player-profile:hover {
-  transform: scale(1.02); /* Slight zoom on hover */
+  transform: scale(1.02);
 }
 
 .profile-header {
   display: flex;
-  align-items: center;
+  justify-content: center; /* Center the profile image */
 }
 
 .profile-img {
   width: 120px;
   height: 120px;
-  /* border-radius: 50%; */
-  margin-right: 20px;
-  border: 1px solid #3498db;
+  border-radius: 50%;
+  border: 2px solid #3498db;
+  object-fit: cover;
+}
+
+.profile-info {
+  margin-top: 15px; /* Space between image and text */
 }
 
 .profile-info h2 {
-  font-size: 24px;
+  font-size: 28px;
   color: #333;
 }
 
@@ -59,26 +57,16 @@
   margin: 5px 0;
 }
 
-.player-position {
-  font-weight: bold;
-  color: #e67e22; /* Position color (orange) */
-}
-
 .bidding-price {
   font-weight: bold;
-  color: #3498db; /* Bidding price color (blue) */
-}
-
-.last-team {
-  font-style: italic;
-  color: #888;
+  color: #3498db;
 }
 
 /* Final Bid Button */
 .final-bid-btn {
-  background-color: #2ecc71; /* Green color for final bid button */
+  background-color: #2ecc71;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   margin-top: 15px;
@@ -93,7 +81,7 @@
 
 /* Final Bidding Details */
 .final-bid {
-  background-color: #fff;
+  background-color: #333;
   border-radius: 12px;
   padding: 20px;
   margin-top: 20px;
@@ -102,17 +90,33 @@
 }
 
 .final-bid h3 {
-  font-size: 22px;
-  color: #333;
+  font-size: 24px;
+  color: #fff;
 }
 
 .final-bid p {
   font-size: 18px;
   margin: 5px 0;
-  color: #444;
+  color: #fff;
 }
 
 .final-bid p:last-child {
   font-weight: bold;
-  color: #e74c3c; /* Red for final price */
+  color: #e74c3c; /* Red color for final price */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .player-profile {
+    max-width: 90%; /* Full width on smaller screens */
+  }
+
+  
+.profile-header {
+  display: flex;
+  justify-content: center; /* Center the profile image */
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
 }

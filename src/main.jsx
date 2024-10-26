@@ -7,12 +7,17 @@ import Error from "./components/Error.jsx";
 import { Home } from "./components/Home.jsx";
 import { Gallery } from "./components/Gallery.jsx";
 import { Teams } from "./components/Teams.jsx";
-import { Live } from "./secondmaincomponents/Live.jsx";
-import { MatchImage } from "./components/MatchImage.jsx";
+import { LiveAuction } from "./components/LiveAuction.jsx";
 import { CricketPlayerRegistration } from "./components/Registration.jsx";
-import About from "./components/About.jsx";
+import { About } from "./components/About.jsx";
+import { AdminLogin } from "./components/AdminLogin.jsx";
 import { ShowUpdate } from "./components/ShowUpdate.jsx";
-import { InsertUpdate } from "./components/insertUpdate.jsx";
+import { Matches } from "./components/Matches.jsx";
+import { Admin } from "./Admin.jsx";
+
+
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -24,11 +29,13 @@ const appRouter = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/gallary", element: <Gallery /> },
       { path: "/register", element: <CricketPlayerRegistration /> },
-      { path: "/matches", element: <MatchImage /> },
-      { path: "/live", element: <Live /> },
+      { path: "/matches", element: <Matches /> },
+      { path: "/live", element: <LiveAuction /> },
       { path: "/teams", element: <Teams /> },
-      { path: "/showUpdate", element: <ShowUpdate /> },
-      { path: "/insertUpdate", element: <InsertUpdate /> },
+      { path: "/live", element: <LiveAuction /> },
+      { path: "/login", element: <AdminLogin /> },
+      { path: "/update", element: <ShowUpdate /> },
+      { path: "/admin", element: <Admin /> },
     ],
   },
 ]);

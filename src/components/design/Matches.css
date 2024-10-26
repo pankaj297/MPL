@@ -1,0 +1,122 @@
+/* Matches.css */
+
+/* Base Styles */
+/* body {
+  margin: 0;
+  padding: 0;
+  background-color: #333; /* Light background for contrast 
+}*/
+
+
+
+.match-page{
+   margin: 0;
+  padding: 0;
+  background-color: #333;
+  height: 100vh;
+  width: 100%;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.matches-container {
+  /* text-align: center; */
+  padding: 20px;
+  margin: 20px auto; /* Center container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   display: flex; 
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr;
+ 
+}
+
+h1 {
+  font-size: 2rem; /* Responsive font size */
+  color: #fff; /* Dark text color */
+  margin-bottom: 20px;
+}
+
+/* Match Card Styles */
+.match-card {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  padding: 5px;
+  background-color: #f8f9fa; /* Slightly off-white for contrast */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(174, 172, 172, 0.1);
+  transition: transform 0.3s; /* Smooth scaling effect on hover */
+}
+
+.match-card:hover {
+  transform: scale(1.02); /* Scale up on hover */
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 15px;
+}
+
+.team img {
+  width: 60px; /* Logo size */
+  height: 60px;
+  border-radius: 50%; /* Circular logos for teams */
+  margin-bottom: 5px;
+}
+
+.team p {
+  font-size: 1.2rem; /* Team name size */
+  color: #333; /* Dark text for team names */
+}
+
+/* Vs Text Styles */
+h2 {
+  margin: 0 10px;
+  font-weight: normal;
+  font-size: 24px;
+  color: #e67e22; /* Orange color for vs text */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem; /* Smaller heading for mobile */
+  }
+
+  .match-card {
+    flex-direction: rows; /* Stack teams vertically on mobile */
+    padding: 5px; /* Increased padding for touch devices */
+  }
+
+  .team {
+    margin: 10px 0; /* Space between teams */
+  }
+
+  .team img {
+    width: 50px; /* Slightly smaller logo */
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem; /* Even smaller heading for very small devices */
+  }
+
+  h2 {
+    font-size: 20px; /* Smaller vs text */
+  }
+
+  .team p {
+    font-size: 1rem; /* Smaller team name */
+  }
+}

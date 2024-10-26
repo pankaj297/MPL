@@ -1,8 +1,9 @@
 import React from "react";
 import "./design/Home.css";
 
-const About = () => {
+export const About = () => {
   return (
+    <>
     <div>
       {/* About Section */}
       <div className="about-section">
@@ -26,8 +27,7 @@ const About = () => {
           <img src="./images/trophy.jpg" alt="About Image" />
         </div>
       </div>
-    </div>
+      </div>
+      </>
   );
 };
-
-export default About;

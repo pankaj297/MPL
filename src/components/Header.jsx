@@ -50,13 +50,15 @@ export const Header = () => {
               <Link to="/teams">Teams</Link>
             </li>
             <li>
-              <Link to="/showUpdate">Update</Link>
+              <Link to="/update">Update</Link>
             </li>
             {/* <li>
               <Link to="/insertUpdate">Insert Update</Link>
             </li> */}
             <li>
-              <button>Admin</button>
+              <Link to="/login" className="admin-btn">
+                Admin
+              </Link>
             </li>
           </ul>
         </div>

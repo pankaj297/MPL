@@ -1,17 +1,20 @@
-import React from "react";
-import { UserShow } from "./userShow";
-import "./App.css";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 
 export const App = () => {
+  const [loggedInAsAdmin, setLoggedInAsAdmin] = useState(true);
+  const location = useLocation();
+
+  // Only show the Header if not on /admin and not logged in as admin
+  const showHeader = !(loggedInAsAdmin && location.pathname === "/admin");
+
   return (
     <>
-      <Header />
-      <Outlet />
+      {showHeader && <Header />}
+      <Outlet context={{ setLoggedInAsAdmin, loggedInAsAdmin }} />
       <Footer />
-      {/* <UserShow /> */}
     </>
   );
 };

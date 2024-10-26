@@ -29,29 +29,37 @@ export const Gallery = () => {
   };
 
   return (
-    <div className="gallery-section">
-      <h2>Gallery</h2>
-      <div className="gallery-grid">
-        {images.map((image) => (
-          <div
-            key={image.id}
-            className="gallery-item"
-            onClick={() => openIMG(image)}
-          >
-            <img src={image.src} alt={image.alt} />
+    <>
+      <div className="gallery-page">
+        <div className="gallery-section">
+          <h2>Gallery</h2>
+          <div className="gallery-grid">
+            {images.map((image) => (
+              <div
+                key={image.id}
+                className="gallery-item"
+                onClick={() => openIMG(image)}
+              >
+                <img src={image.src} alt={image.alt} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      {selectedImage && (
-        <div className="show" onClick={closeIMG}>
-          <div className="show-content" onClick={(e) => stopPropegation()}>
-            <span className="close" onClick={closeIMG}>
-                          &times;
-            </span>
-            <img src={selectedImage.src} alt={selectedImage.alt} className="show-img" />
-          </div>
+          {selectedImage && (
+            <div className="show" onClick={closeIMG}>
+              <div className="show-content" onClick={(e) => stopPropegation()}>
+                <span className="close" onClick={closeIMG}>
+                  &times;
+                </span>
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="show-img"
+                />
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };

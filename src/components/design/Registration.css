@@ -1,10 +1,22 @@
 /* General Styling for the Registration Section */
+/* Registration.css */
+
+
+
+.register-page{
+  padding-top: 5%;
+  padding-bottom: 50px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
 .registration-container {
   width: 80%;
   padding: 30px;
   color: #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(240, 234, 234, 0.3);
 }
 
 .scan-img{

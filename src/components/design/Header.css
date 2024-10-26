@@ -8,6 +8,8 @@ body {
   background-color: #f4f4f4;
 }
 
+
+
 .header-section {
   /* background-color: #333; */
   background-color: transparent;
@@ -71,7 +73,7 @@ body {
   color: #f39c12;
 }
 
-.nav-links button {
+.nav-links .admin-btn {
   background-color: #f39c12;
   border: none;
   padding: 10px 20px;

@@ -1,0 +1,84 @@
+/* Header.css */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Keep padding for the header */
+  background-color: transparent; /* Dark blue background */
+  color: #ecf0f1; /* Light text color */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); */
+  height: 80px; /* Set a fixed height for the header */
+  position: relative;
+  position: fixed;
+    z-index: 1000;
+    top: 0;
+  width: 100%;
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 100%; /* Make logo take full height of header */
+  max-height: 100px; /* Set maximum height equal to header height */
+  width: auto; /* Keep aspect ratio */
+  margin-right: 10px;
+}
+
+.mpl-text {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ecf0f1; /* Same color as header text */
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative; /* For dropdown positioning */
+}
+
+.admin-image {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 40px; /* Set image size */
+  height: 40px; /* Set image size */
+}
+
+.admin-name {
+  font-weight: bold;
+  color: #ecf0f1; /* Light text color */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Aligns dropdown below nav */
+  right: 0; /* Aligns dropdown to the right of the nav */
+  background-color: #333; /* Dark background for dropdown */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100; /* Ensures dropdown is above other content */
+  border-radius: 5px; /* Slightly round the corners */
+}
+
+.dropdown-menu a {
+  color: white; /* White text color for dropdown links */
+  text-decoration: none;
+  padding: 8px 15px; /* Adjust padding for better spacing */
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f39c12; /* Highlight color on hover */
+}
