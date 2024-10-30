@@ -29,7 +29,7 @@ export const AdminLiveAuction = () => {
       profileImg: "./images/ak.enc",
       name: "Akash Ramesh Naik",
       age: 22,
-      position: "Wicket Keeper Batsman",
+      position: "Wicket Keeper Batsman",  
       finalTeam: "",
     },
 

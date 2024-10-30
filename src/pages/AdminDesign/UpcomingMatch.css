@@ -5,10 +5,15 @@
   margin-bottom: 5rem;
 }
 
+.form__title{
+  color: #000;
+}
+
 .admin-matches__header {
   text-align: center;
   color: #333;
 }
+
 
 .form__input,
 .form__button {

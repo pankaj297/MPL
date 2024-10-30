@@ -17,19 +17,22 @@ export const Sidebar = () => {
               <a href="#adminhome">Admin Home</a>
             </li>
             <li>
-              <a href="#allplayers">All Register Players</a>
+              <a href="#allplayers">All Register Players Table</a>
             </li>
             <li>
               <a href="#liveauction">Live Auction Page</a>
             </li>
             <li>
-              <a href="#finalteamplayers">Final Teams Players</a>
+              <a href="#finalteamplayers">Final Team Players</a>
             </li>
             <li>
               <a href="#addmatches">Add Upcoming Matches</a>
             </li>
             <li>
-              <a href="#addupdate">Add Update Info</a>
+              <a href="#addupdate">Admin Update Info</a>
+            </li>
+            <li>
+              <a href="#addupdate">Total Selected Players</a>
             </li>
           </ul>
         </nav>

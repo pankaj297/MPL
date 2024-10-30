@@ -5,7 +5,9 @@ import { Sidebar } from "./Sidebar";
 // import { PlayerTable } from "./PlayerTable";
 // import { AdminUpdate} from "./AdminUpdate";
 // import { UpcomingMatch } from "./UpcomingMatch";
-import { AdminLiveAuction } from "./AdminLiveAuction";
+// import { AdminLiveAuction } from "./AdminLiveAuction";
+// import { AdminTeamPlayers } from "./AdminTeamPlayers";
+import { TotalSoldOutPlayers } from "./TotalSoldOutPlayers";
 
 export const HomeAdmin = () => {
   return (
@@ -17,7 +19,9 @@ export const HomeAdmin = () => {
           {/* <PlayerTable /> */}
           {/* <AdminUpdate /> */}
           {/* <UpcomingMatch /> */}
-          <AdminLiveAuction />
+          {/* <AdminLiveAuction /> */}
+          {/* <AdminTeamPlayers /> */}
+          <TotalSoldOutPlayers />
 
 
         </div>
