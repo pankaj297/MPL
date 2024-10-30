@@ -1,0 +1,102 @@
+/* AdminUpdate.css */
+
+.addupdate-section {
+  width: 80%;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px #ffffff;
+  background-color: #ffffff;
+}
+
+h1 {
+  text-align: center;
+  color: #343a40;
+}
+
+.add-update {
+  margin-bottom: 20px;
+}
+
+.update-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: black; 
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.updates-list {
+  margin-top: 20px;
+}
+
+.update-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #333; 
+}
+
+.update-item p {
+  margin: 0;
+  flex: 1;
+  color: white; /* White text color for visibility */
+  overflow: hidden; /* Prevent overflow of child elements */
+  white-space: nowrap; /* Prevent text wrapping */
+  text-overflow: ellipsis; /* Show '...' for overflow text */
+}
+
+.update-item button {
+  background-color: black; /* Consistent button color */
+  color: white; /* Button text color */
+}
+
+.update-item button:hover {
+  background-color: #fff; /* Hover effect for delete button */
+  color: black; /* Change text color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .addupdate-section {
+    width: 100%; /* Full width on smaller screens */
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  .add-update {
+    flex-direction: column; /* Stack input and button vertically */
+  }
+
+  .update-form {
+    flex-direction: column; /* Stack input and button vertically */
+  }
+
+  input[type="text"] {
+    margin-right: 0; /* No margin for smaller screens */
+    margin-bottom: 10px; /* Space below input field */
+  }
+}
+
+.updates-list{
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}

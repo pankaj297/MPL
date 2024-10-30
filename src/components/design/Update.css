@@ -1,8 +1,9 @@
 
 /* ShowUpdate Component */
 .update-page{
-  padding-top: 50px;
-   height: 100vh;
+  padding-top: 80px;
+   height: auto;
+   margin-bottom: 30px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -47,6 +48,9 @@
   border-radius: 8px;
   height: 90vh;
     width: 95%;
+}
+.show-update-container {
+  margin-top: 80px;
 }
 
   h2 {

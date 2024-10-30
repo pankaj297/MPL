@@ -1,0 +1,115 @@
+.admin-matches {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+  margin-bottom: 5rem;
+}
+
+.admin-matches__header {
+  text-align: center;
+  color: #333;
+}
+
+.form__input,
+.form__button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.form__button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  background-color: #45a049;
+}
+
+.list__card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 10% 1fr;
+  grid-template-areas:
+    "team1 vs team2"
+    "date info delete";
+  gap: 10px;
+}
+
+.card__team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team__name {
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.team__logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.card__vs {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  grid-area: vs;
+  align-self: center;
+}
+
+.card__info {
+  text-align: center;
+  margin: 15px 0;
+  grid-area: info;
+}
+
+.info__date,
+.info__time {
+  font-weight: bold;
+  color: #333;
+}
+
+.card__date {
+  grid-area: date;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.card__delete-button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  grid-area: delete;
+  align-self: center;
+  justify-self: end;
+}
+
+.card__delete-button:hover {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .list__card {
+    padding: 5px;
+    margin-bottom: 10px;
+    grid-template-columns: 1fr 30% 1fr;
+  }
+}

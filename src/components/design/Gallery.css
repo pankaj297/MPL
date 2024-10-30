@@ -2,7 +2,6 @@
 .gallery-page{
     width: 100%;
   height: auto;
-
   padding-top: 5%;
   background-color: #333;
 }
@@ -111,6 +110,11 @@
     max-width: 30%;
     max-height: 30%;
   }
+  .gallery-page{
+  
+  padding-top: 15%;
+
+}
   .gallery-grid {
     /* grid-template-columns: repeat(auto-fit, minmax(80px, 1fr 1fr)); */
     grid-template-columns: 1fr 1fr;

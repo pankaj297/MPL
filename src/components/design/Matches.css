@@ -1,122 +1,111 @@
-/* Matches.css */
-
-/* Base Styles */
-/* body {
-  margin: 0;
-  padding: 0;
-  background-color: #333; /* Light background for contrast 
-}*/
-
-
-
-.match-page{
-   margin: 0;
-  padding: 0;
+.match-page {
+  padding-top: 5%;
   background-color: #333;
-  height: 100vh;
+  height: auto;
   width: 100%;
-   display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.matches-container {
-  /* text-align: center; */
-  padding: 20px;
-  margin: 20px auto; /* Center container */
   display: flex;
   justify-content: center;
   align-items: center;
-   display: flex; 
-  justify-content: center;
-  align-items: center;
+}
+
+.matches-container {
+  padding: 20px;
   display: grid;
-  grid-template-rows: 1fr;
- 
+  justify-items: center;
+  width: 100%;
 }
 
 h1 {
-  font-size: 2rem; /* Responsive font size */
-  color: #fff; /* Dark text color */
+  font-size: 2rem;
+  color: #fff;
   margin-bottom: 20px;
 }
 
-/* Match Card Styles */
 .match-card {
-  display: flex; 
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 5px;
   align-items: center;
-  margin: 15px 0;
-  padding: 5px;
-  background-color: #f8f9fa; /* Slightly off-white for contrast */
+  padding: 10px;
+  background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(174, 172, 172, 0.1);
-  transition: transform 0.3s; /* Smooth scaling effect on hover */
+  transition: transform 0.3s;
+  width: 80%;
+  margin-bottom: 10px;
 }
 
 .match-card:hover {
-  transform: scale(1.02); /* Scale up on hover */
+  transform: scale(1.02);
 }
 
 .team {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  margin: 0 15px;
 }
 
 .team img {
-  width: 60px; /* Logo size */
+  width: 60px;
   height: 60px;
-  border-radius: 50%; /* Circular logos for teams */
+  border-radius: 50%;
   margin-bottom: 5px;
 }
 
 .team p {
-  font-size: 1.2rem; /* Team name size */
-  color: #333; /* Dark text for team names */
+  font-size: 1.2rem;
+  color: #333;
 }
 
-/* Vs Text Styles */
 h2 {
-  margin: 0 10px;
   font-weight: normal;
   font-size: 24px;
-  color: #e67e22; /* Orange color for vs text */
+  color: #e67e22;
+  text-align: center;
+}
+
+.match-info {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   h1 {
-    font-size: 1.5rem; /* Smaller heading for mobile */
+    font-size: 1.5rem;
   }
+  .match-page {
+  padding-top: 20%;
+}
 
   .match-card {
-    flex-direction: rows; /* Stack teams vertically on mobile */
-    padding: 5px; /* Increased padding for touch devices */
-  }
-
-  .team {
-    margin: 10px 0; /* Space between teams */
+    width: 100%;
+    gap: 5px;
+    padding: 10px;
   }
 
   .team img {
-    width: 50px; /* Slightly smaller logo */
+    width: 50px;
     height: 50px;
+  }
+
+  .team p {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.2rem; /* Even smaller heading for very small devices */
+    font-size: 1.2rem;
   }
 
   h2 {
-    font-size: 20px; /* Smaller vs text */
+    font-size: 20px;
   }
 
   .team p {
-    font-size: 1rem; /* Smaller team name */
+    font-size: 0.9rem;
   }
 }

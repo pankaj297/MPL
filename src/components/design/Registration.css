@@ -4,7 +4,7 @@
 
 
 .register-page{
-  padding-top: 5%;
+  padding-top: 7%;
   padding-bottom: 50px;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@
 
 .registration-container {
   width: 80%;
-  padding: 30px;
+  padding: 10px;
   color: #f4f4f4;
   border-radius: 10px;
 }
@@ -103,7 +103,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .registration-container {
-    padding: 20px;
+    padding-top: 100px;
   }
 
   .registration-container {

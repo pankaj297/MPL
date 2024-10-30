@@ -1,0 +1,161 @@
+.auction-admin-live-bid {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  padding: 20px;
+  color: #333;
+  margin-bottom: 5rem;
+}
+
+.auction-h1-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffff;
+}
+
+.auction-live-status {
+  color: red;
+}
+
+.auction-bid-container {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+
+.auction-player-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 700px; /* Set a fixed height for the player list */
+  overflow-y: auto; /* Vertical scrollbar for the player list */
+  margin-right: 20px; /* Add some space between player list and details */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.small-profile-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s, filter 0.3s;
+}
+
+.small-profile-item.highlighted {
+  background-color: rgb(35, 196, 35); /* Highlight color for selected profile */
+}
+
+.small-profile-item img {
+  width: 50px; /* Profile image size */
+  height: 50px; /* Profile image size */
+  border-radius: 50%; /* Circular image */
+  margin-right: 10px;
+}
+
+.small-profile-item p {
+  margin: 10px;
+}
+
+.auction-bid-section {
+  width: 80%;
+  padding: 0 20px;
+}
+
+.auction-player-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  width: 80%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #ffff;
+}
+
+.auction-player-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.player-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.auction-h2-header {
+  color: black;
+  font-weight: 600;
+}
+
+.control-buttons {
+  margin-top: 20px;
+}
+
+.team-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.team-button-container button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #2a9df4;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.team-button-container button:hover {
+  background-color: #1a6bbf;
+}
+
+.bid-control-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.bid-control-buttons button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.bid-control-buttons button:nth-child(1) {
+  background-color: #28a745;
+  color: white;
+}
+
+.bid-control-buttons button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.bid-control-buttons button:nth-child(3) {
+  background-color: orange;
+  color: #ffff;
+}
+
+.auction-final-bid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: #ffff;
+  background-color: #333;
+  box-shadow: 0 4px 8px #ffff;
+}

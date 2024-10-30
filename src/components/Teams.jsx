@@ -4,34 +4,54 @@ import "./design/Teams.css";
 export const Teams = () => {
   const teams = [
     {
-  id: 1,
-  mpl: "Malkheda Premier League",
-  name: "Royal Challengers Bangalore",
-  owner: "United Spirits Limited",
-  logo: "./images/rcb.webp",
-  players: [
-    { id: 1, name: "Virat Kohli", role: "Batsman", price: "₹5000" },
-    { id: 2, name: "Mohammed Siraj", role: "Bowler", price: "₹4700" },
-    { id: 3, name: "Faf du Plessis", role: "Batsman", price: "₹4800" },
-    { id: 4, name: "Glenn Maxwell", role: "All-rounder", price: "₹4500" },
-    { id: 5, name: "Harshal Patel", role: "Bowler", price: "₹4200" },
-    { id: 6, name: "Dinesh Karthik", role: "Wicketkeeper-Batsman", price: "₹4000" },
-    { id: 7, name: "Wanindu Hasaranga", role: "All-rounder", price: "₹4300" },
-    { id: 8, name: "Shahbaz Ahmed", role: "All-rounder", price: "₹3900" },
-    { id: 9, name: "Josh Hazlewood", role: "Bowler", price: "₹4600" },
-    { id: 10, name: "Anuj Rawat", role: "Wicketkeeper-Batsman", price: "₹3800" },
-    { id: 11, name: "Karn Sharma", role: "Bowler", price: "₹3700" },
-    { id: 12, name: "Suyash Prabhudessai", role: "All-rounder", price: "₹3500" },
-    { id: 13, name: "Akash Deep", role: "Bowler", price: "₹3400" },
-    { id: 14, name: "Finn Allen", role: "Batsman", price: "₹4000" },
-    { id: 15, name: "David Willey", role: "All-rounder", price: "₹3600" },
-    { id: 16, name: "Mahipal Lomror", role: "All-rounder", price: "₹3300" },
-    { id: 17, name: "Rajat Patidar", role: "Batsman", price: "₹4100" },
-    { id: 18, name: "Reece Topley", role: "Bowler", price: "₹4400" },
-    { id: 19, name: "Manoj Bhandage", role: "All-rounder", price: "₹3200" },
-    { id: 20, name: "Himanshu Sharma", role: "Bowler", price: "₹3100" },
-  ],
-},
+      id: 1,
+      mpl: "Malkheda Primer League",
+      name: "Royal Challengers Bangalore",
+      owner: "United Spirits Limited",
+      logo: "./images/rcb.webp",
+      players: [
+        { id: 1, name: "Virat Kohli", role: "Batsman", price: "₹5000" },
+        { id: 2, name: "Mohammed Siraj", role: "Bowler", price: "₹4700" },
+        { id: 3, name: "Faf du Plessis", role: "Batsman", price: "₹4800" },
+        { id: 4, name: "Glenn Maxwell", role: "All-rounder", price: "₹4500" },
+        { id: 5, name: "Harshal Patel", role: "Bowler", price: "₹4200" },
+        {
+          id: 6,
+          name: "Dinesh Karthik",
+          role: "Wicketkeeper-Batsman",
+          price: "₹4000",
+        },
+        {
+          id: 7,
+          name: "Wanindu Hasaranga",
+          role: "All-rounder",
+          price: "₹4300",
+        },
+        { id: 8, name: "Shahbaz Ahmed", role: "All-rounder", price: "₹3900" },
+        { id: 9, name: "Josh Hazlewood", role: "Bowler", price: "₹4600" },
+        {
+          id: 10,
+          name: "Anuj Rawat",
+          role: "Wicketkeeper-Batsman",
+          price: "₹3800",
+        },
+        { id: 11, name: "Karn Sharma", role: "Bowler", price: "₹3700" },
+        {
+          id: 12,
+          name: "Suyash Prabhudessai",
+          role: "All-rounder",
+          price: "₹3500",
+        },
+        { id: 13, name: "Akash Deep", role: "Bowler", price: "₹3400" },
+        { id: 14, name: "Finn Allen", role: "Batsman", price: "₹4000" },
+        { id: 15, name: "David Willey", role: "All-rounder", price: "₹3600" },
+        { id: 16, name: "Mahipal Lomror", role: "All-rounder", price: "₹3300" },
+        { id: 17, name: "Rajat Patidar", role: "Batsman", price: "₹4100" },
+        { id: 18, name: "Reece Topley", role: "Bowler", price: "₹4400" },
+        { id: 19, name: "Manoj Bhandage", role: "All-rounder", price: "₹3200" },
+        { id: 20, name: "Himanshu Sharma", role: "Bowler", price: "₹3100" },
+      ],
+    },
     {
       id: 2,
       mpl: "Malkheda Primer League",
@@ -88,7 +108,6 @@ export const Teams = () => {
         </style>
       </head>
       <body>
-        <h1>MPL</h1> <!-- MPL Title -->
         <h2>${team.mpl}</h2>
         <img src="${team.logo}" alt="${team.name} Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; border: 3px solid #3498db;"/>
         <div>${printContent.innerHTML}</div>
@@ -105,7 +124,9 @@ export const Teams = () => {
       <div className="mpl-teams-page">
         <div className="participating-teams">
           <div className="teams-container">
-            <h2 className="participating-team-title">Participating Teams In MPL</h2>
+            <h2 className="participating-team-title">
+              Participating Teams In MPL
+            </h2>
 
             <div className="team-list">
               {teams.map((team) => (
@@ -174,7 +195,4 @@ export const Teams = () => {
   );
 };
 
-
-
-
-    //  <h2>${teams.find((team) => team.id === teamId).name} Players</h2>;
+//  <h2>${teams.find((team) => team.id === teamId).name} Players</h2>;

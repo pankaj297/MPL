@@ -11,13 +11,10 @@ export const HeaderAdmin = () => {
 
   return (
     <>
-      <header className="header">
+      <div className="nav-section">
         <div className="header-left">
-          <img
-            src="./images/logo1.png"
-            alt="Logo"
-            className="logo"
-          />
+          <img src="./images/logo1.png" alt="Logo" className="Admin-logo" />
+
           <span className="mpl-text">MPL</span>
         </div>
         <div className="header-right">
@@ -27,7 +24,7 @@ export const HeaderAdmin = () => {
               alt="Admin"
               className="admin-image"
             />
-            <span className="admin-name">Admin Name</span>
+            <span className="admin-name">pankaj1807</span>
             {dropdownOpen && (
               <div className="dropdown-menu">
                 <a href="#profile">Profile</a>
@@ -37,7 +34,7 @@ export const HeaderAdmin = () => {
             )}
           </div>
         </div>
-      </header>
+      </div>
     </>
   );
 };

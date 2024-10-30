@@ -37,6 +37,42 @@ export const CricketPlayerRegistration = () => {
         <div className="register-page">
           <div className="registration-section">
             <div className="registration-container">
+              <div className="important-notes">
+                <h4 className="heading-notes">Read The Important notes</h4>
+                <p>1. All details provided will be verified and recorded.</p>
+                <p>
+                  2. Ensure Transaction id , payment recept photo add correct{" "}
+                </p>
+                <p>
+                  3. Required to fill the all information otherwise not accept
+                  you Registration
+                </p>
+                <p>
+                  4. Ensure the Transaction id , payment recept photo
+                  Transaction id are match{" "}
+                </p>
+                <p>
+                  5. After Registration within 24 hours MPL Authors send massage
+                  on your mobile numbers for conform seat{" "}
+                </p>
+                <p>
+                  6. When you not comfort table with online payment you can pay
+                  offline also{" "}
+                </p>
+                <p>
+                  7. For Offline payment you meet MPL Author ' Baban Naik ' with
+                  your Aadhaar card{" "}
+                </p>
+                <p>8. Watch the following video for payment</p>
+                <video
+                  src="./images/video1.mp4"
+                  width={"300px"}
+                  loop
+                  muted
+                  playsInline
+                  controls
+                ></video>
+              </div>
               <h2>Cricket Player Registration</h2>
               <div className="scan-img">
                 <img

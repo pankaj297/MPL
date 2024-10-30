@@ -1,0 +1,138 @@
+.admin-live-auction {
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 5rem;
+}
+
+.live-h2heading{
+  color: #333333;
+  font-weight: 500;
+}
+.live-h1heading {
+  color: #ffff;
+  margin-bottom: 20px;
+}
+
+.auction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.live-live{
+  color:  red;
+}
+.player-profile {
+  background: #f4f6f8;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.player-img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+}
+
+.player-info p {
+  margin: 5px 0;
+}
+
+.controls {
+  width: 100%;
+  max-width: 600px;
+}
+
+.live-h3heading{
+  color: #ffff;
+}
+
+.team-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.team-buttons button {
+  padding: 10px 15px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.team-buttons button:hover {
+  background-color: #003f8a;
+}
+
+.bid-controls {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.bid-controls button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.bid-controls button:nth-child(1) {
+  background-color: #28a745;
+  color: white;
+}
+
+.bid-controls button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.bid-controls button:nth-child(3) {
+  background-color: orange;
+  color: #ffff;
+}
+
+.bid-controls button:hover {
+  opacity: 0.9;
+}
+
+.final-bid {
+  background: #333;
+  color: #3c763d;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px #ffff;
+}
+
+@media (max-width: 768px) {
+  .player-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .player-img {
+    margin-bottom: 20px;
+  }
+
+  .bid-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

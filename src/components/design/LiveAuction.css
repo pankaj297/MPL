@@ -1,65 +1,98 @@
-/* Player Profile Component Styling */
-
-.live-auction-page{
+/* General Styling */
+.live-auction-page {
   display: flex;
   justify-content: center;
   align-items: center;
-   background-color: #333;
-    height: 90vh;
+  background-color: #1a1a2e;
+  min-height: 100vh;
+  padding: 20px;
 }
+
 .live-player-profile {
   text-align: center;
   width: 100%;
-  padding: 20px 0;
-  color: white;
- 
+  color: #3333;
+  max-width: 700px;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
+.user-live-auction-h1-heading {
+  color: #ffff;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Player Profile Styling */
 .player-profile {
-  background-color: #f8f9fa;
-  border-radius: 12px;
+  background-color: #fff;
+  border-radius: 15px;
   padding: 20px;
-  margin: 20px auto;
-  max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 15px auto;
+  box-shadow: 0 4px 15px #ffff;
   transition: transform 0.3s ease;
+  color: #333;
 }
 
 .player-profile:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .profile-header {
   display: flex;
-  justify-content: center; /* Center the profile image */
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
 }
 
-.profile-img {
+.live-profile-img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px solid #3498db;
+  border: 3px solid #f9f871;
   object-fit: cover;
 }
 
-.profile-info {
-  margin-top: 15px; /* Space between image and text */
-}
-
-.profile-info h2 {
-  font-size: 28px;
-  color: #333;
+.profile-info .user-live-auction-h2-heading {
+  font-size: 1.8rem;
+  color: black;
+  margin: 0;
 }
 
 .profile-info p {
-  font-size: 16px;
-  color: #555;
+  font-size: 1rem;
+  color: black;
   margin: 5px 0;
 }
 
 .bidding-price {
+  color: #66fcf1;
   font-weight: bold;
-  color: #3498db;
+}
+
+
+/* Final Bidding Details */
+.final-bid {
+  background-color: #333;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+
+.final-bid p {
+  font-size: 1rem;
+  color: #ffffff;
+  margin: 8px 0;
+}
+
+.final-bid p:last-child {
+  font-weight: bold;
+  color: #2ecc71;
 }
 
 /* Final Bid Button */
@@ -68,10 +101,9 @@
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-top: 15px;
   cursor: pointer;
-  width: 100%;
   transition: background-color 0.3s ease;
 }
 
@@ -79,44 +111,56 @@
   background-color: #27ae60;
 }
 
-/* Final Bidding Details */
-.final-bid {
-  background-color: #333;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.final-bid h3 {
-  font-size: 24px;
-  color: #fff;
-}
-
-.final-bid p {
-  font-size: 18px;
-  margin: 5px 0;
-  color: #fff;
-}
-
-.final-bid p:last-child {
-  font-weight: bold;
-  color: #e74c3c; /* Red color for final price */
-}
-
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .player-profile {
-    max-width: 90%; /* Full width on smaller screens */
+  .live-player-profile {
+    padding: 10px;
   }
-
   
 .profile-header {
-  display: flex;
-  justify-content: center; /* Center the profile image */
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  gap: 20px;
 }
 
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .live-profile-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .profile-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .profile-info p,
+  .final-bid p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-profile {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .profile-info p,
+  .final-bid p {
+    font-size: 0.8rem;
+  }
 }

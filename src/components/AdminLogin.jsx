@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./design/AdminLogin.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Sample admin data
 const adminUsers = [
@@ -20,6 +20,7 @@ export const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,7 +30,8 @@ export const AdminLogin = () => {
 
     if (admin) {
       setError("");
-      // Add any logic needed after successful login
+      // Redirect to the admin page after successful login
+      navigate("/admin");
     } else {
       setError("Invalid username or password.");
     }
@@ -37,9 +39,9 @@ export const AdminLogin = () => {
 
   return (
     <div className="admin-login-container">
-      <div className="login-form">
+      <div className="login-form1">
         <h2>Admin Login</h2>
-        <form onSubmit={handleLogin}>
+        <form className="" onSubmit={handleLogin}>
           <input
             type="text"
             value={username}
@@ -56,13 +58,9 @@ export const AdminLogin = () => {
             required
             className="input-field"
           />
-          <Link
-            to="/admin"
-            type="submit"
-            className="login-button"
-          >
+          <button type="submit" className="login-button">
             Login
-          </Link>
+          </button>
           {error && <p className="error-msg">{error}</p>}
         </form>
       </div>

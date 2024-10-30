@@ -155,7 +155,7 @@
   .about-section {
     flex-direction: column;
     text-align: center;
-    padding: 20px; /* Reduced padding */
+    padding-top: 20%; /* Reduced padding */
     gap: 20px;
     height: auto; /* Remove full height for small screens */
   }

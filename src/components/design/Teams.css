@@ -170,7 +170,20 @@ h2 {
   }
 }
 
+@media (max-width: 768px) {
+  .mpl-teams-page{
+  padding-top: 25%;
+ 
+}
+}
+
 @media (min-width: 768px) {
+  .mpl-teams-page{
+  padding-top: 5%;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+}
   .players-table th,
 .players-table td {
   padding: 5px; /* Increased padding for better readability on mobile */
