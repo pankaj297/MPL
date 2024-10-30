@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import "./App.css"
-
+import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 export const App = () => {
   const [loggedInAsAdmin, setLoggedInAsAdmin] = useState(true);
   const location = useLocation();
@@ -12,13 +13,12 @@ export const App = () => {
   const showHeader = !(loggedInAsAdmin && location.pathname === "/admin");
   const showFooter = !(loggedInAsAdmin && location.pathname === "/admin");
 
-
   return (
     <>
-     
       {showHeader && <Header />}
       <Outlet context={{ setLoggedInAsAdmin, loggedInAsAdmin }} />
       {showFooter && <Footer />}
+      <ToastContainer />
     </>
   );
 };
