@@ -1,0 +1,128 @@
+/* Container styling */
+.leader-section {
+  margin-top: 8rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px #c4c2c2;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Background Image */
+.profile-background {
+  height: 190px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  object-fit: cover;
+}
+
+/* Profile Details */
+.profile-details {
+  margin-left: 160px;
+  padding-top: 20px;
+}
+
+.profile-name {
+  font-size: 1.5em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.profile-title {
+  font-size: 1.1em;
+  color: #ffffff;
+  margin: 5px 0;
+}
+
+.profile-spend {
+  font-size: 1em;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.profile-about {
+  font-size: 0.9em;
+  color: #ffffff;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.profile-achievements {
+  margin-top: 20px;
+}
+
+.achievements-title {
+  font-size: 1em;
+  color: rgb(109, 219, 109);
+  margin: 0;
+}
+
+.achievements-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #ffffff;
+}
+
+.achievement-item {
+  margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .profile-container {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .profile-background {
+    height: 150px;
+  }
+
+  .profile-image {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 95px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-details {
+    margin-left: 0;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  position: absolute;
+  top: 90px;
+  left: 65px;
+  object-fit: cover;
+}
+
+}

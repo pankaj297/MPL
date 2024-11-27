@@ -8,6 +8,7 @@ export const UpcomingMatch = () => {
     team2: { name: "", logo: null },
     date: "",
     time: "",
+    winner: "", // Winner is still part of the state but not required for validation
   });
 
   const handleInputChange = (e) => {
@@ -40,6 +41,7 @@ export const UpcomingMatch = () => {
   };
 
   const handleAddMatch = () => {
+    // Validation without checking for the winner
     if (
       newMatch.team1.name &&
       newMatch.team1.logo &&
@@ -52,19 +54,26 @@ export const UpcomingMatch = () => {
         ...prevMatches,
         { ...newMatch, id: Date.now() },
       ]);
+      // Reset the form
       setNewMatch({
         team1: { name: "", logo: null },
         team2: { name: "", logo: null },
         date: "",
         time: "",
+        winner: "", // You can keep it here for future use
       });
     } else {
-      alert("Please fill in all fields to add a match.");
+      alert("Please fill in all required fields to add a match.");
     }
   };
 
   const handleDeleteMatch = (id) => {
     setMatches(matches.filter((match) => match.id !== id));
+  };
+
+  const handleAddExistingMatch = (match) => {
+    // Logic to add the existing match back into the list
+     alert("Added match")
   };
 
   return (
@@ -117,52 +126,69 @@ export const UpcomingMatch = () => {
           onChange={handleInputChange}
           className="form__input"
         />
+        <input
+          type="text"
+          name="winner"
+          placeholder="Winner (optional)"
+          value={newMatch.winner}
+          onChange={handleInputChange}
+          className="form__input"
+        />
+
         <button onClick={handleAddMatch} className="form__button">
           Add Match
         </button>
       </div>
 
       <div className="admin-matches__list">
-        <h2 className="list__title">Matches List</h2>
+        <h2 className="list_h2_title">Matches List</h2>
         {matches.length > 0 ? (
           matches.map((match) => (
-            <>
-              <div className="list__card" key={match.id}>
-                <div className="card__team">
-                  <p className="team__name">{match.team1.name}</p>
-                  {match.team1.logo && (
-                    <img
-                      src={match.team1.logo}
-                      alt={`${match.team1.name} logo`}
-                      className="team__logo"
-                    />
-                  )}
-                </div>
-                <h2 className="card__vs">vs</h2>
-                <div className="card__team">
-                  <p className="team__name">{match.team2.name}</p>
-                  {match.team2.logo && (
-                    <img
-                      src={match.team2.logo}
-                      alt={`${match.team2.name} logo`}
-                      className="team__logo"
-                    />
-                  )}
-                      </div>
-                   
-                <div className="card__info">
-                  <p className="info__date">Date: {match.date}</p>
-                  <p className="info__time">Time: {match.time}</p>
-                      </div>
-                 
+            <div className="list__card" key={match.id}>
+              <div className="card__team">
+                <p className="team__name">{match.team1.name}</p>
+                {match.team1.logo && (
+                  <img
+                    src={match.team1.logo}
+                    alt={`${match.team1.name} logo`}
+                    className="team__logo"
+                  />
+                )}
+              </div>
+              <h2 className="card__vs">vs</h2>
+              <div className="card__team">
+                <p className="team__name">{match.team2.name}</p>
+                {match.team2.logo && (
+                  <img
+                    src={match.team2.logo}
+                    alt={`${match.team2.name} logo`}
+                    className="team__logo"
+                  />
+                )}
+              </div>
+              <div className="card__info">
+                <p className="info__date">Date: {match.date}</p>
+                <p className="info__time">Time: {match.time}</p>
+                {match.winner && (
+                  <p className="info__winner">Winner: {match.winner}</p>
+                )}
+              </div>
+
+              <div className="card__buttons">
                 <button
                   onClick={() => handleDeleteMatch(match.id)}
                   className="card__delete-button"
                 >
                   Delete
                 </button>
+                <button
+                  onClick={() => handleAddExistingMatch(match)}
+                  className="card__add-button"
+                >
+                  Add
+                </button>
               </div>
-            </>
+            </div>
           ))
         ) : (
           <p className="list__empty-message">

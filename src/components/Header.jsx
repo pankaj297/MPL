@@ -52,9 +52,12 @@ export const Header = () => {
             <li>
               <Link to="/update">Update</Link>
             </li>
-            {/* <li>
-              <Link to="/insertUpdate">Insert Update</Link>
-            </li> */}
+            <li>
+              <Link to="/political">Investor Profile</Link>
+            </li>
+            <li>
+              <Link to="/price">PriceMoney</Link>
+            </li>
             <li>
               <Link to="/login" className="admin-btn">
                 Admin

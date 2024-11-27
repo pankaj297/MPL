@@ -48,14 +48,14 @@ export const Matches = () => {
   return (
     <div className="match-page">
       <div className="matches-container">
-        <h1>Upcoming Matches</h1>
+        <h1 className="Upcomeing-heading">Upcoming Matches</h1>
         {matches.map((match) => (
           <div className="match-card" key={match.id}>
             <div className="team">
               <p>{match.team1.name}</p>
               <img src={match.team1.logo} alt={`${match.team1.name} logo`} />
             </div>
-            <h2>vs</h2>
+            <h2 className="vs">vs</h2>
             <div className="team">
               <p>{match.team2.name}</p>
               <img src={match.team2.logo} alt={`${match.team2.name} logo`} />

@@ -1,40 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminDesign/AdminLiveAuction.css";
 
 export const AdminLiveAuction = () => {
   const [currentBid, setCurrentBid] = useState();
   const [lastBiddingTeam, setLastBiddingTeam] = useState("No Bidder");
   const [finalized, setFinalized] = useState(false);
-  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(null); // Initially null
-
-  const players = [
-    {
-      id: 1,
-      profileImg: "./images/baban.jpeg",
-      name: "Baban Ratilal Naik",
-      age: 21,
-      position: "All Rounder",
-      finalTeam: "Chennai Super Kings",
-    },
-    {
-      id: 2,
-      profileImg: "./images/pankaj.jpeg",
-      name: "Pankaj Suklal Naik",
-      age: 24,
-      position: "Batsman",
-      finalTeam: "",
-    },
-    {
-      id: 3,
-      profileImg: "./images/ak.enc",
-      name: "Akash Ramesh Naik",
-      age: 22,
-      position: "Wicket Keeper Batsman",  
-      finalTeam: "",
-    },
-
-    // Add more players as needed
-  ];
+  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(null); // Store player ID
+  const [players, setPlayers] = useState([]); // Initialize players state
+  const [loading, setLoading] = useState(true); // Initialize loading state
+  const [filterPosition, setFilterPosition] = useState("All"); // Filter state for position
 
   const teams = [
     "Chennai Super Kings",
@@ -47,15 +21,49 @@ export const AdminLiveAuction = () => {
     "Rajasthan Royals",
   ];
 
-  const handlePlayerSelect = (index) => {
-    setSelectedPlayerIndex(index);
+  // Fetch players from the API
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const response = await fetch(
+          "https://mpl-backend-5gc6.onrender.com/api/user/allUsers"
+        );
+        const data = await response.json();
+
+        if (data.success) {
+          // Map the user data to the format you want
+          const mappedPlayers = data.user.map((user) => ({
+            id: user._id,
+            profileImg: user.passPhoto, // Change this if you want to use a different image
+            name: user.name || "Unknown Player",
+            age: user.age,
+            position:
+              user.position.charAt(0).toUpperCase() + user.position.slice(1), // Capitalize first letter
+            finalTeam: "",
+          }));
+          setPlayers(mappedPlayers); // Set the players state
+        }
+      } catch (error) {
+        console.error("Error fetching players:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchPlayers();
+  }, []);
+
+  const handlePlayerSelect = (playerId) => {
+    setSelectedPlayerIndex(playerId); // Store the player's ID
     setFinalized(false);
     setCurrentBid(100);
     setLastBiddingTeam("No bids yet");
   };
 
-  const handleIncreaseBid = () => setCurrentBid(currentBid + 100);
-  const handleDecreaseBid = () => setCurrentBid(Math.max(0, currentBid - 100));
+  const handleIncreaseBid = () =>
+    setCurrentBid((prevBid) => (prevBid ? prevBid + 100 : 100));
+  const handleDecreaseBid = () =>
+    setCurrentBid((prevBid) => Math.max(0, (prevBid || 0) - 100));
 
   // Check if a player is selected before finalizing
   const handleFinalize = () => {
@@ -66,18 +74,49 @@ export const AdminLiveAuction = () => {
     setFinalized(true);
   };
 
+  // Filter players based on position
+  const filteredPlayers =
+    filterPosition === "All"
+      ? players
+      : players.filter((player) => player.position === filterPosition);
+
+  // Get the selected player details
+  const selectedPlayer =
+    selectedPlayerIndex !== null
+      ? players.find((player) => player.id === selectedPlayerIndex)
+      : null;
+
+  if (loading) {
+    return <div>Loading players...</div>; // Show a loading message while fetching
+  }
+
   return (
     <div className="auction-admin-live-bid">
       <h1 className="auction-h1-header">Admin Live Auction - MPL</h1>
       <div className="auction-bid-container">
+        <div className="filter-dropdown">
+          <label htmlFor="position-filter">Filter by Position:</label>
+          <select
+            id="position-filter"
+            value={filterPosition}
+            onChange={(e) => setFilterPosition(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Batsman">Batsman</option>
+            <option value="Bowler">Bowler</option>
+            <option value="Allrounder">All-Rounder</option>
+            <option value="Keeper-batsman">Wicket-Keeper</option>
+          </select>
+        </div>
         <div className="auction-player-list">
-          {players.map((player, index) => (
+          {/* Render filtered players */}
+          {filteredPlayers.map((player) => (
             <div
-              key={index}
+              key={player.id} // Use player's ID as key
               className={`small-profile-item ${
-                selectedPlayerIndex === index ? "highlighted" : ""
+                selectedPlayerIndex === player.id ? "highlighted" : ""
               }`} // Apply selected class
-              onClick={() => handlePlayerSelect(index)}
+              onClick={() => handlePlayerSelect(player.id)}
             >
               <img
                 src={player.profileImg}
@@ -85,7 +124,7 @@ export const AdminLiveAuction = () => {
                 className="small-profile-image"
               />
               <p>{player.name}</p>
-              <p>{player.position}</p>
+              <p className="player-position">{player.position}</p>
             </div>
           ))}
         </div>
@@ -93,31 +132,20 @@ export const AdminLiveAuction = () => {
           <h3 className="auction-live-status">Live</h3>
           <div className="auction-player-details">
             <img
-              src={
-                selectedPlayerIndex !== null
-                  ? players[selectedPlayerIndex].profileImg
-                  : null
-              }
+              src={selectedPlayer ? selectedPlayer.profileImg : null}
               alt="Player"
               className="auction-player-image"
             />
             <div className="player-info-details">
               <h2 className="auction-h2-header">
-                {selectedPlayerIndex !== null
-                  ? players[selectedPlayerIndex].name
-                  : "Select a player"}
+                {selectedPlayer ? selectedPlayer.name : "Select a player"}
               </h2>
               <p>
-                <strong>Age:</strong>{" "}
-                {selectedPlayerIndex !== null
-                  ? players[selectedPlayerIndex].age
-                  : ""}
+                <strong>Age:</strong> {selectedPlayer ? selectedPlayer.age : ""}
               </p>
               <p>
                 <strong>Position:</strong>{" "}
-                {selectedPlayerIndex !== null
-                  ? players[selectedPlayerIndex].position
-                  : ""}
+                {selectedPlayer ? selectedPlayer.position : ""}
               </p>
               <p>
                 <strong>Current Bid:</strong> ₹ {currentBid}
@@ -142,15 +170,14 @@ export const AdminLiveAuction = () => {
               <button onClick={handleFinalize}>Finalize Bid</button>
             </div>
           </div>
-          {finalized && selectedPlayerIndex !== null && (
+          {finalized && selectedPlayer && (
             <div className="auction-final-bid">
               <h3 className="auction-h3-header">Final Bidding</h3>
-              <p>Player: {players[selectedPlayerIndex].name}</p>
+              <p>Player: {selectedPlayer.name}</p>
               <p>Sold Out By: {lastBiddingTeam}</p>
               <p>Sold Out Price: ₹ {currentBid}</p>
               <p>
-                <strong>Congratulations:</strong>{" "}
-                {players[selectedPlayerIndex].name} 🎊🥳
+                <strong>Congratulations:</strong> {selectedPlayer.name} 🎊🥳
               </p>
             </div>
           )}

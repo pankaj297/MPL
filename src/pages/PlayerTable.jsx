@@ -1,66 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminDesign/PlayerTable.css";
 
-const demoPlayers = [
-  {
-    id: 1,
-    fullName: "Virat Kohli",
-    mobileNum: "7249766875",
-    age: 35,
-    position: "Batsman",
-    profileImg: "./images/virat-kohli.jpg",
-    aadharImg: "./images/pankajadhaar.jpeg",
-    transactionId: "T2410242055356649283753",
-    transactionImg: "./images/trasationphoto.jpeg",
-    payment: "₹200",
-  },
-  {
-    id: 2,
-    fullName: "Baban Ratilal Naik",
-    mobileNum: "7276746341",
-    age: 20,
-    position: "All Rounder",
-    profileImg: "./images/baban.jpeg",
-    aadharImg: "./images/pankajadhaar.jpeg",
-    transactionId: "T2410241227175209280316",
-    transactionImg: "./images/trasationphoto.jpeg",
-    payment: "₹200",
-  },
-  {
-    id: 3,
-    fullName: "Pankaj Suklal Naik",
-    mobileNum: "7249766875",
-    age: 21,
-    position: "Batsman",
-    profileImg: "./images/pankaj.jpeg",
-    aadharImg: "./images/pankajadhaar.jpeg",
-    transactionId: "T2410241227175209280316",
-    transactionImg: "./images/trasationphoto.jpeg",
-    payment: "₹200",
-  },
-  {
-    id: 4,
-    fullName: "Akash Ramesh Naik",
-    mobileNum: "9359294532",
-    age: 21,
-    position: "Wicket Keeper Batsman",
-    profileImg: "./images/ak.enc",
-    aadharImg: "./images/pankajadhaar.jpeg",
-    transactionId: "T2410241227175209280316",
-    transactionImg: "./images/trasationphoto.jpeg",
-    payment: "₹200",
-  },
-  // ...additional player data
-];
-
 export const PlayerTable = () => {
-  const [players, setPlayers] = useState(demoPlayers);
+  const [players, setPlayers] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [selectedAadhar, setSelectedAadhar] = useState(null);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [checkedStatus, setCheckedStatus] = useState(
     JSON.parse(localStorage.getItem("checkedStatus")) || {}
   );
+
+  // Fetching data from the API
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const response = await fetch(
+          "https://mpl-backend-5gc6.onrender.com/api/user/allUsers"
+        );
+        const data = await response.json();
+
+        if (data.success) {
+          setPlayers(data.user);
+        } else {
+          console.error("API returned unsuccessful response:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching players data:", error);
+      }
+    };
+
+    fetchPlayers();
+  }, []);
 
   const handleCheckboxChange = (id) => {
     setCheckedStatus((prevState) => {
@@ -106,14 +76,14 @@ export const PlayerTable = () => {
             <tbody>
               ${players
                 .map(
-                  (player) => `
+                  (player, index) => `
                 <tr>
-                  <td>${player.id}</td>
-                  <td>${player.fullName}</td>
-                  <td>${player.mobileNum}</td>
+                  <td>${index + 1}</td>
+                  <td>${player.name}</td>
+                  <td>${player.mobile}</td>
                   <td>${player.age}</td>
                   <td>${player.position}</td>
-                  <td>${player.payment}</td>
+                  <td>${player.payment || "N/A"}</td>
                   <td></td>
                 </tr>
               `
@@ -130,24 +100,47 @@ export const PlayerTable = () => {
   };
 
   const sendWhatsAppMessage = (player, messageType) => {
-  let message = `From Malkheda Primer League Author\nHello, ${player.fullName}!\n`;
-  
-  if (messageType === "success") {
-    message += `Here are your details:\nMobile: ${player.mobileNum}\nAge: ${player.age}\nPosition: ${player.position}\nTransaction ID: ${player.transactionId}\nPayment: ${player.payment} Successfully Paid! \nThank you for participating in MPL !! `;
-  } else {
-    message += `Unfortunately, \nyour transaction with ID ' ${player.transactionId} ' was not successful.  \nPlease contact MPL authors for resolve this problem.\nMPL Authors Contact : 7276746341 \nThank you !!`;
-  }
+    let message = `From Malkheda Primer League Author\nHello, ${player.name}!\n`;
 
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/${player.mobileNum}?text=${encodedMessage}`;
-  window.open(whatsappUrl, "_blank");
-};
+    if (messageType === "success") {
+      message += `Here are your details:\nMobile: ${player.mobile}\nAge: ${
+        player.age
+      }\nPosition: ${player.position}\nTransaction ID: ${
+        player.transactionId
+      }\nPayment: ${
+        player.payment || "Pending"
+      } Successfully Paid!\nThank you for participating in MPL!`;
+    } else {
+      message += `Unfortunately, your transaction with ID '${player.transactionId}' was not successful.\nPlease contact MPL authors to resolve this problem.\nMPL Authors Contact: 7276746341\nThank you!`;
+    }
 
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${player.mobile}?text=${encodedMessage}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `https://mpl-backend-5gc6.onrender.com/api/user/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-  const handleDelete = (id) => {
-    const updatedPlayers = players.filter((player) => player.id !== id);
-    setPlayers(updatedPlayers);
+      if (response.ok) {
+        setPlayers((prevPlayers) =>
+          prevPlayers.filter((player) => player._id !== id)
+        );
+        alert("Player deleted successfully!");
+      } else {
+        console.error("Failed to delete player:", response);
+        alert("Failed to delete player. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting player:", error);
+      alert("An error occurred while deleting the player. Please try again.");
+    }
   };
 
   return (
@@ -164,6 +157,7 @@ export const PlayerTable = () => {
       <table>
         <thead>
           <tr>
+            <th>Sir No</th>
             <th>Check</th>
             <th>Name</th>
             <th>Mobile</th>
@@ -180,54 +174,55 @@ export const PlayerTable = () => {
           </tr>
         </thead>
         <tbody>
-          {players.map((player) => (
-            <tr key={player.id} id={`player-${player.id}`}>
+          {players.map((player, index) => (
+            <tr key={player._id}>
+              <td>{index + 1}</td>
               <td>
                 <input
                   type="checkbox"
-                  checked={checkedStatus[player.id] || false}
-                  onChange={() => handleCheckboxChange(player.id)}
+                  checked={checkedStatus[player._id] || false}
+                  onChange={() => handleCheckboxChange(player._id)}
                 />
               </td>
-              <td>{player.fullName}</td>
-              <td>{player.mobileNum}</td>
+              <td>{player.name}</td>
+              <td>{player.mobile}</td>
               <td>{player.age}</td>
               <td>{player.position}</td>
               <td>
                 <img
-                  src={player.profileImg}
-                  alt={player.fullName}
+                  src={player.passPhoto}
+                  alt={player.name}
                   className="profile-img"
                   onClick={() =>
-                    handleImageClick(player.profileImg, setSelectedImg)
+                    handleImageClick(player.passPhoto, setSelectedImg)
                   }
                 />
               </td>
               <td>
                 <img
-                  src={player.aadharImg}
+                  src={player.aadhar}
                   alt="Aadhar Card"
                   className="aadhar-img"
                   onClick={() =>
-                    handleImageClick(player.aadharImg, setSelectedAadhar)
+                    handleImageClick(player.aadhar, setSelectedAadhar)
                   }
                 />
               </td>
               <td>{player.transactionId}</td>
               <td>
                 <img
-                  src={player.transactionImg}
+                  src={player.transactionPhoto}
                   alt="Transaction"
                   className="transaction-img"
                   onClick={() =>
                     handleImageClick(
-                      player.transactionImg,
+                      player.transactionPhoto,
                       setSelectedTransaction
                     )
                   }
                 />
               </td>
-              <td>{player.payment}</td>
+              <td>{200 || "N/A"}</td>
               <td>
                 <button onClick={() => sendWhatsAppMessage(player, "success")}>
                   Send
@@ -239,7 +234,7 @@ export const PlayerTable = () => {
                 </button>
               </td>
               <td>
-                <button onClick={() => handleDelete(player.id)}>Delete</button>
+                <button onClick={() => handleDelete(player._id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -254,7 +249,7 @@ export const PlayerTable = () => {
 
       {selectedAadhar && (
         <div className="modal" onClick={() => setSelectedAadhar(null)}>
-          <img src={selectedAadhar} alt="Aadhar" className="modal-img" />
+          <img src={selectedAadhar} alt="Aadhar Card" className="modal-img" />
         </div>
       )}
 
@@ -270,8 +265,3 @@ export const PlayerTable = () => {
     </div>
   );
 };
-
-
-
-
-
