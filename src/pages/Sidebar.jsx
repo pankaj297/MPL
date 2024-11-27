@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AdminDesign/Sidebar.css";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,25 +15,25 @@ export const Sidebar = () => {
         <nav className="sidebar-nav">
           <ul>
             <li>
-              <a href="#adminhome">Admin Home</a>
+              <Link to="/admin">Admin Home</Link>
             </li>
             <li>
-              <a href="#allplayers">All Register Players Table</a>
+              <Link to="/admin/allplayers">All Register Players Table</Link>
             </li>
             <li>
-              <a href="#liveauction">Live Auction Page</a>
+              <Link to="/admin/liveauction">Live Auction Page</Link>
             </li>
             <li>
-              <a href="#finalteamplayers">Final Team Players</a>
+              <Link to="/admin/finalteamplayers">Final Team Players</Link>
             </li>
             <li>
-              <a href="#addmatches">Add Upcoming Matches</a>
+              <Link to="/admin/addmatches">Add Upcoming Matches</Link>
             </li>
             <li>
-              <a href="#addupdate">Admin Update Info</a>
+              <Link to="/admin/addupdate">Admin Update Info</Link>
             </li>
             <li>
-              <a href="#addupdate">Total Selected Players</a>
+              <Link to="/admin/soldPlayer">Total Selected Players</Link>
             </li>
           </ul>
         </nav>

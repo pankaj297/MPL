@@ -167,10 +167,10 @@ export const CricketPlayerRegistration = () => {
                   required
                 >
                   <option value="">Select Position</option>
-                  <option value="Batsman">Batsman</option>
-                  <option value="Bowler">Bowler</option>
-                  <option value="Allrounder">Allrounder</option>
-                  <option value="Keeper-batsman">Keeper-Batsman</option>
+                  <option value="batsman">Batsman</option>
+                  <option value="bowler">Bowler</option>
+                  <option value="allrounder">Allrounder</option>
+                  <option value="keeperBatsman">Keeper-Batsman</option>
                 </select>
               </div>
 

@@ -16,7 +16,13 @@ import { Matches } from "./components/Matches.jsx";
 import { Admin } from "./Admin.jsx";
 import { PoliticalLeaderProfile } from "./components/PoliticalLeaderProfile";
 import { PriceMoney } from "./components/PriceMoney.jsx";
-
+import { HomeAdmin } from "./pages/HomeAdmin.jsx";
+import { PlayerTable } from "./pages/PlayerTable.jsx";
+import { AdminLiveAuction } from "./pages/AdminLiveAuction.jsx";
+import { AdminTeamPlayers } from "./pages/AdminTeamPlayers.jsx";
+import { UpcomingMatch } from "./pages/UpcomingMatch.jsx";
+import { AdminUpdate } from "./pages/AdminUpdate.jsx";
+import { TotalSoldOutPlayers } from "./pages/TotalSoldOutPlayers.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -36,7 +42,40 @@ const appRouter = createBrowserRouter([
       { path: "/update", element: <ShowUpdate /> },
       { path: "/political", element: <PoliticalLeaderProfile /> },
       { path: "/price", element: <PriceMoney /> },
-      { path: "/admin", element: <Admin /> },
+      {
+        path: "/admin",
+        element: <Admin />,
+        children: [
+          {
+            path: "",
+            element: <PlayerTable />,
+          },
+          {
+            path: "allplayers",
+            element: <PlayerTable />,
+          },
+          {
+            path: "liveauction",
+            element: <AdminLiveAuction />,
+          },
+          {
+            path: "finalteamplayers",
+            element: <AdminTeamPlayers />,
+          },
+          {
+            path: "addmatches",
+            element: <UpcomingMatch />,
+          },
+          {
+            path: "addupdate",
+            element: <AdminUpdate />,
+          },
+          {
+            path: "soldPlayer",
+            element: <TotalSoldOutPlayers />,
+          },
+        ],
+      },
     ],
   },
 ]);
