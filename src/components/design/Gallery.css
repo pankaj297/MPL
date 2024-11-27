@@ -83,7 +83,7 @@
   position: absolute;
   top: 0;
   right: 15px;
-  font-size:  40px;
+  font-size:  10px;
   color: red;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -107,11 +107,10 @@
 /* Responsive Styles */
 @media (max-width: 768px) {
   .show-content {
-    max-width: 30%;
-    max-height: 30%;
+    max-width: 90%;
+    max-height: 90%;
   }
   .gallery-page{
-  
   padding-top: 15%;
 
 }

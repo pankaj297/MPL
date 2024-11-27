@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-h1 {
+.Upcomeing-heading {
   font-size: 2rem;
   color: #fff;
   margin-bottom: 20px;
@@ -38,7 +38,9 @@ h1 {
 .match-card:hover {
   transform: scale(1.02);
 }
-
+.vs{
+  color: #000;
+}
 .team {
   display: flex;
   flex-direction: column;

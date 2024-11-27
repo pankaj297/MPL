@@ -14,9 +14,8 @@ import { AdminLogin } from "./components/AdminLogin.jsx";
 import { ShowUpdate } from "./components/ShowUpdate.jsx";
 import { Matches } from "./components/Matches.jsx";
 import { Admin } from "./Admin.jsx";
-
-
-
+import { PoliticalLeaderProfile } from "./components/PoliticalLeaderProfile";
+import { PriceMoney } from "./components/PriceMoney.jsx";
 
 
 const appRouter = createBrowserRouter([
@@ -35,6 +34,8 @@ const appRouter = createBrowserRouter([
       { path: "/live", element: <LiveAuction /> },
       { path: "/login", element: <AdminLogin /> },
       { path: "/update", element: <ShowUpdate /> },
+      { path: "/political", element: <PoliticalLeaderProfile /> },
+      { path: "/price", element: <PriceMoney /> },
       { path: "/admin", element: <Admin /> },
     ],
   },
