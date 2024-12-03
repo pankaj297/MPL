@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios
 import "./AdminDesign/UpcomingMatch.css";
 
 export const UpcomingMatch = () => {
@@ -8,14 +9,30 @@ export const UpcomingMatch = () => {
     team2: { name: "", logo: null },
     date: "",
     time: "",
-    winner: "", // Winner is still part of the state but not required for validation
+    winner: "",
   });
+  const [loading, setLoading] = useState(false); // State for loading indicator
 
+  // Fetch Matches
+  useEffect(() => {
+    const fetchMatches = async () => {
+      try {
+        const response = await axios.get(
+          "https://mpl-backend-5gc6.onrender.com/api/match/getmatches"
+        );
+        setMatches(response.data);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    };
+    fetchMatches();
+  }, []);
+
+  // Handle Input Change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith("team1") || name.startsWith("team2")) {
-      const team = name.split(".")[0];
-      const field = name.split(".")[1];
+      const [team, field] = name.split(".");
       setNewMatch((prev) => ({
         ...prev,
         [team]: {
@@ -31,17 +48,24 @@ export const UpcomingMatch = () => {
     }
   };
 
+  // Handle Logo Upload
   const handleLogoUpload = (e, team) => {
     const file = e.target.files[0];
-    const fileUrl = URL.createObjectURL(file);
     setNewMatch((prev) => ({
       ...prev,
-      [team]: { ...prev[team], logo: fileUrl },
+      [team]: { ...prev[team], logo: file },
     }));
   };
 
-  const handleAddMatch = () => {
-    // Validation without checking for the winner
+  // Add Match
+  const handleAddMatch = async () => {
+    console.log("Team1 Name:", newMatch.team1.name);
+    console.log("Team1 Logo:", newMatch.team1.logo);
+    console.log("Team2 Name:", newMatch.team2.name);
+    console.log("Team2 Logo:", newMatch.team2.logo);
+    console.log("Date:", newMatch.date);
+    console.log("Time:", newMatch.time);
+
     if (
       newMatch.team1.name &&
       newMatch.team1.logo &&
@@ -50,36 +74,70 @@ export const UpcomingMatch = () => {
       newMatch.date &&
       newMatch.time
     ) {
-      setMatches((prevMatches) => [
-        ...prevMatches,
-        { ...newMatch, id: Date.now() },
-      ]);
-      // Reset the form
-      setNewMatch({
-        team1: { name: "", logo: null },
-        team2: { name: "", logo: null },
-        date: "",
-        time: "",
-        winner: "", // You can keep it here for future use
-      });
+      setLoading(true); // Set loading to true when request starts
+      const formData = new FormData();
+      formData.append("team1.name", newMatch.team1.name);
+      formData.append("team1.logo", newMatch.team1.logo);
+      formData.append("team2.name", newMatch.team2.name);
+      formData.append("team2.logo", newMatch.team2.logo);
+      formData.append("date", newMatch.date);
+      formData.append("time", newMatch.time);
+      formData.append("winner", newMatch.winner);
+
+      try {
+        const response = await axios.post(
+          "https://mpl-backend-5gc6.onrender.com/api/match/addmatch",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            timeout: 100000,
+          }
+        );
+        alert(response.data.message);
+        setMatches((prevMatches) => [...prevMatches, response.data.match]);
+        setNewMatch({
+          team1: { name: "", logo: null },
+          team2: { name: "", logo: null },
+          date: "",
+          time: "",
+          winner: "",
+        });
+      } catch (error) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to add match";
+        alert(errorMessage);
+      } finally {
+        setLoading(false); // Reset loading to false once request is complete
+      }
     } else {
-      alert("Please fill in all required fields to add a match.");
+      alert("Please fill in all required fields.");
     }
   };
 
-  const handleDeleteMatch = (id) => {
-    setMatches(matches.filter((match) => match.id !== id));
-  };
-
-  const handleAddExistingMatch = (match) => {
-    // Logic to add the existing match back into the list
-     alert("Added match")
+  // Delete Match
+  const handleDeleteMatch = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://mpl-backend-5gc6.onrender.com/api/match/deletematch/${id}`
+      );
+      if (response.data.message === "Match deleted successfully") {
+        setMatches(matches.filter((match) => match._id !== id));
+      }
+    } catch (error) {
+      alert(
+        "Failed to delete match: " +
+          (error.response?.data?.message || "Unknown error")
+      );
+    }
   };
 
   return (
     <div className="admin-matches">
       <h1 className="admin-matches__header">Admin - Manage Matches</h1>
 
+      {/* Add Match Form */}
       <div className="admin-matches__form">
         <h2 className="form__title">Add New Match</h2>
         <input
@@ -90,6 +148,7 @@ export const UpcomingMatch = () => {
           onChange={handleInputChange}
           className="form__input"
         />
+
         <input
           type="file"
           accept="image/*"
@@ -111,91 +170,55 @@ export const UpcomingMatch = () => {
           className="form__input"
         />
         <input
-          type="text"
+          type="date"
           name="date"
-          placeholder="Date (e.g., 10 Jan 2025)"
           value={newMatch.date}
           onChange={handleInputChange}
           className="form__input"
         />
         <input
-          type="text"
+          type="time"
           name="time"
-          placeholder="Time (e.g., 10:30 AM)"
           value={newMatch.time}
           onChange={handleInputChange}
           className="form__input"
         />
-        <input
-          type="text"
-          name="winner"
-          placeholder="Winner (optional)"
-          value={newMatch.winner}
-          onChange={handleInputChange}
-          className="form__input"
-        />
-
-        <button onClick={handleAddMatch} className="form__button">
-          Add Match
+        <button
+          onClick={handleAddMatch}
+          className="form__button"
+          disabled={loading} // Disable the button while loading
+        >
+          {loading ? "Adding Match..." : "Add Match"} {/* Show loading text */}
         </button>
       </div>
 
+      {/* Match List */}
       <div className="admin-matches__list">
-        <h2 className="list_h2_title">Matches List</h2>
-        {matches.length > 0 ? (
-          matches.map((match) => (
-            <div className="list__card" key={match.id}>
-              <div className="card__team">
-                <p className="team__name">{match.team1.name}</p>
-                {match.team1.logo && (
-                  <img
-                    src={match.team1.logo}
-                    alt={`${match.team1.name} logo`}
-                    className="team__logo"
-                  />
-                )}
-              </div>
-              <h2 className="card__vs">vs</h2>
-              <div className="card__team">
-                <p className="team__name">{match.team2.name}</p>
-                {match.team2.logo && (
-                  <img
-                    src={match.team2.logo}
-                    alt={`${match.team2.name} logo`}
-                    className="team__logo"
-                  />
-                )}
-              </div>
-              <div className="card__info">
-                <p className="info__date">Date: {match.date}</p>
-                <p className="info__time">Time: {match.time}</p>
-                {match.winner && (
-                  <p className="info__winner">Winner: {match.winner}</p>
-                )}
-              </div>
-
-              <div className="card__buttons">
+        <h2 className="list__title">Upcoming Matches</h2>
+        {matches && matches.length > 0 ? (
+          <ul>
+            {matches.map((match) => (
+              <li key={match._id} className="match__item">
+                <h3>
+                  {match.team1.name} vs {match.team2.name}
+                </h3>
+                <p>Date: {match.date}</p>
+                <p>Time: {match.time}</p>
                 <button
-                  onClick={() => handleDeleteMatch(match.id)}
-                  className="card__delete-button"
+                  onClick={() => handleDeleteMatch(match._id)}
+                  className="list__button"
                 >
-                  Delete
+                  Delete Match
                 </button>
-                <button
-                  onClick={() => handleAddExistingMatch(match)}
-                  className="card__add-button"
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-          ))
+              </li>
+            ))}
+          </ul>
         ) : (
-          <p className="list__empty-message">
-            No matches added yet. Use the form above to add matches.
-          </p>
+          <p>No upcoming matches available.</p>
         )}
       </div>
     </div>
   );
 };
+
+export default UpcomingMatch;
