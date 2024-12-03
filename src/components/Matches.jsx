@@ -1,72 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./design/Matches.css";
 
-// Sample match data with date and time
-const matches = [
-  {
-    id: 1,
-    team1: {
-      name: "Royal Challengers Bangalore",
-      logo: "./images/rcb.webp",
-    },
-    team2: {
-      name: "Mumbai Indians",
-      logo: "./images/mi.png",
-    },
-    date: "10 Jan 2025-",
-    time: "10:30 Am",
-  },
-  {
-    id: 2,
-    team1: {
-      name: "Chennai Super Kings",
-      logo: "./images/csk.png",
-    },
-    team2: {
-      name: "Mumbai Indians",
-      logo: "./images/mi.png",
-    },
-    date: "10 Jan 2025-",
-    time: "02:30 Am",
-  },
-  {
-    id: 3,
-    team1: {
-      name: "Royal Challengers Bangalore",
-      logo: "./images/rcb.webp",
-    },
-    team2: {
-      name: "Chennai Super Kings",
-      logo: "./images/csk.png",
-    },
-    date: "11 Jan 2025-",
-    time: "11:00 Am",
-  },
-];
-
 export const Matches = () => {
+  const [matches, setMatches] = useState([]); // State to hold matches
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
+  useEffect(() => {
+    // Fetch matches from the backend
+    const fetchMatches = async () => {
+      try { 
+        const response = await axios.get(
+          "https://mpl-backend-5gc6.onrender.com/api/match/getmatches"
+        );
+        setMatches(response.data); // Update the matches state
+        console.log(response);
+        setLoading(false); // Set loading to false
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load matches");
+        setLoading(false);
+      }
+    };
+
+    fetchMatches();
+  }, []);
+
+  // Show loading or error message
+  if (loading) return <p>Loading matches...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="match-page">
       <div className="matches-container">
         <h1 className="Upcomeing-heading">Upcoming Matches</h1>
-        {matches.map((match) => (
-          <div className="match-card" key={match.id}>
-            <div className="team">
-              <p>{match.team1.name}</p>
-              <img src={match.team1.logo} alt={`${match.team1.name} logo`} />
+        {matches.length === 0 ? ( // Check if matches array is empty
+          <p className="no-matches">No matches found</p>
+        ) : (
+          matches.map((match) => (
+            <div className="match-card" key={match._id}>
+              <div className="team">
+                <p>{match.team1.name}</p>
+                <img src={match.team1.logo} alt={`${match.team1.name} logo`} />
+              </div>
+              <h2 className="vs">vs</h2>
+              <div className="team">
+                <p>{match.team2.name}</p>
+                <img src={match.team2.logo} alt={`${match.team2.name} logo`} />
+              </div>
+              <div className="match-info">
+                <p>Date: {new Date(match.date).toLocaleDateString()}</p>
+                <p>Time: {match.time}</p>
+              </div>
             </div>
-            <h2 className="vs">vs</h2>
-            <div className="team">
-              <p>{match.team2.name}</p>
-              <img src={match.team2.logo} alt={`${match.team2.name} logo`} />
-            </div>
-            <div></div>
-            <div className="match-info">
-              <p>Date: {match.date}</p>
-              <p>Time: {match.time}</p>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
