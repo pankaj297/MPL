@@ -12,6 +12,11 @@
  
 }
 
+.manage_img_size{
+  max-width: 500px;
+  height: 200px;
+}
+
 .gallery-section h2 {
   font-size: 36px;
   margin-bottom: 40px;

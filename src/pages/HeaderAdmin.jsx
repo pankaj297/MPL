@@ -13,14 +13,14 @@ export const HeaderAdmin = () => {
     <>
       <div className="nav-section">
         <div className="header-left">
-          <img src="./images/logo1.png" alt="Logo" className="Admin-logo" />
+          <img src="../images/logo1.png" alt="Logo" className="Admin-logo" />
 
           <span className="mpl-text">MPL</span>
         </div>
         <div className="header-right">
           <div className="admin-info" onClick={toggleDropdown}>
             <img
-              src="./images/pankaj.jpeg"
+              src="../images/pankaj.jpeg"
               alt="Admin"
               className="admin-image"
             />

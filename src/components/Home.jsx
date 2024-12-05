@@ -6,14 +6,14 @@ export const Home = () => {
   return (
     <>
       <div className="home-container">
-        <video
+        {/* <video
           className="background-video"
           src="./images/video1.mp4"
           autoPlay
           loop
           muted
           playsInline
-        ></video>
+        ></video> */}
       </div>
 
       {/* About Section */}

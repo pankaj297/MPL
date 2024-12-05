@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./AdminDesign/PlayerTable.css";
+import styles from "./AdminDesign/PlayerTable.module.css";
 
 export const PlayerTable = () => {
   const [players, setPlayers] = useState([]);
@@ -10,7 +10,6 @@ export const PlayerTable = () => {
     JSON.parse(localStorage.getItem("checkedStatus")) || {}
   );
 
-  // Fetching data from the API
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -32,6 +31,23 @@ export const PlayerTable = () => {
     fetchPlayers();
   }, []);
 
+  const totalPlayers = players.length;
+  const totalPaid = totalPlayers * 200;
+  const totalBatsman = players.filter(
+    (player) => player.position === "batsman"
+  ).length;
+  const totalAllrounder = players.filter(
+    (player) => player.position === "allrounder"
+  ).length;
+
+  const totalBowler = players.filter(
+    (player) => player.position === "bowler"
+  ).length;
+
+  const totalWicketkeeper = players.filter(
+    (player) => player.position === "keeperBatsman"
+  ).length;
+
   const handleCheckboxChange = (id) => {
     setCheckedStatus((prevState) => {
       const newStatus = { ...prevState, [id]: !prevState[id] };
@@ -50,6 +66,7 @@ export const PlayerTable = () => {
       <html>
         <head>
           <title>MPL Players Details</title>
+          
           <style>
             body { font-family: Arial, sans-serif; }
             h2 { text-align: center; }
@@ -57,10 +74,26 @@ export const PlayerTable = () => {
             th, td { padding: 10px; border: 1px solid #ddd; }
             th { background-color: #3498db; color: white; }
             .author { position: absolute; bottom: 10px; right: 10px; font-size: 15px; color: #666; }
+                .tableInfoData{
+            margin: 1rem;
+            padding: 1rem;
+            display: flex;
+           flex-direction: column;
+           display: grid;
+           grid-template-columns: 1fr 1fr 1fr;
+            }
           </style>
         </head>
         <body>
           <h2>MPL Registered Players</h2>
+           <div class="tableInfoData">
+        <p>Total Players : ${totalPlayers}</p>
+        <p>Total Money : ${totalPaid}</p>
+        <p>Total Batsman : ${totalBatsman}</p>
+        <p>Total Allrounder : ${totalAllrounder}</p>
+        <p>Total Bowler : ${totalBowler}</p>
+        <p>Total Wicketkeeper : ${totalWicketkeeper}</p>
+      </div>
           <table>
             <thead>
               <tr>
@@ -83,7 +116,7 @@ export const PlayerTable = () => {
                   <td>${player.mobile}</td>
                   <td>${player.age}</td>
                   <td>${player.position}</td>
-                  <td>${player.payment || "N/A"}</td>
+                  <td>${200 || "N/A"}</td>
                   <td></td>
                 </tr>
               `
@@ -144,7 +177,7 @@ export const PlayerTable = () => {
   };
 
   return (
-    <div className="player-table">
+    <div className={styles["player-table"]}>
       <h2>MPL Registered Players</h2>
 
       <button
@@ -153,6 +186,14 @@ export const PlayerTable = () => {
       >
         Print All Players
       </button>
+      <div className={styles.tableInfoData}>
+        <p>Total Players : {totalPlayers}</p>
+        <p>Total Money : {totalPaid}</p>
+        <p>Total Batsman : {totalBatsman}</p>
+        <p>Total Allrounder : {totalAllrounder}</p>
+        <p>Total Bowler : {totalBowler}</p>
+        <p>Total Wicketkeeper : {totalWicketkeeper}</p>
+      </div>
 
       <table>
         <thead>
@@ -192,7 +233,7 @@ export const PlayerTable = () => {
                 <img
                   src={player.passPhoto}
                   alt={player.name}
-                  className="profile-img"
+                  className={styles["profile-img"]}
                   onClick={() =>
                     handleImageClick(player.passPhoto, setSelectedImg)
                   }
@@ -202,7 +243,7 @@ export const PlayerTable = () => {
                 <img
                   src={player.aadhar}
                   alt="Aadhar Card"
-                  className="aadhar-img"
+                  className={styles["aadhar-img"]}
                   onClick={() =>
                     handleImageClick(player.aadhar, setSelectedAadhar)
                   }
@@ -213,7 +254,7 @@ export const PlayerTable = () => {
                 <img
                   src={player.transactionPhoto}
                   alt="Transaction"
-                  className="transaction-img"
+                  className={styles["transaction-img"]}
                   onClick={() =>
                     handleImageClick(
                       player.transactionPhoto,
@@ -242,23 +283,34 @@ export const PlayerTable = () => {
       </table>
 
       {selectedImg && (
-        <div className="modal" onClick={() => setSelectedImg(null)}>
-          <img src={selectedImg} alt="Profile" className="modal-img" />
+        <div className={styles.modal} onClick={() => setSelectedImg(null)}>
+          <img
+            src={selectedImg}
+            alt="Profile"
+            className={styles["modal-img"]}
+          />
         </div>
       )}
 
       {selectedAadhar && (
-        <div className="modal" onClick={() => setSelectedAadhar(null)}>
-          <img src={selectedAadhar} alt="Aadhar Card" className="modal-img" />
+        <div className={styles.modal} onClick={() => setSelectedAadhar(null)}>
+          <img
+            src={selectedAadhar}
+            alt="Aadhar Card"
+            className={styles["modal-img"]}
+          />
         </div>
       )}
 
       {selectedTransaction && (
-        <div className="modal" onClick={() => setSelectedTransaction(null)}>
+        <div
+          className={styles.modal}
+          onClick={() => setSelectedTransaction(null)}
+        >
           <img
             src={selectedTransaction}
             alt="Transaction"
-            className="modal-img"
+            className={styles["modal-img"]}
           />
         </div>
       )}

@@ -3,9 +3,9 @@ import "./AdminDesign/AdminTeamPlayers.css";
 
 export const AdminTeamPlayers = () => {
   const teams = [
-    { id: 1, name: "Chennai Super Kings", logo: "./images/csk.png" },
-    { id: 2, name: "Mumbai Indians", logo: "./images/mi.png" },
-    { id: 3, name: "RCB", logo: "./images/rcb.webp" },
+    { id: 1, name: "Chennai Super Kings", logo: "../images/csk.png" },
+    { id: 2, name: "Mumbai Indians", logo: "../images/mi.png" },
+    { id: 3, name: "RCB", logo: "../images/rcb.webp" },
 
     // Additional teams here
   ];

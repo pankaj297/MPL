@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./design/Gallery.css";
 
 const images = [
-  { id: 1, src: "./images/g1.jpg", alt: "Image 1" },
-  { id: 2, src: "./images/g2.jpg", alt: "Image 2" },
+  { id: 1, src: "./images/g1.jpeg", alt: "Image 1" },
+  { id: 2, src: "./images/g2.jpeg", alt: "Image 2" },
   { id: 3, src: "./images/g3.jpg", alt: "Image 3" },
   { id: 4, src: "./images/g4.jpg", alt: "Image 4" },
   { id: 5, src: "./images/g5.jpg", alt: "Image 5" },
@@ -40,7 +40,7 @@ export const Gallery = () => {
                 className="gallery-item"
                 onClick={() => openIMG(image)}
               >
-                <img src={image.src} alt={image.alt} />
+                <img className="manage_img_size" src={image.src} alt={image.alt} />
               </div>
             ))}
           </div>

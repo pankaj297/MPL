@@ -168,7 +168,7 @@
   background-color: orange;
 }
 
-.auction-final-bid {
+.auction_final_bid {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,7 +179,81 @@
   border-radius: 8px;
   color: #fff;
   background-color: #333;
-  box-shadow: 0 4px 8px #fff;
+  /* box-shadow: 0 4px 8px #fff; */
+}
+
+.teams-btn{
+   padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.teams-btn:nth-child(1) {
+  background-color: yellow; 
+  color: #333;
+}
+
+.teams-btn:nth-child(2) {
+  background-color: blue;
+  color: #ffff;
+}
+
+.teams-btn:nth-child(3) {
+  background-color: red; 
+  color: #ffff;
+}
+
+.teams-btn:nth-child(4) {
+  background-color: SteelBlue; /* Orange */
+  color: #ffff;
+}
+
+.teams-btn:nth-child(5) {
+  background-color: #8a2be2; /* BlueViolet */
+  color: #ffff;
+}
+
+.teams-btn:nth-child(6) {
+  background-color: #f48156; /* DeepPink */
+  color: #ffff;
+}
+
+.teams-btn:nth-child(7) {
+  background-color:  moccasin; /* LightSeaGreen */
+  color: #333;
+}
+
+.teams-btn:nth-child(8) {
+  background-color: pink; /* MediumVioletRed */
+  color: #000;
+}
+
+
+.Increase-btn{
+   padding: .5rem;
+  background-color: #57e757;
+   text-decoration: none;
+   border-radius: 2px;
+    color: #ffff;
+}
+
+.Decrease-btn{
+   padding: .5rem;
+  background-color: red;
+   text-decoration: none;
+   border-radius: 2px;
+    color: #ffff;
+}
+.Finalize-btn{
+   padding: .5rem;
+  background-color: blue;
+   text-decoration: none;
+   border-radius: 2px;
+    color: #ffff;
 }
 
 /* Media Queries */

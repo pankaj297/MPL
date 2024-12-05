@@ -9,6 +9,12 @@
     padding-top: 5%;
 }
 
+.left_filter_list{
+    display: flex;
+    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+}
 
 .footer-bigcard {
     width: 90%;

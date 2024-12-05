@@ -1,5 +1,5 @@
 .match-page {
-  padding-top: 5%;
+  margin-top: 5%;
   background-color: #333;
   height: auto;
   width: 100%;
@@ -67,18 +67,33 @@ h2 {
 }
 
 .match-info {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 10px;
   font-size: 1rem;
   color: #333;
 }
  
 @media (max-width: 768px) {
+  
+.match-info {
+ display: flex;
+ flex-direction: column;
+  
+}
+.match-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  align-items: center;
+  padding: 10px;
+}
   h1 {
     font-size: 1.5rem;
   }
   .match-page {
-  padding-top: 20%;
+   margin-top: 20%;
 }
 
   .match-card {

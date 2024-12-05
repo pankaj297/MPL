@@ -94,19 +94,23 @@ export const CricketPlayerRegistration = () => {
                 your Aadhaar card{" "}
               </p>
               <p>8. Watch the following video for payment</p>
-              <video
+              {/* <video
                 src="./images/video1.mp4"
                 width={"300px"}
                 loop
                 muted
                 playsInline
                 controls
-              ></video>
+              ></video> */}
             </div>
             <h2>Cricket Player Registration</h2>
             <div className="scan-img">
-              <img src="./images/scanner.jpeg" alt="Scanner" width={"200px"} />
-              <p>Registration Fees:100/-</p>
+              <img
+                src="./images/vivek_scanner.jpeg"
+                alt="Scanner"
+                width={"200px"}
+              />
+              <p>Registration Fees: 200₹</p>
             </div>
 
             <form onSubmit={handleSubmit} className="registration-form">

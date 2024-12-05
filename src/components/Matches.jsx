@@ -51,6 +51,7 @@ export const Matches = () => {
               </div>
               <div className="match-info">
                 <p>Date: {new Date(match.date).toLocaleDateString()}</p>
+
                 <p>Time: {match.time}</p>
               </div>
             </div>

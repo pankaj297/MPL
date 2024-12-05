@@ -93,21 +93,21 @@ export const AdminLiveAuction = () => {
   return (
     <div className="auction-admin-live-bid">
       <h1 className="auction-h1-header">Admin Live Auction - MPL</h1>
+      <div className="filter-dropdown">
+        <label htmlFor="position-filter">Filter by Position:</label>
+        <select
+          id="position-filter"
+          value={filterPosition}
+          onChange={(e) => setFilterPosition(e.target.value)}
+        >
+          <option value="All">All</option>
+          <option value="Batsman">Batsman</option>
+          <option value="Bowler">Bowler</option>
+          <option value="Allrounder">All-Rounder</option>
+          <option value="Keeper-batsman">Wicket-Keeper</option>
+        </select>
+      </div>
       <div className="auction-bid-container">
-        <div className="filter-dropdown">
-          <label htmlFor="position-filter">Filter by Position:</label>
-          <select
-            id="position-filter"
-            value={filterPosition}
-            onChange={(e) => setFilterPosition(e.target.value)}
-          >
-            <option value="All">All</option>
-            <option value="Batsman">Batsman</option>
-            <option value="Bowler">Bowler</option>
-            <option value="Allrounder">All-Rounder</option>
-            <option value="Keeper-batsman">Wicket-Keeper</option>
-          </select>
-        </div>
         <div className="auction-player-list">
           {/* Render filtered players */}
           {filteredPlayers.map((player) => (
@@ -128,6 +128,7 @@ export const AdminLiveAuction = () => {
             </div>
           ))}
         </div>
+
         <div className="auction-bid-section">
           <h3 className="auction-live-status">Live</h3>
           <div className="auction-player-details">
@@ -159,19 +160,29 @@ export const AdminLiveAuction = () => {
             <h3 className="auction-h3-header">Select Team for Bidding</h3>
             <div className="team-button-container">
               {teams.map((team, index) => (
-                <button key={index} onClick={() => setLastBiddingTeam(team)}>
+                <a
+                  className="teams-btn"
+                  key={index}
+                  onClick={() => setLastBiddingTeam(team)}
+                >
                   {team}
-                </button>
+                </a>
               ))}
             </div>
             <div className="bid-control-buttons">
-              <button onClick={handleIncreaseBid}>Increase Bid</button>
-              <button onClick={handleDecreaseBid}>Decrease Bid</button>
-              <button onClick={handleFinalize}>Finalize Bid</button>
+              <a className="Increase-btn" onClick={handleIncreaseBid}>
+                Increase Bid
+              </a>
+              <a className="Decrease-btn" onClick={handleDecreaseBid}>
+                Decrease Bid
+              </a>
+              <a className="Finalize-btn" onClick={handleFinalize}>
+                Finalize Bid
+              </a>
             </div>
           </div>
           {finalized && selectedPlayer && (
-            <div className="auction-final-bid">
+            <div className="auction_final_bid">
               <h3 className="auction-h3-header">Final Bidding</h3>
               <p>Player: {selectedPlayer.name}</p>
               <p>Sold Out By: {lastBiddingTeam}</p>

@@ -3,6 +3,8 @@
   color: #333;
   padding: 20px;
   margin-bottom: 5rem;
+  height: auto;
+  margin-right: 1rem;
 }
 
 .form__title{
