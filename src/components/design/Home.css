@@ -166,7 +166,8 @@
   }
 
   .about-img img {
-    width: 90%; /* Limit image size on small screens */
+    width: 100%; /* Limit image size on small screens */
+    height: 300px;
   }
 
   .about-content h2 {

@@ -261,3 +261,15 @@ h2 {
     height: 60px; /* Smaller logo for mobile */
   }
 }
+
+
+
+.teams-btn{
+   padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #3498db;
+}

@@ -6,72 +6,70 @@ export const Teams = () => {
     {
       id: 1,
       mpl: "Malkheda Primer League",
-      name: "Royal Challengers Bangalore",
-      owner: "United Spirits Limited",
-      logo: "./images/rcb.webp",
+      name: "Vishwanath warriors",
+      owner: "Vishwanath Rathod",
+      logo: "./images/logo2.jpeg",
       players: [
-        { id: 1, name: "Virat Kohli", role: "Batsman", price: "₹5000" },
-        { id: 2, name: "Mohammed Siraj", role: "Bowler", price: "₹4700" },
-        { id: 3, name: "Faf du Plessis", role: "Batsman", price: "₹4800" },
-        { id: 4, name: "Glenn Maxwell", role: "All-rounder", price: "₹4500" },
-        { id: 5, name: "Harshal Patel", role: "Bowler", price: "₹4200" },
-        {
-          id: 6,
-          name: "Dinesh Karthik",
-          role: "Wicketkeeper-Batsman",
-          price: "₹4000",
-        },
-        {
-          id: 7,
-          name: "Wanindu Hasaranga",
-          role: "All-rounder",
-          price: "₹4300",
-        },
-        { id: 8, name: "Shahbaz Ahmed", role: "All-rounder", price: "₹3900" },
-        { id: 9, name: "Josh Hazlewood", role: "Bowler", price: "₹4600" },
-        {
-          id: 10,
-          name: "Anuj Rawat",
-          role: "Wicketkeeper-Batsman",
-          price: "₹3800",
-        },
-        { id: 11, name: "Karn Sharma", role: "Bowler", price: "₹3700" },
-        {
-          id: 12,
-          name: "Suyash Prabhudessai",
-          role: "All-rounder",
-          price: "₹3500",
-        },
-        { id: 13, name: "Akash Deep", role: "Bowler", price: "₹3400" },
-        { id: 14, name: "Finn Allen", role: "Batsman", price: "₹4000" },
-        { id: 15, name: "David Willey", role: "All-rounder", price: "₹3600" },
-        { id: 16, name: "Mahipal Lomror", role: "All-rounder", price: "₹3300" },
-        { id: 17, name: "Rajat Patidar", role: "Batsman", price: "₹4100" },
-        { id: 18, name: "Reece Topley", role: "Bowler", price: "₹4400" },
-        { id: 19, name: "Manoj Bhandage", role: "All-rounder", price: "₹3200" },
-        { id: 20, name: "Himanshu Sharma", role: "Bowler", price: "₹3100" },
+        { id: 1, name: "Akash Ramesh Naik", role: "_", price: "₹1000" },
+        { id: 2, name: "Pavan Saidas Chavan", role: "_", price: "₹1000" },
       ],
     },
     {
       id: 2,
       mpl: "Malkheda Primer League",
-      name: "Mumbai Indians",
-      owner: "Mukesh Ambani",
-      logo: "./images/mi.png",
+      name: "Dipak Warriors",
+      owner: "Dipak Ashok Naik",
+      logo: "./images/logo3.jpg",
       players: [
-        { id: 1, name: "Rohit Sharma", role: "Batsman", price: "₹4000" },
-        { id: 2, name: "Jasprit Bumrah", role: "Bowler", price: "₹4500" },
+        { id: 1, name: "Baban Ratilal Naik", role: "_", price: "₹1000" },
+        { id: 2, name: "Yogesh Gotu Chavan", role: "_", price: "₹1000" },
       ],
     },
     {
       id: 3,
       mpl: "Malkheda Primer League",
-      name: "Chennai Super Kings",
-      owner: "N. Srinivasan",
-      logo: "./images/csk.png",
+      name: "Black Panthers",
+      owner: "Ankush Ramlal Rathod",
+      logo: "./images/logo4.jpeg",
       players: [
-        { id: 1, name: "MS Dhoni", role: "Wicketkeeper", price: "₹2000" },
-        { id: 2, name: "Ravindra Jadeja", role: "All-rounder", price: "₹3000" },
+        { id: 1, name: "Rohit Ramkrushna Rathod", role: "_", price: "₹1000" },
+        { id: 2, name: "Umesh Arjun Rathod", role: "_", price: "₹1000" },
+      ],
+    },
+
+    {
+      id: 4,
+      mpl: "Malkheda Primer League",
+      name: "Shree Yodha",
+      owner: "Sachin Indrajit Pawar",
+      logo: "./images/logo5.jpeg",
+      players: [
+        { id: 1, name: "Amol Dalichant Rathod", role: "_", price: "₹1000" },
+        { id: 2, name: "Avinash Santhosh Chavan", role: "_", price: "₹1000" },
+      ],
+    },
+
+    {
+      id: 5,
+      mpl: "Malkheda Primer League",
+      name: "Vishnu Blaster",
+      owner: "Vishnu Kailash Rathod",
+      logo: "./images/logo6.jpeg",
+      players: [
+        { id: 1, name: "Himmat Jagan Naik", role: "_", price: "₹1000" },
+        { id: 2, name: "Krushna Vijay Naik", role: "_", price: "₹1000" },
+      ],
+    },
+
+    {
+      id: 6,
+      mpl: "Malkheda Primer League",
+      name: "Jagan Super Strikers",
+      owner: "Jagan Yuvraj Rathod",
+      logo: "./images/logo7.jpeg",
+      players: [
+        { id: 1, name: "Dipak Anna Rathod", role: "_", price: "₹1000" },
+        { id: 2, name: "Nitin ganesh Rathod", role: "_", price: "₹1000" },
       ],
     },
 
@@ -141,21 +139,21 @@ export const Teams = () => {
                       <h3>{team.name}</h3>
                       <p>Owner: {team.owner}</p>
                     </div>
-                    <button
-                      className="team-details-btn"
+                    <a
+                      className="teams-btn"
                       onClick={() => handleShowTeamDetails(team.id)}
                     >
                       {selectedTeamId === team.id
                         ? "Hide Details"
                         : "Show Details"}
-                    </button>
+                    </a>
                     {/* Print Button */}
-                    <button
-                      className="print-btn"
+                    <a
+                      className="teams-btn"
                       onClick={() => handlePrint(team.id)}
                     >
                       Print Details
-                    </button>
+                    </a>
                   </div>
                   <div className="table-content" id={`team-${team.id}`}>
                     {/* Display player details if this team's ID matches the selected team */}

@@ -13,7 +13,7 @@ export const ShowUpdate = () => {
           resolve([
             {
               id: 1,
-              massage: "Auction Date 1st Nov 2024",
+              massage: "Auction Date between 10 Dec to 15 Dec 2024",
             },
             {
               id: 2,
@@ -21,15 +21,11 @@ export const ShowUpdate = () => {
             },
             {
               id: 3,
-              massage: "MPL Tournament Start From 1st Jan 2025",
+              massage: "MPL Tournament Start From 25 Dec Jan 2025",
             },
             {
               id: 4,
-              massage: "Today's Match Cancel",
-            },
-            {
-              id: 5,
-              massage: "Registration Date Start Form 5 Nov 2024",
+              massage: "Registration Date  6 Dec  to 10 Dec 2024 ",
             },
           ]);
         }, 1000); // Simulating network delay

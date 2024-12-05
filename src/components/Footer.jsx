@@ -89,13 +89,10 @@ export const Footer = () => {
               </div>
             </div>
             <div className="call-me">
-              <a href="mailto:pankajnaik958@gmail.com" className="icon1">
-                <i className="fa-solid fa-envelope"></i>
-              </a>
               <a href="tel:+91 7276746341" className="icon1">
                 <i className="fa-solid fa-phone-flip"></i>
               </a>
-              <a href="tel:+91 7276028036" className="icon1">
+              <a href="tel:+91 9511271868" className="icon1">
                 <i className="fa-solid fa-phone-flip"></i>
               </a>
             </div>
@@ -103,36 +100,21 @@ export const Footer = () => {
               <h3>Social Links</h3>
               <div className="social-link-content">
                 <a
-                  href="https://www.linkedin.com/in/pankaj-naik-788549262"
-                  className="icon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-brands fa-linkedin"></i>
-                </a>
-                <a
-                  href="https://github.com/pankaj297"
-                  className="icon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-brands fa-github"></i>
-                </a>
-                <a
-                  href="https://www.instagram.com/pankajnaik53"
+                  href="https://www.instagram.com/_bunty_naik_17"
                   className="icon"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <i className="fa-brands fa-instagram"></i>
                 </a>
+
                 <a
-                  href="https://twitter.com/Pankajnaik077?s=09"
+                  href="https://www.instagram.com/vivek_chavan07"
                   className="icon"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fa-brands fa-twitter"></i>
+                  <i className="fa-brands fa-instagram"></i>
                 </a>
               </div>
             </div>

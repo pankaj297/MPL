@@ -6,7 +6,7 @@ const leaders = [
   {
     id: 1,
     profileImg: "./images/baban.jpeg",
-    backgroundImg: "./images/g8.jpg",
+    backgroundImg: "./images/g3.jpg",
     name: "Baban Naik",
     title: "Position in Party",
     spendMoney: "500,000",
@@ -21,7 +21,7 @@ const leaders = [
   {
     id: 2,
     profileImg: "./images/baban.jpeg",
-    backgroundImg: "./images/g8.jpg",
+    backgroundImg: "./images/g1.jpg",
     name: "Baban Naik",
     title: "Position in Party",
     spendMoney: "500,000",

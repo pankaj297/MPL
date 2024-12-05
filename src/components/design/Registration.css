@@ -12,6 +12,18 @@
   height: auto;
 }
 
+.kb-btn{
+  padding: .5rem;
+  background-color: orange;
+  text-decoration: none;
+  color: white;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
 .registration-container {
   width: 80%;
   padding: 10px;
