@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./design/Registration.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import "./design/Registration.css";
 
 export const CricketPlayerRegistration = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export const CricketPlayerRegistration = () => {
     transactionId: "",
     transactionPhoto: null,
   });
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     name: "",
@@ -194,7 +195,10 @@ export const CricketPlayerRegistration = () => {
               8. पेमेंट कसे करावे हे जाणून घेण्यासाठी खाली दिलेला व्हिडिओ पाहा.
             </p>
             <p>
-              <a className="kb-btn" href="https://image.pi7.org/reduce-image-size-in-kb">
+              <a
+                className="kb-btn"
+                href="https://image.pi7.org/reduce-image-size-in-kb"
+              >
                 Under 200kb
               </a>
             </p>
@@ -312,7 +316,7 @@ export const CricketPlayerRegistration = () => {
             </div>
 
             <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? "Processing..." : "Submit"}
             </button>
           </form>
         </div>
@@ -320,3 +324,4 @@ export const CricketPlayerRegistration = () => {
     </div>
   );
 };
+
