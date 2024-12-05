@@ -8,10 +8,10 @@ export const CricketPlayerRegistration = () => {
     name: "",
     mobile: "",
     age: "",
-    address: "",
+    // address: "",
     position: "",
     passPhoto: null,
-    aadhar: null,
+    // aadhar: null,
     transactionId: "",
     transactionPhoto: null,
   });
@@ -39,7 +39,7 @@ export const CricketPlayerRegistration = () => {
     data.append("age", formData.age);
     data.append("position", formData.position);
     data.append("transactionId", formData.transactionId);
-    data.append("aadhar", formData.aadhar);
+    // data.append("aadhar", formData.aadhar);
     data.append("passPhoto", formData.passPhoto);
     data.append("transactionPhoto", formData.transactionPhoto);
 
@@ -150,7 +150,7 @@ export const CricketPlayerRegistration = () => {
                 />
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="address">Address</label>
                 <textarea
                   name="address"
@@ -159,7 +159,7 @@ export const CricketPlayerRegistration = () => {
                   onChange={handleChange}
                   required
                 ></textarea>
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="position">Position</label>
@@ -189,7 +189,7 @@ export const CricketPlayerRegistration = () => {
                 />
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="aadharCard">Upload Aadhar Card</label>
                 <input
                   type="file"
@@ -198,7 +198,7 @@ export const CricketPlayerRegistration = () => {
                   onChange={handleFileChange}
                   required
                 />
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="transactionId">Transaction ID</label>

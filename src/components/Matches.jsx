@@ -28,7 +28,7 @@ export const Matches = () => {
   }, []);
 
   // Show loading or error message
-  if (loading) return <p>Loading matches...</p>;
+  if (loading) return <p className="loader">Loading matches...</p>;
   if (error) return <p>{error}</p>;
 
   return (

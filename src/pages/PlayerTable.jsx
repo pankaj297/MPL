@@ -205,7 +205,7 @@ export const PlayerTable = () => {
             <th>Age</th>
             <th>Position</th>
             <th>Profile Image</th>
-            <th>Aadhar Card</th>
+            {/* <th>Aadhar Card</th> */}
             <th>Transaction ID</th>
             <th>Transaction Image</th>
             <th>Payment</th>
@@ -239,7 +239,7 @@ export const PlayerTable = () => {
                   }
                 />
               </td>
-              <td>
+              {/* <td>
                 <img
                   src={player.aadhar}
                   alt="Aadhar Card"
@@ -248,7 +248,7 @@ export const PlayerTable = () => {
                     handleImageClick(player.aadhar, setSelectedAadhar)
                   }
                 />
-              </td>
+              </td> */}
               <td>{player.transactionId}</td>
               <td>
                 <img
