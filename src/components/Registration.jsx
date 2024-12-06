@@ -188,7 +188,7 @@ export const CricketPlayerRegistration = () => {
               पद्धतीने पेमेंट करू शकता.
             </p>
             <p>
-              7. ऑफलाइन पेमेंटसाठी MPL लेखक बाबन नाईक यांची भेट घ्या आणि तुमचा
+              7. ऑफलाइन पेमेंटसाठी MPL लेखक बबन नाईक यांची भेट घ्या आणि तुमचा
               आधार कार्ड सोबत ठेवा.
             </p>
             <p>
@@ -199,12 +199,13 @@ export const CricketPlayerRegistration = () => {
                 className="kb-btn"
                 href="https://image.pi7.org/reduce-image-size-in-kb"
               >
-                Under 200kb
+                Website image under 200kb
               </a>
             </p>
             <video
-              src="./images/video1.mp4"
+              src="./images/video2.mp4"
               width={"300px"}
+              height={"300px"}
               loop
               muted
               playsInline
@@ -212,6 +213,14 @@ export const CricketPlayerRegistration = () => {
             ></video>
           </div>
           <h2>Cricket Player Registration</h2>
+          <div className="scan-img">
+            <img
+              src="./images/vivek_scanner.jpeg"
+              alt="Scanner"
+              width={"200px"}
+            />
+            <p>Registration Fees: 200₹</p>
+          </div>
           <form onSubmit={handleSubmit} className="registration-form">
             <div className="form-group">
               <label htmlFor="fullName">Full Name</label>
