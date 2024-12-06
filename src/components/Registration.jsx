@@ -48,61 +48,60 @@ export const CricketPlayerRegistration = () => {
     }
   };
 
+  
   const validateForm = () => {
-    let valid = true;
-    let tempErrors = { ...errors };
+  let valid = true;
+  let tempErrors = { ...errors };
 
-    if (!formData.name.trim()) {
-      tempErrors.name = "Name is required.";
+  if (!formData.name.trim()) {
+    tempErrors.name = "Name is required.";
+    valid = false;
+  }
+  if (!formData.mobile.match(/^\d{10}$/)) {
+    tempErrors.mobile = "Mobile number must be 10 digits.";
+    valid = false;
+  } else {
+    tempErrors.mobile = " ";
+  }
+  if (formData.age <= 0 || formData.age > 100) {
+    tempErrors.age = "Please enter a valid age.";
+    valid = false;
+  } else {
+    tempErrors.age = " ";
+  }
+  if (!formData.position) {
+    tempErrors.position = "Position is required.";
+    valid = false;
+  }
+  if (!formData.passPhoto) {
+    tempErrors.passPhoto = "Passport photo is required.";
+    valid = false;
+  } else {
+    const fileType = formData.passPhoto.type.toLowerCase();
+    if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
+      tempErrors.passPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
       valid = false;
     }
-    if (!formData.mobile.match(/^\d{10}$/)) {
-      tempErrors.mobile = "Mobile number must be 10 digits.";
-      valid = false;
-    } else {
-      tempErrors.mobile = " ";
-    }
-    if (formData.age <= 0 || formData.age > 100) {
-      tempErrors.age = "Please enter a valid age.";
-      valid = false;
-    } else {
-      tempErrors.age = " ";
-    }
-    if (!formData.position) {
-      tempErrors.position = "Position is required.";
+  }
+  if (!formData.transactionId.trim()) {
+    tempErrors.transactionId = "Transaction ID is required.";
+    valid = false;
+  }
+  if (!formData.transactionPhoto) {
+    tempErrors.transactionPhoto = "Transaction photo is required.";
+    valid = false;
+  } else {
+    const fileType = formData.transactionPhoto.type.toLowerCase();
+    if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
+      tempErrors.transactionPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
       valid = false;
     }
-    if (!formData.passPhoto) {
-      tempErrors.passPhoto = "Passport photo is required.";
-      valid = false;
-    } else if (
-      !["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
-        formData.passPhoto.type
-      )
-    ) {
-      tempErrors.passPhoto = "Only jpg , jpeg and png images are allowed.";
-      valid = false;
-    }
-    if (!formData.transactionId.trim()) {
-      tempErrors.transactionId = "Transaction ID is required.";
-      valid = false;
-    }
-    if (!formData.transactionPhoto) {
-      tempErrors.transactionPhoto = "Transaction photo is required.";
-      valid = false;
-    } else if (
-      !["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
-        formData.transactionPhoto.type
-      )
-    ) {
-      tempErrors.transactionPhoto =
-        "Only jpg , jpeg and png images are allowed.";
-      valid = false;
-    }
+  }
 
-    setErrors(tempErrors);
-    return valid;
-  };
+  setErrors(tempErrors);
+  return valid;
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
