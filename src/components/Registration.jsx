@@ -202,14 +202,14 @@ export const CricketPlayerRegistration = () => {
                 Watch Video
               </a>
             </p>
-
+            <p>खालील वेबसाइटचा वापर करून 200KB च्या आत फोटो अपलोड करा.</p>
             <p>
               <a
                 className="kb-btn"
                 href="https://image.pi7.org/reduce-image-size-in-kb"
                 target="_blank"
               >
-                Website image under 200kb
+                वेबसाइट 200kb
               </a>
             </p>
           </div>
