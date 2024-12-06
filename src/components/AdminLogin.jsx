@@ -58,7 +58,7 @@ export const AdminLogin = () => {
             required
             className="input-field"
           />
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" target="_blank">
             Login
           </button>
           {error && <p className="error-msg">{error}</p>}

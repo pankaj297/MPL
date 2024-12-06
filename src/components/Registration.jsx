@@ -207,6 +207,7 @@ export const CricketPlayerRegistration = () => {
               <a
                 className="kb-btn"
                 href="https://image.pi7.org/reduce-image-size-in-kb"
+                target="_blank"
               >
                 Website image under 200kb
               </a>
