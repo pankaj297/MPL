@@ -33,6 +33,7 @@ export const UpcomingMatch = () => {
     const { name, value } = e.target;
     if (name.startsWith("team1") || name.startsWith("team2")) {
       const [team, field] = name.split(".");
+
       setNewMatch((prev) => ({
         ...prev,
         [team]: {
@@ -49,6 +50,7 @@ export const UpcomingMatch = () => {
   };
 
   // Handle Logo Upload
+
   const handleLogoUpload = (e, team) => {
     const file = e.target.files[0];
     setNewMatch((prev) => ({
@@ -56,7 +58,7 @@ export const UpcomingMatch = () => {
       [team]: { ...prev[team], logo: file },
     }));
   };
-
+ 
   // Add Match
   const handleAddMatch = async () => {
     console.log("Team1 Name:", newMatch.team1.name);
@@ -77,14 +79,14 @@ export const UpcomingMatch = () => {
       setLoading(true); // Set loading to true when request starts
       const formData = new FormData();
       formData.append("team1.name", newMatch.team1.name);
-      formData.append("team1.logo", newMatch.team1.logo);
+      formData.append("team1Logo", newMatch.team1.logo); // Use 'team1Logo' here
       formData.append("team2.name", newMatch.team2.name);
-      formData.append("team2.logo", newMatch.team2.logo);
+      formData.append("team2Logo", newMatch.team2.logo); // Use 'team2Logo' here
       formData.append("date", newMatch.date);
       formData.append("time", newMatch.time);
       formData.append("winner", newMatch.winner);
 
-      try {
+      try { 
         const response = await axios.post(
           "https://mpl-backend-5gc6.onrender.com/api/match/addmatch",
           formData,
@@ -153,8 +155,10 @@ export const UpcomingMatch = () => {
           type="file"
           accept="image/*"
           onChange={(e) => handleLogoUpload(e, "team1")}
+          name="team1Logo" // Changed name here
           className="form__input"
         />
+
         <input
           type="text"
           name="team2.name"
@@ -163,12 +167,15 @@ export const UpcomingMatch = () => {
           onChange={handleInputChange}
           className="form__input"
         />
+
         <input
           type="file"
           accept="image/*"
           onChange={(e) => handleLogoUpload(e, "team2")}
+          name="team2Logo" // Changed name here
           className="form__input"
         />
+
         <input
           type="date"
           name="date"
@@ -194,31 +201,41 @@ export const UpcomingMatch = () => {
 
       {/* Match List */}
       <div className="admin-matches__list">
-        <h2 className="list__title">Upcoming Matches</h2>
-        {matches && matches.length > 0 ? (
-          <ul>
-            {matches.map((match) => (
-              <li key={match._id} className="match__item">
-                <h3>
-                  {match.team1.name} vs {match.team2.name}
-                </h3>
-                <p>Date: {match.date}</p>
-                <p>Time: {match.time}</p>
-                <button
-                  onClick={() => handleDeleteMatch(match._id)}
-                  className="list__button"
-                >
-                  Delete Match
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No upcoming matches available.</p>
-        )}
+        <h2 className="matches__title">Upcoming Matches</h2>
+        {matches.map((match) => (
+          <div key={match._id} className="match">
+            <div className="match__details">
+              <div className="match__team">
+                <img
+                  src={match.team1.logo}
+                  alt={match.team1.name}
+                  className="match__team-logo"
+                />
+                <span>{match.team1.name}</span>
+              </div>
+              <span className="match__vs">vs</span>
+              <div className="match__team">
+                <img
+                  src={match.team2.logo}
+                  alt={match.team2.name}
+                  className="match__team-logo"
+                />
+                <span>{match.team2.name}</span>
+              </div>
+              <div className="match__info">
+                <span>{match.date}</span>
+                <span>{match.time}</span>
+              </div>
+            </div>
+            <button
+              className="match__delete-btn"
+              onClick={() => handleDeleteMatch(match._id)}
+            >
+              Delete Match
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
-
-export default UpcomingMatch;
