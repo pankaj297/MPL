@@ -42,16 +42,23 @@ export const Matches = () => {
             <div className="match-card" key={match._id}>
               <div className="team">
                 <p>{match.team1.name}</p>
-                <img src={match.team1.logo} alt={`${match.team1.name} logo`} />
+                <img
+                  src={match.team1.logo}
+                  alt={`${match.team1.name} logo`}
+                  className="team-logo"
+                />
               </div>
               <h2 className="vs">vs</h2>
               <div className="team">
                 <p>{match.team2.name}</p>
-                <img src={match.team2.logo} alt={`${match.team2.name} logo`} />
+                <img
+                  src={match.team2.logo}
+                  alt={`${match.team2.name} logo`}
+                  className="team-logo"
+                />
               </div>
               <div className="match-info">
                 <p>Date: {new Date(match.date).toLocaleDateString()}</p>
-
                 <p>Time: {match.time}</p>
               </div>
             </div>
