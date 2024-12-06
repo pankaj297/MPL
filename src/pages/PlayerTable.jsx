@@ -133,24 +133,26 @@ export const PlayerTable = () => {
   };
 
   const sendWhatsAppMessage = (player, messageType) => {
-    let message = `From Malkheda Primer League Author\nHello, ${player.name}!\n`;
+    let message = `मालखेडा प्रीमियर लीग लेखकाकडून\nनमस्कार, ${player.name}!\n`;
 
     if (messageType === "success") {
-      message += `Here are your details:\nMobile: ${player.mobile}\nAge: ${
-        player.age
-      }\nPosition: ${player.position}\nTransaction ID: ${
+      message += `तुमची माहिती खालीलप्रमाणे आहे:\nमोबाईल: ${
+        player.mobile
+      }\nवय: ${player.age}\nस्थान: ${player.position}\nTransaction ID: ${
         player.transactionId
-      }\nPayment: ${
-        player.payment || "Pending"
-      } Successfully Paid!\nThank you for participating in MPL!`;
+      }\nपेमेंट: ${player.payment || "200₹"
+      } ✓ यशस्वीरित्या पूर्ण!\nमालखेडा प्रीमियर लीगमध्ये सहभागी झाल्याबद्दल धन्यवाद!`;
     } else {
-      message += `Unfortunately, your transaction with ID '${player.transactionId}' was not successful.\nPlease contact MPL authors to resolve this problem.\nMPL Authors Contact: 7276746341\nThank you!`;
+      message += ` दुर्दैवाने, तुमचा व्यवहार (Transaction ID) '${player.transactionId}' यशस्वी झालेला नाही.\nकृपया ही समस्या सोडवण्यासाठी MPL आयोजकांशी संपर्क साधा. \n
+MPL आयोजक संपर्क: 7276746341
+धन्यवाद!`;
     }
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${player.mobile}?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
   };
+
 
   const handleDelete = async (id) => {
     try {
