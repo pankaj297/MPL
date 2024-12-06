@@ -23,7 +23,7 @@ import { AdminTeamPlayers } from "./pages/AdminTeamPlayers.jsx";
 import { UpcomingMatch } from "./pages/UpcomingMatch.jsx";
 import { AdminUpdate } from "./pages/AdminUpdate.jsx";
 import { TotalSoldOutPlayers } from "./pages/TotalSoldOutPlayers.jsx";
-import Error  from "./components/Error.jsx";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -33,7 +33,6 @@ const appRouter = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
-      {element:<Error />},
       { path: "/gallary", element: <Gallery /> },
       { path: "/register", element: <CricketPlayerRegistration /> },
       { path: "/matches", element: <Matches /> },
