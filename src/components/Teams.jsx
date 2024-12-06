@@ -102,7 +102,7 @@ export const Teams = () => {
           table { width: 100%; border-collapse: collapse; margin: 20px 0; }
           th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
           th { background-color: #3498db; color: white; }
-          .author { position: absolute; bottom: 10px; right: 10px; font-weight: bold;  font-size: 15px; color: #666; }
+          .author { right: 10px; font-weight: bold;  font-size: 15px; color: #666; }
         </style>
       </head>
       <body>

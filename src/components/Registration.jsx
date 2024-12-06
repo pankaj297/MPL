@@ -194,6 +194,15 @@ export const CricketPlayerRegistration = () => {
             <p>
               8. पेमेंट कसे करावे हे जाणून घेण्यासाठी खाली दिलेला व्हिडिओ पाहा.
             </p>
+            <p className="video-link">
+              <a
+                href="https://youtube.com/shorts/4dAZ0ua4P3U?si=cReXjfz1MRaJwJH-"
+                target="_blank"
+              >
+                Watch Video
+              </a>
+            </p>
+
             <p>
               <a
                 className="kb-btn"
@@ -202,15 +211,6 @@ export const CricketPlayerRegistration = () => {
                 Website image under 200kb
               </a>
             </p>
-            <video
-              src="./images/video2.mp4"
-              width={"300px"}
-              height={"300px"}
-              loop
-              muted
-              playsInline
-              controls
-            ></video>
           </div>
           <h2>Cricket Player Registration</h2>
           <div className="scan-img">

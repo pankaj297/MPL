@@ -19,6 +19,12 @@
   color: white;
 }
 
+.video-link{
+  color: rgb(78, 78, 223);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
 .error {
   color: red;
   font-size: 12px;
