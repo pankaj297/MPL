@@ -49,7 +49,7 @@ export const CricketPlayerRegistration = () => {
   };
 
   
-  const validateForm = () => {
+const validateForm = () => {
   let valid = true;
   let tempErrors = { ...errors };
 
@@ -77,7 +77,7 @@ export const CricketPlayerRegistration = () => {
     tempErrors.passPhoto = "Passport photo is required.";
     valid = false;
   } else {
-    const fileType = formData.passPhoto.type.toLowerCase();
+    const fileType = formData.passPhoto.type?.toLowerCase();
     if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
       tempErrors.passPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
       valid = false;
@@ -91,7 +91,7 @@ export const CricketPlayerRegistration = () => {
     tempErrors.transactionPhoto = "Transaction photo is required.";
     valid = false;
   } else {
-    const fileType = formData.transactionPhoto.type.toLowerCase();
+    const fileType = formData.transactionPhoto.type?.toLowerCase();
     if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
       tempErrors.transactionPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
       valid = false;

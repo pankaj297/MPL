@@ -9,11 +9,9 @@ const adminUsers = [
     password: "pankaj0718",
     image: "./images/pankaj.jpeg",
   },
-  { username: "admin", password: "admin", image: "/path/to/image2.png" },
-  { username: "admin3", password: "password3", image: "/path/to/image3.png" },
-  { username: "admin4", password: "password4", image: "/path/to/image4.png" },
-  { username: "admin5", password: "password5", image: "/path/to/image5.png" },
 ];
+
+
 
 // The main AdminLogin component
 export const AdminLogin = () => {
