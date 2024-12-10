@@ -6,19 +6,21 @@ const socket = io.connect("http://localhost:8000");
 
 export const LiveAuction = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [currentBid, setCurrentBid] = useState(0);
+  const [currentBid, setCurrentBid] = useState(100); // Set default bid to 100
+  const [lastBiddingTeam, setLastBiddingTeam] = useState("No bids yet");
 
   useEffect(() => {
     // Listen for player selection
-    socket.on("playerSelected", (player) => {
-      setSelectedPlayer(player);
-      setCurrentBid(100); // Starting bid
+    socket.on("playerSelected", (data) => {
+      setSelectedPlayer(data.player);
+      setLastBiddingTeam(data.lastBiddingTeam || "No bids yet");
     });
 
     // Listen for bid update
     socket.on("bidUpdated", (data) => {
       if (selectedPlayer && data.player._id === selectedPlayer._id) {
         setCurrentBid(data.currentBid);
+        setLastBiddingTeam(data.lastBiddingTeam || "Unknown Team");
       }
     });
 
@@ -44,6 +46,7 @@ export const LiveAuction = () => {
         <div>
           <h3>Current Player: {selectedPlayer.name}</h3>
           <p>Current Bid: ₹{currentBid}</p>
+          <p>Last Bidding Team: {lastBiddingTeam}</p>
         </div>
       ) : (
         <p>No player selected yet.</p>

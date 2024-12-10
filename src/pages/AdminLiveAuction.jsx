@@ -7,7 +7,10 @@ const socket = io("http://localhost:8000");
 export const AdminLiveAuction = () => {
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [currentBid, setCurrentBid] = useState(0);
+  const [currentBid, setCurrentBid] = useState(100); // Start with bid 100
+  const [lastBiddingTeam, setLastBiddingTeam] = useState("No bids yet");
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [bidMap, setBidMap] = useState({}); // Track bids for each player
 
   const teams = [
     "Chennai Super Kings",
@@ -21,26 +24,49 @@ export const AdminLiveAuction = () => {
   ];
 
   useEffect(() => {
-    // Fetch players data from MongoDB via backend
+    // Fetch players data from backend
     fetch("https://mpl-backend-5gc6.onrender.com/api/user/allUsers")
       .then((response) => response.json())
       .then((data) => setPlayers(data.user))
       .catch((error) => console.error("Error fetching players:", error));
   }, []);
 
-  console.log("players is fetched ", players);
-  console.log("players users ", players);
-
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
-    setCurrentBid(100); // Starting bid
-    socket.emit("selectPlayer", player); // Emit event to notify frontend
+    const playerBid = bidMap[player._id] || 100; // Retrieve bid or default to 100
+    setCurrentBid(playerBid);
+    setLastBiddingTeam("No bids yet");
+    setSelectedTeam(null);
+    socket.emit("selectPlayer", { player, lastBiddingTeam: "No bids yet" });
+  };
+
+  const handleTeamSelect = (team) => {
+    setSelectedTeam(team);
+    setLastBiddingTeam(team);
+    if (selectedPlayer) {
+      socket.emit("selectPlayer", {
+        player: selectedPlayer,
+        lastBiddingTeam: team,
+      });
+    }
   };
 
   const handleBidChange = (amount) => {
-    const newBid = Math.max(0, currentBid + amount); // Calculate the new bid value
-    setCurrentBid(newBid); // Update the state
-    socket.emit("updateBid", { player: selectedPlayer, currentBid: newBid }); // Emit the updated bid
+    if (!selectedTeam) {
+      alert("Please select a team before updating the bid.");
+      return;
+    }
+    const newBid = Math.max(0, currentBid + amount);
+    setCurrentBid(newBid);
+    setBidMap((prevBidMap) => ({
+      ...prevBidMap,
+      [selectedPlayer._id]: newBid, // Update bid for selected player
+    }));
+    socket.emit("updateBid", {
+      player: selectedPlayer,
+      currentBid: newBid,
+      lastBiddingTeam: selectedTeam,
+    });
   };
 
   const handleFinalizeBid = () => {
@@ -48,11 +74,15 @@ export const AdminLiveAuction = () => {
       alert("No player selected.");
       return;
     }
+    if (!selectedTeam) {
+      alert("Please select a team before finalizing the bid.");
+      return;
+    }
     socket.emit("finalizeBid", {
       player: selectedPlayer,
       finalBid: currentBid,
     });
-    alert(`Bid finalized for ${selectedPlayer.name} at ₹${currentBid}`);
+    alert(`Bid finalized for ${selectedPlayer.name} at ₹${currentBid} by ${selectedTeam}`);
   };
 
   return (
@@ -75,15 +105,35 @@ export const AdminLiveAuction = () => {
         <div>
           <h3>Current Player: {selectedPlayer.name}</h3>
           <p>Current Bid: ₹{currentBid}</p>
-          <button onClick={() => handleBidChange(100)}>Increase Bid</button>
-          <button onClick={() => handleBidChange(-100)}>Decrease Bid</button>
-          <button onClick={handleFinalizeBid}>Finalize Bid</button>
+          <p>Last Bidding Team: {lastBiddingTeam}</p>
+
+          <h3>Select a Team:</h3>
+          <div>
+            {teams.map((team) => (
+              <button
+                key={team}
+                onClick={() => handleTeamSelect(team)}
+                style={{
+                  margin: "5px",
+                  padding: "10px",
+                  border: "1px solid black",
+                }}
+              >
+                {team}
+              </button>
+            ))}
+          </div>
+
+          <div>
+            <button onClick={() => handleBidChange(100)}>Increase Bid</button>
+            <button onClick={() => handleBidChange(-100)}>Decrease Bid</button>
+            <button onClick={handleFinalizeBid}>Finalize Bid</button>
+          </div>
         </div>
       )}
     </div>
   );
 };
-
 
 // import React, { useEffect, useState } from "react";
 // import "./AdminDesign/AdminLiveAuction.css";
