@@ -1,18 +1,21 @@
+
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
+import "./design/LiveAuction.css";
 
 // Connect to Socket.IO server
 const socket = io.connect("https://mpl-backend-5gc6.onrender.com/");
 
 export const LiveAuction = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [currentBid, setCurrentBid] = useState(100); // Set default bid to 100
+  const [currentBid, setCurrentBid] = useState(200); // Set default bid to 200
   const [lastBiddingTeam, setLastBiddingTeam] = useState("No bids yet");
 
   useEffect(() => {
     // Listen for player selection
     socket.on("playerSelected", (data) => {
       setSelectedPlayer(data.player);
+      setCurrentBid(data.player.startingBid || 200); // Default bid
       setLastBiddingTeam(data.lastBiddingTeam || "No bids yet");
     });
 
@@ -40,20 +43,63 @@ export const LiveAuction = () => {
   }, [selectedPlayer]);
 
   return (
-    <div>
-      <h2>Live Auction</h2>
-      {selectedPlayer ? (
-        <div>
-          <h3>Current Player: {selectedPlayer.name}</h3>
-          <p>Current Bid: ₹{currentBid}</p>
-          <p>Last Bidding Team: {lastBiddingTeam}</p>
-        </div>
-      ) : (
-        <p>No player selected yet.</p>
-      )}
+    <div className="live-auction-page">
+      <div className="live-player-profile">
+        <h1 className="user-live-auction-h1heading">Live Auction Of MPL</h1>
+        {selectedPlayer ? (
+          <div className="player-profile">
+            <div className="profile-header">
+              <div className="live-img">
+                <img
+                  src={selectedPlayer.profileImg || "./images/default.jpeg"}
+                  alt={`${selectedPlayer.name}'s profile`}
+                  className="live-profile-img"
+                />
+              </div>
+              <div className="profile-info">
+                <h2 className="user-live-auction-h2-heading">
+                  {selectedPlayer.name}
+                </h2>
+                <p>
+                  <span className="bold-text">Age :</span>{" "}
+                  {selectedPlayer.age || "N/A"}
+                </p>
+                <p className="player-position">
+                  <span className="bold-text">Position :</span>{" "}
+                  {selectedPlayer.position || "Unknown"}
+                </p>
+                <p className="bidding-price">Current Bid : ₹ {currentBid}</p>
+                <p className="last-team">
+                  <span className="bold-text">Highest Bidder :</span>{" "}
+                  {lastBiddingTeam}
+                </p>
+              </div>
+            </div>
+
+            <div className="final-bid">
+              <h2 className="user-live-auction-h2-heading">Final Bidding</h2>
+              <p>Player : {selectedPlayer.name}</p>
+              <p>Sold Out By : {lastBiddingTeam || "N/A"}</p>
+              <p>Sold Out Price : ₹ {currentBid}</p>
+              <p>
+                <span className="bold-text">Congratulation :</span>{" "}
+                {selectedPlayer.name} 🎊🥳
+              </p>
+            </div>
+          </div>
+        ) : (
+          <p className="no-player-message">No player selected yet.</p>
+        )}
+      </div>
     </div>
   );
 };
+
+
+
+
+
+// ----------------------------------------------------------------------
 
 // import React, { useState } from "react";
 // import "./design/LiveAuction.css";
