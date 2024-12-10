@@ -27,11 +27,11 @@ export const LiveAuction = () => {
     });
 
     // Listen for bid finalization
-    socket.on("bidFinalized", (data) => {
-      if (data.player._id === selectedPlayer._id) {
-        alert(`Bid finalized for ${data.player.name} at ₹${data.finalBid}`);
-      }
-    });
+    // socket.on("bidFinalized", (data) => {
+    //   if (data.player._id === selectedPlayer._id) {
+    //     alert(`Bid finalized for ${data.player.name} at ₹${data.finalBid}`);
+    //   }
+    // });
 
     // Clean up socket listeners on unmount
     return () => {

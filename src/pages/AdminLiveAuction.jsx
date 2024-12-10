@@ -15,12 +15,12 @@ export const AdminLiveAuction = () => {
   const [finalized, setFinalized] = useState(false);
 
   const teams = [
-    "Chennai Super Kings",
-    "Mumbai Indians",
-    "Royal Bangalore",
-    "Delhi Capitals",
-    "Kolkata Knight Riders",
-    "Sunrisers Hyderabad",
+    "Vishwanath warriors",
+    "Dipak Warriors",
+    "Black Panthers",
+    "Shree Yodha",
+    "Vishnu Blaster",
+    "Jagan Super Strikers",
   ];
 
   // Fetch players from API
@@ -61,7 +61,7 @@ export const AdminLiveAuction = () => {
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
-    // setCurrentBid(200);
+    setCurrentBid(200);
     setLastBiddingTeam("No bids yet");
     setFinalized(false);
     socket.emit("selectPlayer", {
@@ -84,17 +84,6 @@ export const AdminLiveAuction = () => {
     });
   };
 
-  // const handleTeamSelect = (team) => {
-  //   setLastBiddingTeam(team);
-  //   if (selectedPlayer) {
-  //     socket.emit("selectPlayer", {
-  //       player: selectedPlayer,
-  //       currentBid,
-  //       lastBiddingTeam: team,
-  //     });
-  //   }
-  // };
-
   const handleTeamSelect = (team) => {
     setLastBiddingTeam(team); // Update the last bidding team
     if (selectedPlayer) {
@@ -105,9 +94,6 @@ export const AdminLiveAuction = () => {
       });
     }
   };
-
-
-
 
   const handleFinalizeBid = () => {
     if (!selectedPlayer) {

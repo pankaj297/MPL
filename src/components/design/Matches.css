@@ -41,6 +41,7 @@
 .vs{
   color: #000;
 }
+
 .team {
   display: flex;
   flex-direction: column;
@@ -73,6 +74,10 @@ h2 {
   margin-top: 10px;
   font-size: 1rem;
   color: #333;
+}
+
+.match-info p{
+  color: #000;
 }
 
 .loader{
