@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "./design/LiveAuction.css";
@@ -15,7 +14,7 @@ export const LiveAuction = () => {
     // Listen for player selection
     socket.on("playerSelected", (data) => {
       setSelectedPlayer(data.player);
-      setCurrentBid(data.player.startingBid || 200); // Default bid
+      setCurrentBid(data.player.startingBid || 200); // Default bid corrected to use player's startingBid or fallback to 200
       setLastBiddingTeam(data.lastBiddingTeam || "No bids yet");
     });
 
@@ -23,7 +22,7 @@ export const LiveAuction = () => {
     socket.on("bidUpdated", (data) => {
       if (selectedPlayer && data.player._id === selectedPlayer._id) {
         setCurrentBid(data.currentBid);
-        setLastBiddingTeam(data.lastBiddingTeam || "Unknown Team");
+          setLastBiddingTeam(data.lastBiddingTeam || "Unknown Team");
       }
     });
 
@@ -45,7 +44,7 @@ export const LiveAuction = () => {
   return (
     <div className="live-auction-page">
       <div className="live-player-profile">
-        <h1 className="user-live-auction-h1heading">Live Auction Of MPL</h1>
+        <h1 className="user-live-auction-h1heading">MPL Live Auction </h1>
         {selectedPlayer ? (
           <div className="player-profile">
             <div className="profile-header">
@@ -94,10 +93,6 @@ export const LiveAuction = () => {
     </div>
   );
 };
-
-
-
-
 
 // ----------------------------------------------------------------------
 

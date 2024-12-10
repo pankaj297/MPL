@@ -61,7 +61,7 @@ export const AdminLiveAuction = () => {
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
-    setCurrentBid(200);
+    // setCurrentBid(200);
     setLastBiddingTeam("No bids yet");
     setFinalized(false);
     socket.emit("selectPlayer", {
@@ -84,15 +84,30 @@ export const AdminLiveAuction = () => {
     });
   };
 
+  // const handleTeamSelect = (team) => {
+  //   setLastBiddingTeam(team);
+  //   if (selectedPlayer) {
+  //     socket.emit("selectPlayer", {
+  //       player: selectedPlayer,
+  //       currentBid,
+  //       lastBiddingTeam: team,
+  //     });
+  //   }
+  // };
+
   const handleTeamSelect = (team) => {
-    setLastBiddingTeam(team);
+    setLastBiddingTeam(team); // Update the last bidding team
     if (selectedPlayer) {
-      socket.emit("selectPlayer", {
+      socket.emit("updateBid", {
         player: selectedPlayer,
+        currentBid, // Do not change the bid value here
         lastBiddingTeam: team,
       });
     }
   };
+
+
+
 
   const handleFinalizeBid = () => {
     if (!selectedPlayer) {
@@ -184,11 +199,6 @@ export const AdminLiveAuction = () => {
             ))}
           </div>
 
-          {/* <div className="bid-control-buttons">
-            <button onClick={() => handleBidChange(20)}>Increase Bid</button>
-            <button onClick={() => handleBidChange(-20)}>Decrease Bid</button>
-            <button onClick={handleFinalizeBid}>Finalize Bid</button>
-          </div> */}
           <div className="bid-control-buttons">
             <a className="Increase-btn" onClick={() => handleBidChange(20)}>
               Increase Bid
