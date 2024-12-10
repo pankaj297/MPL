@@ -57,9 +57,9 @@
 .live-profile-img {
   width: 250px;
   height: 250px;
-  border-radius: 50%;
+  border-radius: 10%;
   border: 3px solid #f9f871;
-  object-fit: cover;
+  /* object-fit: cover; */
 }
 
 .profile-info .user-live-auction-h2-heading {
@@ -136,8 +136,8 @@
   }
 
   .live-profile-img {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 300px;
   }
 
   h1 {

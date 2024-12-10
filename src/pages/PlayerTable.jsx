@@ -60,77 +60,171 @@ export const PlayerTable = () => {
     setImage(image);
   };
 
-  const handlePrint = () => {
-    const newWindow = window.open("", "", "width=600,height=600");
-    newWindow.document.write(`
-      <html>
-        <head>
-          <title>MPL Players Details</title>
+  // const handlePrint = () => {
+  //   const newWindow = window.open("", "", "width=600,height=600");
+  //   newWindow.document.write(`
+  //     <html>
+  //       <head>
+  //         <title>MPL Players Details</title>
           
-          <style>
-            body { font-family: Arial, sans-serif; }
-            h2 { text-align: center; }
-            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-            th, td { padding: 10px; border: 1px solid #ddd; }
-            th { background-color: #3498db; color: white; }
-            .author { position: absolute; bottom: 10px; right: 10px; font-size: 15px; color: #666; }
-                .tableInfoData{
+  //         <style>
+  //           body { font-family: Arial, sans-serif; }
+  //           h2 { text-align: center; }
+  //           table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  //           th, td { padding: 10px; border: 1px solid #ddd; }
+  //           th { background-color: #3498db; color: white; }
+  //           .author { position: absolute; bottom: 10px; right: 10px; font-size: 15px; color: #666; }
+  //               .tableInfoData{
+  //           margin: 1rem;
+  //           padding: 1rem;
+  //           display: flex;
+  //          flex-direction: column;
+  //          display: grid;
+  //          grid-template-columns: 1fr 1fr 1fr;
+  //           }
+  //         </style>
+  //       </head>
+  //       <body>
+  //         <h2>MPL Registered Players</h2>
+  //          <div class="tableInfoData">
+  //       <p>Total Players : ${totalPlayers}</p>
+  //       <p>Total Money : ${totalPaid}</p>
+  //       <p>Total Batsman : ${totalBatsman}</p>
+  //       <p>Total Allrounder : ${totalAllrounder}</p>
+  //       <p>Total Bowler : ${totalBowler}</p>
+  //       <p>Total Wicketkeeper : ${totalWicketkeeper}</p>
+  //     </div>
+  //         <table>
+  //           <thead>
+  //             <tr>
+  //               <th>Sir No</th>
+  //               <th>Name</th>
+  //               <th>Mobile</th>
+  //               <th>Age</th>
+  //               <th>Position</th>
+  //               <th>Payment</th>
+  //               <th>Select Team Name</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             ${players
+  //               .map(
+  //                 (player, index) => `
+  //               <tr>
+  //                 <td>${index + 1}</td>
+  //                 <td>${player.name}</td>
+  //                 <td>${player.mobile}</td>
+  //                 <td>${player.age}</td>
+  //                 <td>${player.position}</td>
+  //                 <td>${200 || "N/A"}</td>
+  //                 <td></td>
+  //               </tr>
+  //             `
+  //               )
+  //               .join("")}
+  //           </tbody>
+          
+  //         </table>
+  //           <div class="author">Author: Pankaj Naik</div>
+  //       </body>
+  //     </html>
+  //   `);
+  //   newWindow.document.close();
+  //   newWindow.print();
+  // };
+
+
+  const handlePrint = () => {
+  const newWindow = window.open("", "", "width=600,height=600");
+  newWindow.document.write(`
+    <html>
+      <head>
+        <title>MPL Players Details</title>
+        <style>
+          body { font-family: Arial, sans-serif; }
+          h2 { text-align: center; }
+          table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          th, td { padding: 10px; border: 1px solid #ddd; }
+          th { background-color: #3498db; color: white; }
+          .author {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            font-size: 15px;
+            color: #666;
+            width: 100%;
+            text-align: center;
+            background: white;
+            padding: 5px 3px;
+          }
+          @media print {
+            .author {
+              position: fixed;
+              bottom: 0;
+              right: 0;
+              width: 100%;
+              text-align: center;
+              background: white;
+              padding: 5px 0;
+            }
+          }
+          .tableInfoData {
             margin: 1rem;
             padding: 1rem;
             display: flex;
-           flex-direction: column;
-           display: grid;
-           grid-template-columns: 1fr 1fr 1fr;
-            }
-          </style>
-        </head>
-        <body>
-          <h2>MPL Registered Players</h2>
-           <div class="tableInfoData">
-        <p>Total Players : ${totalPlayers}</p>
-        <p>Total Money : ${totalPaid}</p>
-        <p>Total Batsman : ${totalBatsman}</p>
-        <p>Total Allrounder : ${totalAllrounder}</p>
-        <p>Total Bowler : ${totalBowler}</p>
-        <p>Total Wicketkeeper : ${totalWicketkeeper}</p>
-      </div>
-          <table>
-            <thead>
+            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+        </style>
+      </head>
+      <body>
+        <h2>MPL Registered Players</h2>
+        <div class="tableInfoData">
+          <p>Total Players : ${totalPlayers}</p>
+          <p>Total Money : ${totalPaid}</p>
+          <p>Total Batsman : ${totalBatsman}</p>
+          <p>Total Allrounder : ${totalAllrounder}</p>
+          <p>Total Bowler : ${totalBowler}</p>
+          <p>Total Wicketkeeper : ${totalWicketkeeper}</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Sir No</th>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Age</th>
+              <th>Position</th>
+              <th>Payment</th>
+              <th>Select Team Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${players
+              .map(
+                (player, index) => `
               <tr>
-                <th>Sir No</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Age</th>
-                <th>Position</th>
-                <th>Payment</th>
-                <th>Select Team Name</th>
+                <td>${index + 1}</td>
+                <td>${player.name}</td>
+                <td>${player.mobile}</td>
+                <td>${player.age}</td>
+                <td>${player.position}</td>
+                <td>${200 || "N/A"}</td>
+                <td></td>
               </tr>
-            </thead>
-            <tbody>
-              ${players
-                .map(
-                  (player, index) => `
-                <tr>
-                  <td>${index + 1}</td>
-                  <td>${player.name}</td>
-                  <td>${player.mobile}</td>
-                  <td>${player.age}</td>
-                  <td>${player.position}</td>
-                  <td>${200 || "N/A"}</td>
-                  <td></td>
-                </tr>
-              `
-                )
-                .join("")}
-            </tbody>
-          </table>
-          <div class="author">Author: Pankaj Naik</div>
-        </body>
-      </html>
-    `);
-    newWindow.document.close();
-    newWindow.print();
-  };
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+        <div class="author">Author: Pankaj Naik</div>
+      </body>
+    </html>
+  `);
+  newWindow.document.close();
+  newWindow.print();
+};
 
   const sendWhatsAppMessage = (player, messageType) => {
     let message = `मालखेडा प्रीमियर लीग लेखकाकडून\nनमस्कार, ${player.name}!\n`;
