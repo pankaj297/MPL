@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 // Connect to Socket.IO server
-const socket = io("http://localhost:8000");
+const socket = io("https://mpl-backend-5gc6.onrender.com/");
 
 export const AdminLiveAuction = () => {
   const [players, setPlayers] = useState([]);
