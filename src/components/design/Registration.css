@@ -39,8 +39,13 @@
 }
 
 .important-notes{
-  margin: 1rem;
+  margin-bottom: 1rem;
 }
+
+.important-notes p{
+  margin: .5rem;
+}
+
 
 .scan-img{
    display: flex;
