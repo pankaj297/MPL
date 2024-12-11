@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
+import axios from "axios";
 import "./AdminDesign/AdminLiveAuction.css";
+import { toast } from "react-toastify";
 
 // Connect to Socket.IO server
 const socket = io("https://mpl-backend-5gc6.onrender.com/");
@@ -85,17 +87,17 @@ export const AdminLiveAuction = () => {
   };
 
   const handleTeamSelect = (team) => {
-    setLastBiddingTeam(team); // Update the last bidding team
+    setLastBiddingTeam(team);
     if (selectedPlayer) {
       socket.emit("updateBid", {
         player: selectedPlayer,
-        currentBid, // Do not change the bid value here
+        currentBid,
         lastBiddingTeam: team,
       });
     }
   };
 
-  const handleFinalizeBid = () => {
+  const handleFinalizeBid = async () => {
     if (!selectedPlayer) {
       alert("Please select a player to finalize.");
       return;
@@ -104,11 +106,31 @@ export const AdminLiveAuction = () => {
       alert("Please select a team before finalizing the bid.");
       return;
     }
-    setFinalized(true);
-    socket.emit("finalizeBid", {
-      player: selectedPlayer,
-      finalBid: currentBid,
-    });
+
+    // API call to finalize bid
+    try {
+      const payload = {
+        name: selectedPlayer.name,
+        position: selectedPlayer.position,
+        currentBid,
+        lastBiddingTeam,
+        age: selectedPlayer.age,
+      };
+      const response = await axios.post(
+        "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/addfinalisedbidding",
+        payload
+      );
+      if (response.status === 201) {
+        toast.success("Bid finalized and saved successfully");
+        setFinalized(true);
+        socket.emit("finalizeBid", {
+          player: selectedPlayer,
+          finalBid: currentBid,
+        });
+      }
+    } catch (error) {
+      toast.error("Error finalizing bid: " + error.message);
+    }
   };
 
   if (loading) return <div>Loading players...</div>;
