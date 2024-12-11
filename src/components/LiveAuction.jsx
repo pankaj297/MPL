@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "./design/LiveAuction.css";
+import { toast } from "react-toastify";
 
 // Connect to Socket.IO server
 const socket = io.connect("https://mpl-backend-5gc6.onrender.com/");
@@ -9,10 +10,12 @@ export const LiveAuction = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [currentBid, setCurrentBid] = useState(200); // Set default bid to 200
   const [lastBiddingTeam, setLastBiddingTeam] = useState("No bids yet");
+  const [isbidFinalised, setIsBidFinalised] = useState(false);
 
   useEffect(() => {
     // Listen for player selection
     socket.on("playerSelected", (data) => {
+      setIsBidFinalised(false);
       setSelectedPlayer(data.player);
       setCurrentBid(data.player.startingBid || 200); // Default bid corrected to use player's startingBid or fallback to 200
       setLastBiddingTeam(data.lastBiddingTeam || "No bids yet");
@@ -22,16 +25,19 @@ export const LiveAuction = () => {
     socket.on("bidUpdated", (data) => {
       if (selectedPlayer && data.player._id === selectedPlayer._id) {
         setCurrentBid(data.currentBid);
-          setLastBiddingTeam(data.lastBiddingTeam || "Unknown Team");
+        setLastBiddingTeam(data.lastBiddingTeam || "Unknown Team");
       }
     });
 
     // Listen for bid finalization
-    // socket.on("bidFinalized", (data) => {
-    //   if (data.player._id === selectedPlayer._id) {
-    //     alert(`Bid finalized for ${data.player.name} at ₹${data.finalBid}`);
-    //   }
-    // });
+    socket.on("bidFinalized", (data) => {
+      if (data.player._id === selectedPlayer._id) {
+        setIsBidFinalised(true);
+        toast.success(
+          `Bid finalized for ${data.player.name} at ₹${data.finalBid}`
+        );
+      }
+    });
 
     // Clean up socket listeners on unmount
     return () => {
@@ -75,16 +81,20 @@ export const LiveAuction = () => {
               </div>
             </div>
 
-            <div className="final-bid">
-              <h2 className="user-live-auction-h2-heading">Final Bidding</h2>
-              <p>Player : {selectedPlayer.name}</p>
-              <p>Sold Out By : {lastBiddingTeam || "N/A"}</p>
-              <p>Sold Out Price : ₹ {currentBid}</p>
-              <p>
-                <span className="bold-text">Congratulation :</span>{" "}
-                {selectedPlayer.name} 🎊🥳
-              </p>
-            </div>
+            {isbidFinalised ? (
+              <div className="final-bid">
+                <h2 className="user-live-auction-h2-heading">Final Bidding</h2>
+                <p>Player : {selectedPlayer.name}</p>
+                <p>Sold Out By : {lastBiddingTeam || "N/A"}</p>
+                <p>Sold Out Price : ₹ {currentBid}</p>
+                <p>
+                  <span className="bold-text">Congratulation :</span>{" "}
+                  {selectedPlayer.name} 🎊🥳
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         ) : (
           <p className="no-player-message">No player selected yet.</p>
