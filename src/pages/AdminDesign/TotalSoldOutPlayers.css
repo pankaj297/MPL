@@ -10,7 +10,7 @@
   margin-bottom: 20px;
   color: #fff;
 }
-
+/* 
 .admin-print-button {
   display: block;
   margin: 0 auto 20px;
@@ -21,6 +21,10 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+} */
+
+.admin-print-button{
+  background-color: pink !important;
 }
 
 .table-responsive {
