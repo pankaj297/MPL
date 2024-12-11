@@ -176,11 +176,9 @@ export const Teams = () => {
                               <th>Sir No</th>
                               <th>Player Name</th>
                               <th>Role</th>
-                              <th>Price</th>
                               <th>Age</th>
                               <th>Position</th>
-                              <th>Current Bid</th>
-                              <th>Last Bidding Team</th>
+                              <th>Sold Price</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -189,11 +187,9 @@ export const Teams = () => {
                                 <td>{player.id}</td>
                                 <td>{player.name}</td>
                                 <td>{player.position}</td>
-                                <td>{player.currentBid}</td>
                                 <td>{player.age}</td>
                                 <td>{player.position}</td>
-                                <td>{player.currentBid}</td>
-                                <td>{player.lastBiddingTeam}</td>
+                                <td className="sold-price">₹{player.currentBid}</td>
                               </tr>
                             ))}
                           </tbody>

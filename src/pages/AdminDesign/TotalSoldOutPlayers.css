@@ -3,6 +3,7 @@
   max-width: 1200px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
+  margin-bottom: 5rem;
 }
 
 .admin-header {
@@ -10,21 +11,27 @@
   margin-bottom: 20px;
   color: #fff;
 }
-/* 
-.admin-print-button {
-  display: block;
-  margin: 0 auto 20px;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-} */
 
-.admin-print-button{
-  background-color: pink !important;
+.admin-print-container {
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+
+.admin-print-button {
+  background-color: white !important;
+  color: white !important;;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.admin-print-button:hover {
+  background-color: #2980b9;
 }
 
 .table-responsive {
@@ -35,6 +42,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: auto;
+  margin-top: 20px; /* Adds space between button and table */
 }
 
 .sold-out-players-table th,
@@ -50,7 +58,7 @@
 }
 
 .status {
-  color:  blue;
+  color: blue;
   font-weight: bold;
 }
 

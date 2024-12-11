@@ -5,7 +5,7 @@
   align-items: center;
   background-color: #1a1a2e;
   min-height: 100vh;
-  padding: 20px;
+  padding: 10px;
  
 }
 
@@ -19,11 +19,14 @@
 
 .user-live-auction-h1heading{
   color: #ffff;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 .bold-text {
   font-weight: bold;
+}
+.live-red{
+  color: red;
 }
 
 .user-live-auction-h1-heading {
@@ -34,9 +37,9 @@
 
 /* Player Profile Styling */
 .player-profile {
-  background-color: #fff;
+  background-color: #ffff;
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px;
   margin: 15px auto;
   box-shadow: 0 4px 15px #ffff;
   transition: transform 0.3s ease;
@@ -55,10 +58,11 @@
 }
 
 .live-profile-img {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 10%;
-  border: 3px solid #f9f871;
+  /* border: 3px solid skyblue; */
+box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   /* object-fit: cover; */
 }
 
@@ -79,6 +83,14 @@
   font-weight: bold;
 }
 
+.price1{
+  color: green;
+  font-size: large;
+}
+.tem{
+  color: orange;
+  font-size: large;
+}
 
 /* Final Bidding Details */
 .final-bid {

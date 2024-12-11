@@ -82,6 +82,9 @@ h1, h3, h4, p {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.sold-price{
+  color: orange;
+}
 
 .small-profile-item:hover,
 .small-profile-item.highlighted {

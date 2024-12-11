@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AdminDesign/TotalSoldOutPlayers.css";
@@ -25,20 +24,6 @@ export const TotalSoldOutPlayers = () => {
     }
   };
 
-  const handleDeletePlayer = async (playerId) => {
-    try {
-      await axios.delete(
-        `https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/deletefinalisedbidding/${playerId}`
-      );
-      setSoldOutPlayers(
-        soldOutPlayers.filter((player) => player._id !== playerId)
-      );
-      alert("Player deleted successfully.");
-    } catch (err) {
-      alert("Error deleting player: " + err.message);
-    }
-  };
-
   const handlePrintTable = () => {
     const newWindow = window.open("", "", "width=600,height=600");
     newWindow.document.write(`
@@ -52,7 +37,28 @@ export const TotalSoldOutPlayers = () => {
             th, td { padding: 10px; border: 1px solid #ddd; }
             th { background-color: #3498db; color: white; }
             .status { color: green; font-weight: bold; }
-            .author { position: absolute; bottom: 10px; right: 10px; font-size: 15px; color: #666; }
+            .author {
+              position: fixed;
+              bottom: 0;
+              right: 0;
+              font-size: 15px;
+              color: #666;
+              width: 100%;
+              text-align: center;
+              background: white;
+              padding: 5px 0;
+            }
+            @media print {
+              .author {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                text-align: center;
+                background: white;
+                padding: 5px 0;
+              }
+            }
           </style>
         </head>
         <body>
@@ -97,23 +103,17 @@ export const TotalSoldOutPlayers = () => {
     };
   };
 
-  const handleSendMessage = (player) => {
-    const message =
-      ` Congratulations, ${player.name}! \n\n` +
-      `You are sold out from **${player.lastBiddingTeam}**.\n` +
-      `Your sold-out price is **₹${player.currentBid}**.\n\n` +
-      `Thank you for being a part of the Malkheda Primer League!`;
-    
-       const encodedMessage = encodeURIComponent(message);
-       const whatsappUrl = `https://wa.me/${player.mobile}?text=${encodedMessage}`;
-       window.open(whatsappUrl, "_blank");
-
-    // // const phoneNumber = `${phoneNumber}`; 
-    // // const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    //   message
-    // // )}`;
-    // window.open(url, "_blank");
-  };
+    const handleDeletePlayer = async (playerId) => {
+      try {
+        await axios.delete(
+          `https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/deletefinalisedbidding/${playerId}`
+        );
+        setSoldOutPlayers(soldOutPlayers.filter((player) => player._id !== playerId));
+        alert("Player deleted successfully.");
+      } catch (err) {
+        alert("Error deleting player: " + err.message);
+      }
+    };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -121,9 +121,12 @@ export const TotalSoldOutPlayers = () => {
   return (
     <div className="total-sold-out-players-container">
       <h1 className="admin-header">MPL Total Sold Out Players</h1>
-      <button onClick={handlePrintTable} className="admin-print-button">
+
+      {/* Print Button */}
+      <button onClick={handlePrintTable} className="btn">
         Print Sold Out Players
       </button>
+
       <div className="table-responsive">
         <table className="sold-out-players-table">
           <thead>
@@ -150,12 +153,6 @@ export const TotalSoldOutPlayers = () => {
                 <td className="status">Sold</td>
                 <td>
                   <button
-                    onClick={() => handleSendMessage(player)}
-                    className="admin-send-message-button"
-                  >
-                    Send Message
-                  </button>
-                  <button
                     onClick={() => handleDeletePlayer(player._id)}
                     className="admin-delete-button"
                   >
@@ -171,12 +168,7 @@ export const TotalSoldOutPlayers = () => {
   );
 };
 
-
-
-
 // ================================================================
-
-
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
@@ -341,8 +333,6 @@ export const TotalSoldOutPlayers = () => {
 //     </div>
 //   );
 // };
-
-
 
 // ===========================================================
 

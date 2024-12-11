@@ -51,6 +51,7 @@ export const LiveAuction = () => {
     <div className="live-auction-page">
       <div className="live-player-profile">
         <h1 className="user-live-auction-h1heading">MPL Live Auction </h1>
+        <p className="live-red">Live</p>
         {selectedPlayer ? (
           <div className="player-profile">
             <div className="profile-header">
@@ -73,10 +74,12 @@ export const LiveAuction = () => {
                   <span className="bold-text">Position :</span>{" "}
                   {selectedPlayer.position || "Unknown"}
                 </p>
-                <p className="bidding-price">Current Bid : ₹ {currentBid}</p>
+                <p className="bidding-price">
+                  Current Bid : <span className="price1">₹ {currentBid}</span>
+                </p>
                 <p className="last-team">
                   <span className="bold-text">Highest Bidder :</span>{" "}
-                  {lastBiddingTeam}
+                  <span className="tem"> {lastBiddingTeam}</span>
                 </p>
               </div>
             </div>
