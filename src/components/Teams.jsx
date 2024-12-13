@@ -10,9 +10,10 @@ export const Teams = () => {
     {
       id: 1,
       mpl: "Malkheda Primer League",
-      name: "Vishwanath warriors",
-      owner: "Vishwanath Rathod",
+      name: "Vishwanath Warriors",
+      owner: "Vishwanath Chavan",
       logo: "./images/logo2.jpeg",
+      totalPurse: 7000, // Total budget for the team
     },
     {
       id: 2,
@@ -20,6 +21,7 @@ export const Teams = () => {
       name: "Dipak Warriors",
       owner: "Dipak Ashok Naik",
       logo: "./images/logo3.jpg",
+      totalPurse: 7000,
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export const Teams = () => {
       name: "Black Panthers",
       owner: "Ankush Ramlal Rathod",
       logo: "./images/logo4.jpeg",
+      totalPurse: 7000,
     },
     {
       id: 4,
@@ -34,6 +37,7 @@ export const Teams = () => {
       name: "Shree Yodha",
       owner: "Sachin Indrajit Pawar",
       logo: "./images/logo5.jpeg",
+      totalPurse: 7000,
     },
     {
       id: 5,
@@ -41,6 +45,7 @@ export const Teams = () => {
       name: "Vishnu Blaster",
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
+      totalPurse: 7000,
     },
     {
       id: 6,
@@ -48,6 +53,7 @@ export const Teams = () => {
       name: "Jagan Super Strikers",
       owner: "Jagan Yuvraj Rathod",
       logo: "./images/logo7.jpeg",
+      totalPurse: 7000,
     },
   ];
 
@@ -64,7 +70,15 @@ export const Teams = () => {
         const updatedTeams = teamData.map((team) => {
           // Find players who belong to the current team based on lastBiddingTeam
           const teamPlayers = data.filter(
-            (player) => player.lastBiddingTeam === team.name
+            (player) =>
+              player.lastBiddingTeam?.trim().toLowerCase() ===
+              team.name.trim().toLowerCase()
+          );
+
+          // Calculate remaining purse
+          const totalSpent = teamPlayers.reduce(
+            (sum, player) => sum + player.currentBid,
+            0
           );
 
           return {
@@ -79,6 +93,7 @@ export const Teams = () => {
               currentBid: player.currentBid,
               lastBiddingTeam: player.lastBiddingTeam,
             })),
+            remainingPurse: team.totalPurse - totalSpent,
           };
         });
 
@@ -92,11 +107,7 @@ export const Teams = () => {
   }, []);
 
   const handleShowTeamDetails = (teamId) => {
-    if (selectedTeamId === teamId) {
-      setSelectedTeamId(null);
-    } else {
-      setSelectedTeamId(teamId);
-    }
+    setSelectedTeamId((prevId) => (prevId === teamId ? null : teamId));
   };
 
   const handlePrint = (teamId) => {
@@ -150,6 +161,7 @@ export const Teams = () => {
                     <div className="team-info">
                       <h3>{team.name}</h3>
                       <p>Owner: {team.owner}</p>
+                      <p>Remaining Purse: ₹{team.remainingPurse}</p>
                     </div>
                     <a
                       className="teams-btn"
@@ -173,7 +185,7 @@ export const Teams = () => {
                         <table className="players-table">
                           <thead>
                             <tr>
-                              <th>Sir No</th>
+                              <th>Sr No</th>
                               <th>Player Name</th>
                               <th>Role</th>
                               <th>Age</th>
@@ -186,10 +198,12 @@ export const Teams = () => {
                               <tr key={index}>
                                 <td>{player.id}</td>
                                 <td>{player.name}</td>
-                                <td>{player.position}</td>
+                                <td>{player.role}</td>
                                 <td>{player.age}</td>
                                 <td>{player.position}</td>
-                                <td className="sold-price">₹{player.currentBid}</td>
+                                <td className="sold-price">
+                                  ₹{player.currentBid}
+                                </td>
                               </tr>
                             ))}
                           </tbody>
@@ -207,21 +221,23 @@ export const Teams = () => {
   );
 };
 
-// import React, { useState } from "react";
+//! ===============================================
+
+// import React, { useState, useEffect } from "react";
 // import "./design/Teams.css";
 
 // export const Teams = () => {
-//   const teams = [
+//   const [teams, setTeams] = useState([]);
+//   const [selectedTeamId, setSelectedTeamId] = useState(null);
+
+//   // Teams data (can be fetched if dynamic, but this is hardcoded for now)
+//   const teamData = [
 //     {
 //       id: 1,
 //       mpl: "Malkheda Primer League",
 //       name: "Vishwanath warriors",
-//       owner: "Vishwanath Rathod",
+//       owner: "Vishwanath Chavan",
 //       logo: "./images/logo2.jpeg",
-//       players: [
-//         { id: 1, name: "Akash Ramesh Naik", role: "_", price: "₹1000" },
-//         { id: 2, name: "Pavan Saidas Chavan", role: "_", price: "₹1000" },
-//       ],
 //     },
 //     {
 //       id: 2,
@@ -229,10 +245,6 @@ export const Teams = () => {
 //       name: "Dipak Warriors",
 //       owner: "Dipak Ashok Naik",
 //       logo: "./images/logo3.jpg",
-//       players: [
-//         { id: 1, name: "Baban Ratilal Naik", role: "_", price: "₹1000" },
-//         { id: 2, name: "Yogesh Gotu Chavan", role: "_", price: "₹1000" },
-//       ],
 //     },
 //     {
 //       id: 3,
@@ -240,50 +252,69 @@ export const Teams = () => {
 //       name: "Black Panthers",
 //       owner: "Ankush Ramlal Rathod",
 //       logo: "./images/logo4.jpeg",
-//       players: [
-//         { id: 1, name: "Rohit Ramkrushna Rathod", role: "_", price: "₹1000" },
-//         { id: 2, name: "Umesh Arjun Rathod", role: "_", price: "₹1000" },
-//       ],
 //     },
-
 //     {
 //       id: 4,
 //       mpl: "Malkheda Primer League",
 //       name: "Shree Yodha",
 //       owner: "Sachin Indrajit Pawar",
 //       logo: "./images/logo5.jpeg",
-//       players: [
-//         { id: 1, name: "Amol Dalichant Rathod", role: "_", price: "₹1000" },
-//         { id: 2, name: "Avinash Santhosh Chavan", role: "_", price: "₹1000" },
-//       ],
 //     },
-
 //     {
 //       id: 5,
 //       mpl: "Malkheda Primer League",
 //       name: "Vishnu Blaster",
 //       owner: "Vishnu Kailash Rathod",
 //       logo: "./images/logo6.jpeg",
-//       players: [
-//         { id: 1, name: "Himmat Jagan Naik", role: "_", price: "₹1000" },
-//         { id: 2, name: "Krushna Vijay Naik", role: "_", price: "₹1000" },
-//       ],
 //     },
-
 //     {
 //       id: 6,
 //       mpl: "Malkheda Primer League",
 //       name: "Jagan Super Strikers",
 //       owner: "Jagan Yuvraj Rathod",
 //       logo: "./images/logo7.jpeg",
-//       players: [
-//         { id: 1, name: "Dipak Anna Rathod", role: "_", price: "₹1000" },
-//         { id: 2, name: "Nitin ganesh Rathod", role: "_", price: "₹1000" },
-//       ],
 //     },
 //   ];
 
-//   const [selectedTeamId, setSelectedTeamId] = useState(null);
+//   // Fetch player data from the API
+//   useEffect(() => {
+//     const fetchPlayerData = async () => {
+//       try {
+//         const response = await fetch(
+//           "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/getfinalisedbiddings"
+//         );
+//         const data = await response.json();
+
+//         // Update teams with player data
+//         const updatedTeams = teamData.map((team) => {
+//           // Find players who belong to the current team based on lastBiddingTeam
+//           const teamPlayers = data.filter(
+//             (player) => player.lastBiddingTeam === team.name
+//           );
+
+//           return {
+//             ...team,
+//             players: teamPlayers.map((player, index) => ({
+//               id: index + 1,
+//               name: player.name,
+//               role: player.position,
+//               price: player.currentBid,
+//               age: player.age,
+//               position: player.position,
+//               currentBid: player.currentBid,
+//               lastBiddingTeam: player.lastBiddingTeam,
+//             })),
+//           };
+//         });
+
+//         setTeams(updatedTeams);
+//       } catch (error) {
+//         console.error("Error fetching player data:", error);
+//       }
+//     };
+
+//     fetchPlayerData();
+//   }, []);
 
 //   const handleShowTeamDetails = (teamId) => {
 //     if (selectedTeamId === teamId) {
@@ -299,27 +330,27 @@ export const Teams = () => {
 
 //     const newWindow = window.open("", "", "width=600,height=600");
 //     newWindow.document.write(`
-//     <html>
-//       <head>
-//         <title>${team.name} Details</title>
-//         <style>
-//           body { font-family: Arial, sans-serif; position: relative; min-height: 100vh; margin: 0; padding-bottom: 40px; box-sizing: border-box; }
-//           h1, h2 { text-align: center; }
-//           img { display: block; margin: 0 auto; }
-//           table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-//           th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-//           th { background-color: #3498db; color: white; }
-//           .author { right: 10px; font-weight: bold;  font-size: 15px; color: #666; }
-//         </style>
-//       </head>
-//       <body>
-//         <h2>${team.mpl}</h2>
-//         <img src="${team.logo}" alt="${team.name} Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; border: 3px solid #3498db;"/>
-//         <div>${printContent.innerHTML}</div>
-//         <div class="author">Author: Pankaj Naik</div> <!-- Author at bottom right -->
-//       </body>
-//     </html>
-//   `);
+//       <html>
+//         <head>
+//           <title>${team.name} Details</title>
+//           <style>
+//             body { font-family: Arial, sans-serif; position: relative; min-height: 100vh; margin: 0; padding-bottom: 40px; box-sizing: border-box; }
+//             h1, h2 { text-align: center; }
+//             img { display: block; margin: 0 auto; }
+//             table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+//             th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+//             th { background-color: #3498db; color: white; }
+//             .author { right: 10px; font-weight: bold; font-size: 15px; color: #666; }
+//           </style>
+//         </head>
+//         <body>
+//           <h2>${team.mpl}</h2>
+//           <img src="${team.logo}" alt="${team.name} Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; border: 3px solid #3498db;"/>
+//           <div>${printContent.innerHTML}</div>
+//           <div class="author">Author: Pankaj Naik</div>
+//         </body>
+//       </html>
+//     `);
 //     newWindow.document.close();
 //     newWindow.print();
 //   };
@@ -332,7 +363,6 @@ export const Teams = () => {
 //             <h2 className="participating-team-title">
 //               Participating Teams In MPL
 //             </h2>
-
 //             <div className="team-list">
 //               {teams.map((team) => (
 //                 <div key={team.id} className="team-profile">
@@ -354,7 +384,6 @@ export const Teams = () => {
 //                         ? "Hide Details"
 //                         : "Show Details"}
 //                     </a>
-//                     {/* Print Button */}
 //                     <a
 //                       className="teams-btn"
 //                       onClick={() => handlePrint(team.id)}
@@ -363,7 +392,6 @@ export const Teams = () => {
 //                     </a>
 //                   </div>
 //                   <div className="table-content" id={`team-${team.id}`}>
-//                     {/* Display player details if this team's ID matches the selected team */}
 //                     {selectedTeamId === team.id && (
 //                       <div className="team-details">
 //                         <h2>{team.name} Players</h2>
@@ -373,7 +401,9 @@ export const Teams = () => {
 //                               <th>Sir No</th>
 //                               <th>Player Name</th>
 //                               <th>Role</th>
-//                               <th>Price</th>
+//                               <th>Age</th>
+//                               <th>Position</th>
+//                               <th>Sold Price</th>
 //                             </tr>
 //                           </thead>
 //                           <tbody>
@@ -381,8 +411,10 @@ export const Teams = () => {
 //                               <tr key={index}>
 //                                 <td>{player.id}</td>
 //                                 <td>{player.name}</td>
-//                                 <td>{player.role}</td>
-//                                 <td>{player.price}</td>
+//                                 <td>{player.position}</td>
+//                                 <td>{player.age}</td>
+//                                 <td>{player.position}</td>
+//                                 <td className="sold-price">₹{player.currentBid}</td>
 //                               </tr>
 //                             ))}
 //                           </tbody>
@@ -399,3 +431,5 @@ export const Teams = () => {
 //     </>
 //   );
 // };
+
+// // ====================================================

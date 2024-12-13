@@ -150,9 +150,10 @@ export const AdminLiveAuction = () => {
           <option value="Batsman">Batsman</option>
           <option value="Bowler">Bowler</option>
           <option value="Allrounder">All-Rounder</option>
-          <option value="Keeper-Batsman">Wicket-Keeper</option>
+          <option value="KeeperBatsman">Wicket-Keeper</option>
         </select>
       </div>
+     
 
       <div className="auction-bid-container">
         {/* Players List */}
