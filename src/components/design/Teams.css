@@ -264,6 +264,7 @@ h2 {
 
 
 
+
 .teams-btn{
    padding: 0.5rem 1rem;
   text-decoration: none;
@@ -272,4 +273,9 @@ h2 {
   cursor: pointer;
   transition: background-color 0.3s ease;
   background-color: #3498db;
+}
+
+.sold-price{
+  color: black !important;
+  font-weight: 700;
 }
