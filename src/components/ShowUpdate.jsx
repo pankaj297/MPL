@@ -13,19 +13,15 @@ export const ShowUpdate = () => {
           resolve([
             {
               id: 1,
-              massage: "Auction Date between 10 Dec to 15 Dec 2024",
+              massage: "लाईव्ह Auctions तारीख: १४ डिसेंबर २०२४",
             },
             {
               id: 2,
-              massage: "Auction Time at 10:30 am. ",
+              massage: "Auction रात्री 08 : 00 वाजता",
             },
             {
               id: 3,
-              massage: "MPL Tournament Start From 25 Dec Jan 2025",
-            },
-            {
-              id: 4,
-              massage: "Registration Date  6 Dec  to 10 Dec 2024 ",
+              massage: "एमपीएल स्पर्धा 05 जानेवारी 2025 पासून सुरू होईल.",
             },
           ]);
         }, 1000); // Simulating network delay
