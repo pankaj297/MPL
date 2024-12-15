@@ -10,6 +10,7 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   overflow-x: auto; /* Enables horizontal scrolling on smaller devices */
   margin-top: 5rem;
+  margin-bottom: 2rem;
 }
 
 /* Heading styling */
@@ -70,6 +71,8 @@ h1 {
 @media screen and (max-width: 768px) {
   .table_container {
     overflow-x: auto; /* Allows horizontal scrolling for smaller screens */
+    margin-top: 6rem;
+    margin-bottom: 2rem;
   }
 
   h1 {
