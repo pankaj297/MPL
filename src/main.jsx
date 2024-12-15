@@ -24,6 +24,7 @@ import { UpcomingMatch } from "./pages/UpcomingMatch.jsx";
 import { AdminUpdate } from "./pages/AdminUpdate.jsx";
 import { TotalSoldOutPlayers } from "./pages/TotalSoldOutPlayers.jsx";
 import { PointsTable } from "./components/PointsTable.jsx";
+import { Schedule } from "./components/Schedule.jsx";
 
 
 const appRouter = createBrowserRouter([
@@ -42,6 +43,7 @@ const appRouter = createBrowserRouter([
       { path: "/login", element: <AdminLogin /> },
       { path: "/update", element: <ShowUpdate /> },
       { path: "/table", element: <PointsTable /> },
+      { path: "/schedule", element: <Schedule /> },
       { path: "/political", element: <PoliticalLeaderProfile /> },
       { path: "/price", element: <PriceMoney /> },
       {

@@ -1,47 +1,60 @@
+/* General Page Styling */
 .match-page {
-  margin-top: 5%;
-  background-color: #333;
-  height: auto;
-  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  min-height: 100vh;
+  color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+padding-top: 6rem;
 }
 
 .matches-container {
-  padding: 20px;
-  display: grid;
-  justify-items: center;
-  width: 100%;
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
 }
 
-.Upcomeing-heading {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 20px;
+.Upcomeing-heading{
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* Match Card Styling */
 .match-card {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(174, 172, 172, 0.1);
   transition: transform 0.3s;
-  width: 80%;
-  margin-bottom: 10px;
+  width: 90%;
+  margin-bottom: 15px;
 }
 
 .match-card:hover {
   transform: scale(1.02);
 }
-.vs{
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: bold;
   color: #000;
 }
 
+/* Team Section */
 .team {
   display: flex;
   flex-direction: column;
@@ -49,8 +62,8 @@
 }
 
 .team img {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-bottom: 5px;
 }
@@ -58,15 +71,10 @@
 .team p {
   font-size: 1.2rem;
   color: #333;
+  margin: 0;
 }
 
-h2 {
-  font-weight: normal;
-  font-size: 24px;
-  color: #e67e22;
-  text-align: center;
-}
-
+/* Match Info */
 .match-info {
   display: flex;
   align-items: center;
@@ -76,67 +84,63 @@ h2 {
   color: #333;
 }
 
-.match-info p{
+.match-info p {
   color: #000;
+  margin: 0;
 }
 
-.loader{
-  height: 50%;
-  padding: 100px 50px ; 
+/* Loader */
+.loader {
+  height: auto;
+  padding: 100px 50px;
   background-color: gray;
   font-size: larger;
   font-weight: bold;
   border-radius: 10px;
+  color: #fff;
+  text-align: center;
+}
 
-}
- 
+/* Responsive Design */
 @media (max-width: 768px) {
-  
-.match-info {
- display: flex;
- flex-direction: column;
-  
-}
-.match-card {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 5px;
-  align-items: center;
-  padding: 10px;
-}
-  h1 {
-    font-size: 1.5rem;
-  }
   .match-page {
-   margin-top: 20%;
-}
+    margin-top: 20%;
+  }
 
   .match-card {
-    width: 100%;
-    gap: 5px;
-    padding: 10px;
+    width: 450px;
+    padding: 15px;
   }
 
   .team img {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
   }
 
   .team p {
     font-size: 1rem;
   }
-}
 
-@media (max-width: 480px) {
-  h1 {
+  .vs {
     font-size: 1.2rem;
   }
 
-  h2 {
-    font-size: 20px;
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.5rem;
   }
 
   .team p {
+    font-size: 0.9rem;
+  }
+
+  .vs {
+    font-size: 1rem;
+  }
+
+  .match-info {
     font-size: 0.9rem;
   }
 }

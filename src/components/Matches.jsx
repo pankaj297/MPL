@@ -34,7 +34,7 @@ export const Matches = () => {
   return (
     <div className="match-page">
       <div className="matches-container">
-        <h1 className="Upcomeing-heading">Upcoming Matches</h1>
+        <h1 className="Upcomeing-heading">Upcoming Cricket Matches</h1>
         {matches.length === 0 ? ( // Check if matches array is empty
           <p className="no-matches">No matches found</p>
         ) : (
@@ -57,9 +57,12 @@ export const Matches = () => {
                   className="team-logo"
                 />
               </div>
+
+              <div className="match-info">
+                <p>Time: {match.time}</p>
+              </div>
               <div className="match-info">
                 <p>Date: {new Date(match.date).toLocaleDateString()}</p>
-                <p>Time: {match.time}</p>
               </div>
             </div>
           ))

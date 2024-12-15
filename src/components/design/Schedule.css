@@ -1,0 +1,155 @@
+/* Container styling */
+.schedule-container {
+  padding: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+padding-top: 6rem;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Matches container */
+.matchess {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* Match card */
+.match-cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff 0%, #e9f8fc 100%);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 20px;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animation on hover */
+.match-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Background effect on hover */
+.match-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 0;
+  transition: width 0.3s ease;
+}
+
+.match-card:hover::before {
+  width: 100%;
+}
+
+/* Team container */
+.team {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1;
+}
+
+.teams img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #6a11cb;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+/* Team image animation */
+.team img:hover {
+  transform: scale(1.1);
+}
+
+.team span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* VS text */
+.vs {
+  font-size: 22px;
+  font-weight: bold;
+  color: #6a11cb;
+  z-index: 1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  h2 {
+    font-size: 28px;
+  }
+
+  .match-card {
+    width: 300px;
+    padding: 15px;
+  }
+
+  .team img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .team span {
+    font-size: 16px;
+  }
+
+  .vs {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 24px;
+  }
+
+  .match-card {
+    width: 95%;
+  }
+
+  .team img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .team span {
+    font-size: 14px;
+  }
+
+  .vs {
+    font-size: 18px;
+  }
+}

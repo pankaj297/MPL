@@ -33,7 +33,7 @@ export const PointsTable = () => {
     {
       id: 3,
       res: "Final Winners",
-      name: "Black Panthers",
+      name: "Malkheda Panthers",
       logo: "./images/logo4.jpeg",
       played: 6,
       won: 3,

@@ -85,6 +85,9 @@ export const Header = () => {
               <Link to="/table">Points Table</Link>
             </li>
             <li>
+              <Link to="/schedule">Schedule Matches</Link>
+            </li>
+            <li>
               <Link to="/political">Investor Profile</Link>
             </li>
             <li>
