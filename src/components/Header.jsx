@@ -82,6 +82,9 @@ export const Header = () => {
               <Link to="/update">Update</Link>
             </li>
             <li>
+              <Link to="/table">Points Table</Link>
+            </li>
+            <li>
               <Link to="/political">Investor Profile</Link>
             </li>
             <li>

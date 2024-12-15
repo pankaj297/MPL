@@ -23,6 +23,7 @@ import { AdminTeamPlayers } from "./pages/AdminTeamPlayers.jsx";
 import { UpcomingMatch } from "./pages/UpcomingMatch.jsx";
 import { AdminUpdate } from "./pages/AdminUpdate.jsx";
 import { TotalSoldOutPlayers } from "./pages/TotalSoldOutPlayers.jsx";
+import { PointsTable } from "./components/PointsTable.jsx";
 
 
 const appRouter = createBrowserRouter([
@@ -37,9 +38,10 @@ const appRouter = createBrowserRouter([
       { path: "/register", element: <CricketPlayerRegistration /> },
       { path: "/matches", element: <Matches /> },
       { path: "/live", element: <LiveAuction /> },
-      { path: "/teams", element: <Teams /> }, 
+      { path: "/teams", element: <Teams /> },
       { path: "/login", element: <AdminLogin /> },
       { path: "/update", element: <ShowUpdate /> },
+      { path: "/table", element: <PointsTable /> },
       { path: "/political", element: <PoliticalLeaderProfile /> },
       { path: "/price", element: <PriceMoney /> },
       {
