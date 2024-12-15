@@ -104,7 +104,7 @@ padding-top: 6rem;
 /* Responsive Design */
 @media (max-width: 768px) {
   .match-page {
-    margin-top: 20%;
+    padding-top: 22%;
   }
 
   .match-card {
