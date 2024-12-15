@@ -13,6 +13,7 @@ export const Teams = () => {
       name: "Vishwanath Warriors",
       owner: "Vishwanath Chavan",
       logo: "./images/logo2.jpeg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000, // Total budget for the team
     },
     {
@@ -21,6 +22,7 @@ export const Teams = () => {
       name: "Dipak Warriors",
       owner: "Dipak Ashok Naik",
       logo: "./images/logo3.jpg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000,
     },
     {
@@ -29,6 +31,7 @@ export const Teams = () => {
       name: "Black Panthers",
       owner: "Ankush Ramlal Rathod",
       logo: "./images/logo4.jpeg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000,
     },
     {
@@ -37,6 +40,7 @@ export const Teams = () => {
       name: "Shree Yodha",
       owner: "Sachin Indrajit Pawar",
       logo: "./images/logo5.jpeg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000,
     },
     {
@@ -45,6 +49,7 @@ export const Teams = () => {
       name: "Vishnu Blaster",
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000,
     },
     {
@@ -53,6 +58,7 @@ export const Teams = () => {
       name: "Jagan Super Strikers",
       owner: "Jagan Yuvraj Rathod",
       logo: "./images/logo7.jpeg",
+      profile: "./images/O1.jpeg",
       totalPurse: 7000,
     },
   ];
@@ -158,11 +164,17 @@ export const Teams = () => {
                       alt={`${team.name} Logo`}
                       className="team-logo"
                     />
+                    <img
+                      src={team.profile}
+                      alt={`${team.name} Logo`}
+                      className="team-logo2"
+                    />
                     <div className="team-info">
                       <h3>{team.name}</h3>
                       <p>Owner: {team.owner}</p>
                       <p>Remaining Purse: ₹{team.remainingPurse}</p>
                     </div>
+
                     <a
                       className="teams-btn"
                       onClick={() => handleShowTeamDetails(team.id)}
