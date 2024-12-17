@@ -9,6 +9,11 @@ const adminUsers = [
     password: "pankaj0718",
     image: "./images/pankaj.jpeg",
   },
+  {
+    username: "1807",
+    password: "0718",
+    image: "./images/pankaj.jpeg",
+  },
 ];
 
 
