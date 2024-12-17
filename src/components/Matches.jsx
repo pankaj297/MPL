@@ -60,20 +60,31 @@ export const Matches = () => {
 
               <div className="match-infoo">
                 {/* <li className="Time">Time: {match.time}</li> */}
+                <li className="Time">
+                  Time:{" "}
+                  {new Date(`1970-01-01T${match.time}`).toLocaleTimeString(
+                    "en-IN",
+                    {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                      timeZone: "Asia/Kolkata",
+                    }
+                  )}
+                </li>
               </div>
+              <div></div>
               <div className="match-infoo">
                 {/* <li className="Date">
                   Date: {new Date(match.date).toLocaleDateString()}
                 </li> */}
                 <li className="Date">
-                  Date:
-                  {new Date(match.date).toLocaleString("en-US", {
+                  Date:{" "}
+                  {new Date(match.date).toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "numeric",
                     day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
+                    timeZone: "Asia/Kolkata",
                   })}
                 </li>
               </div>
