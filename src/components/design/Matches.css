@@ -75,13 +75,14 @@ padding-top: 6rem;
 }
 
 /* Match Info */
-.match-info {
+.match-infoo {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
   font-size: 1rem;
   color: #333;
+  margin-top: 1rem;
 }
 
 .match-info p {
@@ -97,8 +98,14 @@ padding-top: 6rem;
   font-size: larger;
   font-weight: bold;
   border-radius: 10px;
-  color: #fff;
+  color: black;
   text-align: center;
+}
+.Time{
+  list-style: none;
+}
+.Date{
+  list-style: none;
 }
 
 /* Responsive Design */

@@ -31,7 +31,7 @@ export const Teams = () => {
       name: "Black Panthers",
       owner: "Ankush Ramlal Rathod",
       logo: "./images/logo4.jpeg",
-      profile: "./images/O.jpeg",
+      profile: "./images/O3.jpeg",
       totalPurse: 7000,
     },
     {
@@ -40,7 +40,7 @@ export const Teams = () => {
       name: "Shree Yodha",
       owner: "Sachin Indrajit Pawar",
       logo: "./images/logo5.jpeg",
-      profile: "./images/O.jpeg",
+      profile: "./images/O4.jpeg",
       totalPurse: 7000,
     },
     {
@@ -49,7 +49,7 @@ export const Teams = () => {
       name: "Vishnu Blaster",
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
-      profile: "./images/O.jpeg",
+      profile: "./images/O5.jpeg",
       totalPurse: 7000,
     },
     {
@@ -58,7 +58,7 @@ export const Teams = () => {
       name: "Jagan Super Strikers",
       owner: "Jagan Yuvraj Rathod",
       logo: "./images/logo7.jpeg",
-      profile: "./images/O.jpeg",
+      profile: "./images/O6.jpeg",
       totalPurse: 7000,
     },
   ];
