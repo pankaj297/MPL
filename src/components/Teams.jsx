@@ -127,7 +127,7 @@ export const Teams = () => {
           <title>${team.name} Details</title>
           <style>
             body { font-family: Arial, sans-serif; position: relative; min-height: 100vh; margin: 0; padding-bottom: 40px; box-sizing: border-box; }
-            h1, h2 { text-align: center; }
+            h1, h2 { text-align: center; font-size: large; font-weight: bold;}
             img { display: block; margin: 0 auto; }
             table { width: 100%; border-collapse: collapse; margin: 20px 0; }
             th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
@@ -201,7 +201,6 @@ export const Teams = () => {
                               <th>Player Name</th>
                               <th>Role</th>
                               <th>Age</th>
-                              <th>Position</th>
                               <th>Sold Price</th>
                             </tr>
                           </thead>
@@ -212,7 +211,6 @@ export const Teams = () => {
                                 <td>{player.name}</td>
                                 <td>{player.role}</td>
                                 <td>{player.age}</td>
-                                <td>{player.position}</td>
                                 <td className="sold-price">
                                   ₹{player.currentBid}
                                 </td>
