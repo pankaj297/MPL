@@ -13,15 +13,17 @@ export const ShowUpdate = () => {
           resolve([
             {
               id: 1,
-              massage: "लाईव्ह Auctions तारीख: १४ डिसेंबर २०२४",
+              massage: `1st Match Dipak Warriors Vs Malkheda Panthers 🏏 Result : Dipak Warriors won by 29 Run 🥳`,
             },
             {
               id: 2,
-              massage: "Auction रात्री 08 : 00 वाजता",
+              massage:
+                "2nd Match Shree Yodha Vs Jagan Super Strikers 🏏 Result : Jagan Super Strikers won by 48 Run 🥳",
             },
             {
               id: 3,
-              massage: "एमपीएल स्पर्धा 05 जानेवारी 2025 पासून सुरू होईल.",
+              massage:
+                "3rd Match Vishwanath Warriors Vs Vishnu Blaster 🏏 Result : Vishnu Blaster won by 44 Run 🥳",
             },
           ]);
         }, 1000); // Simulating network delay
