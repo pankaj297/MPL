@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./design/Gallery.css";
 const images = [
+  { id: 25, src: "./images/g25.jpeg", alt: "Image 2" },
+  { id: 26, src: "./images/g26.jpeg", alt: "Image 3" },
   { id: 1, src: "./images/g17.jpeg", alt: "Image 1" },
   { id: 2, src: "./images/g18.jpeg", alt: "Image 1" },
   { id: 3, src: "./images/g19.jpeg", alt: "Image 1" },
