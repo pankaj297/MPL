@@ -13,11 +13,19 @@ export const ShowUpdate = () => {
           resolve([
             {
               id: 1,
-              massage: `🎉Final 14 Jan 11Am🏏🥳`,
+              massage: `🎉Vishwanath Warriors 🥳Qualify🏏🥳`,
             },
             {
               id: 2,
-              massage: `🎉Semi Finals 12 Jan 11Am Start🏏🥳`,
+              massage: `🎉Vishnu Blaster 🥳Qualify🏏🥳`,
+            },
+            {
+              id: 3,
+              massage: `🎉Jagan Super Strikers 🥳Qualify🏏🥳`,
+            },
+            {
+              id: 3,
+              massage: `Last Years Finalist😔Black Panthers ☹️Dis Qualify🏏`,
             },
           ]);
         }, 1000); // Simulating network delay
