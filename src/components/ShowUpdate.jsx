@@ -24,8 +24,16 @@ export const ShowUpdate = () => {
               massage: `🎉Jagan Super Strikers 🥳Qualify🏏🥳`,
             },
             {
-              id: 3,
+              id: 4,
+              massage: `🎉Dipak Warriors 🥳Qualify🏏🥳`,
+            },
+            {
+              id: 5,
               massage: `Last Years Finalist😔Black Panthers ☹️Dis Qualify🏏`,
+            },
+            {
+              id: 6,
+              massage: `😔Shree Yodha ☹️Dis Qualify🏏`,
             },
           ]);
         }, 1000); // Simulating network delay

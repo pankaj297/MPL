@@ -126,15 +126,21 @@ export const Schedule = () => {
      id: 10,
      day: 6,
      date: "12/01/2025",
-     teamA: { name: "Qualify 1", logo: "./images/logo1.png" },
-     teamB: { name: "Qualify 3", logo: "./images/logo1.png" },
+     teamA: {
+       name: "Vishwanath Warriors Qualify 1",
+       logo: "./images/logo2.jpeg",
+     },
+     teamB: {
+       name: "Jagan Super Strikers Qualify 3",
+       logo: "./images/logo7.jpeg",
+     },
    },
    {
      id: 11,
      day: 6,
      date: "12/01/2025",
-     teamA: { name: "Qualify 2", logo: "./images/logo1.png" },
-     teamB: { name: "Qualify 4", logo: "./images/logo1.png" },
+     teamA: { name: "Vishnu Blaster Qualify 2", logo: "./images/logo6.jpeg" },
+     teamB: { name: "Dipak Warriors Qualify 4", logo: "./images/logo3.jpg" },
    },
    // Semi Final Lost
    {
