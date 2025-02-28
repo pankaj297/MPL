@@ -16,6 +16,9 @@ export const Footer = () => {
                 <br />
                 <span className="pankaj">Abbas</span>
                 <span className="naik">Gawali</span>
+                <br />
+                <span className="pankaj">Harshal</span>
+                <span className="naik">Bhangale</span>
               </div>
             </div>
 

@@ -23,15 +23,15 @@ export const Sidebar = () => {
             <li>
               <Link to="/admin/liveauction">Live Auction Page</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/admin/finalteamplayers">Final Team Players</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/admin/addmatches">Add Upcoming Matches</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/admin/addupdate">Admin Update Info</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/admin/soldPlayer">Total Selected Players</Link>
             </li>

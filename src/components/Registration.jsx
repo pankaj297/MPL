@@ -220,10 +220,10 @@ const validateForm = () => {
               width={"200px"}
             />
             <p>Registration Fees: 200₹</p>
-            <h2>🚫Registration End ‼️</h2>
+            {/* <h2>🚫Registration End ‼️</h2> */}
           </div>
           {/* onSubmit={handleSubmit} */}
-          <form className="registration-form">
+          <form onSubmit={handleSubmit} className="registration-form">
             <div className="form-group">
               <label htmlFor="fullName">Full Name</label>
               <input

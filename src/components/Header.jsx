@@ -78,18 +78,18 @@ export const Header = () => {
             <li>
               <Link to="/teams">Teams</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/update">Update</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/table">Points Table</Link>
             </li>
             <li>
               <Link to="/schedule">Schedule Matches</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/political">Investor Profile</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/price">PriceMoney</Link>
             </li>

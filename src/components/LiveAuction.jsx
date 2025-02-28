@@ -51,7 +51,7 @@ export const LiveAuction = () => {
     <div className="live-auction-page">
       <div className="live-player-profile">
         <h1 className="user-live-auction-h1heading">MPL Live Auction </h1>
-        <p className="live-red">Live End</p>
+        <p className="live-red"> Live </p>
         {selectedPlayer ? (
           <div className="player-profile">
             <div className="profile-header">
