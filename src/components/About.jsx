@@ -6,7 +6,11 @@ export const About = () => {
     <div className={styles.aboutPage}>
       {/* TOP HERO / TITLE */}
       <section className={styles.aboutHero}>
-        <h1>About Malkheda Premier League</h1>
+        <h1>
+          About <span className={styles.M}>Malkheda</span>{" "}
+          <span className={styles.P}>Premier</span>{" "}
+          <span className={styles.L}>League</span>
+        </h1>
         <p>
           A local cricket festival that brings the people of Malkheda and nearby
           villages together with the true spirit of sportsmanship.

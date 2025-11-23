@@ -15,9 +15,10 @@
 .aboutHero h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #d500f9, #7c4dff);
+  color: blanchedalmond;
+  /* background: linear-gradient(45deg, #d500f9, #7c4dff); */
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
 }
 
 .aboutHero p {
@@ -250,4 +251,18 @@
   .aboutHero h1 {
     font-size: 1.9rem;
   }
+}
+
+
+.M{
+   color: orange;
+    font-weight: bold;
+}
+.P{
+  color: white;
+   font-weight: bold;
+}
+.L{
+  color: green;
+  font-weight: bold;
 }

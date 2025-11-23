@@ -83,10 +83,15 @@ export const Footer = () => {
 
         {/* Center Section - MPL Logo */}
         <div className={styles.mplSection}>
-          <h4>Malkheda Premier League</h4>
+          <h4>
+            {" "}
+            <span className={styles.M}>Malkheda</span>{" "}
+            <span className={styles.P}>Premier</span>{" "}
+            <span className={styles.L}>League</span>
+          </h4>
           <div className={styles.logoContainer}>
             <img
-              src="./images/logo1.png"
+              src="./images/app1.png"
               alt="MPL Logo"
               className={styles.mplLogo}
             />

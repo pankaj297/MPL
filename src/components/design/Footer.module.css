@@ -29,7 +29,8 @@
 }
 
 .authors {
-  color: #9c27b0;
+  /* color: #9c27b0; */
+  color: orange;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -125,9 +126,22 @@
   gap: 1rem;
 }
 
+.M{
+   color: orange;
+    font-weight: bold;
+}
+.P{
+  color: white;
+   font-weight: bold;
+}
+.L{
+  color: green;
+  font-weight: bold;
+}
+
 .mplSection h4 {
   font-size: 1.3rem;
-  color: #9c27b0;
+  /* color: #9c27b0; */
   margin: 0;
 }
 
@@ -218,6 +232,6 @@
   }
 
   .mplLogo {
-    width: 80px;
+    width: 100px;
   }
 }

@@ -1,4 +1,3 @@
-// src/components/Header.jsx (or wherever you keep it)
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./design/Header.module.css";
@@ -50,12 +49,13 @@ export const Header = () => {
       <div className={styles.headerContainer}>
         {/* Title and Logo */}
         <div className={styles.titleLogo}>
-          <img
-            src="./images/logo1.png"
-            alt="MPL Logo"
-            className={styles.logo}
-          />
-          <h2>MPL</h2>
+          <img src="./images/app1.png" alt="MPL Logo" className={styles.logo} />
+          <h2 className={styles.siteTitle}>
+            {" "}
+            <span className={styles.M}>M</span>{" "}
+            <span className={styles.P}>P</span>{" "}
+            <span className={styles.L}>L</span>
+          </h2>
         </div>
 
         {/* Mobile Hamburger Icon */}
@@ -87,11 +87,6 @@ export const Header = () => {
                 About
               </Link>
             </li>
-            {/* <li>
-              <Link to="/gallery" onClick={closeMenu}>
-                Gallery
-              </Link>
-            </li> */}
             <li>
               <Link to="/register" onClick={closeMenu}>
                 Register
@@ -127,11 +122,6 @@ export const Header = () => {
                 Schedule
               </Link>
             </li>
-            {/* <li>
-              <Link to="/price" onClick={closeMenu}>
-                Prize Money
-              </Link>
-            </li> */}
             <li>
               <Link to="/login" className={styles.adminBtn} onClick={closeMenu}>
                 Admin
