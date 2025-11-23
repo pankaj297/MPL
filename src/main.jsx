@@ -25,6 +25,10 @@ import { UpcomingMatch } from "./pages/UpcomingMatch.jsx";
 import { TotalSoldOutPlayers } from "./pages/TotalSoldOutPlayers.jsx";
 import { PointsTable } from "./components/PointsTable.jsx";
 import { Schedule } from "./components/Schedule.jsx";
+// import {TopSoldOut} from "./components/TopSoldOut.jsx";
+import TopSoldOut from "./components/TopSoldOut";
+
+import { ToastContainer } from "react-toastify";
 
 
 const appRouter = createBrowserRouter([
@@ -32,6 +36,7 @@ const appRouter = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <Error />,
+    
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
@@ -41,6 +46,8 @@ const appRouter = createBrowserRouter([
       { path: "/live", element: <LiveAuction /> },
       { path: "/teams", element: <Teams /> },
       { path: "/login", element: <AdminLogin /> },
+      { path: "/top", element: <TopSoldOut /> },
+      <ToastContainer position="top-right" />,
       // { path: "/update", element: <ShowUpdate /> },
       { path: "/table", element: <PointsTable /> },
       { path: "/schedule", element: <Schedule /> },

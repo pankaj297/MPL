@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./design/Registration.css";
+import styles from "./design/Registration.module.css";
 
 export const CricketPlayerRegistration = () => {
   const [formData, setFormData] = useState({
@@ -25,88 +25,142 @@ export const CricketPlayerRegistration = () => {
     transactionPhoto: "",
   });
 
+  // ---------- UPI / Payment config ----------
+  const merchantVPA = "7276028036@ybl"; // your UPI ID
+  const merchantName = "Pankaj Suklal Naik"; // payee name
+  const registrationAmount = "3"; // as string
+  const currency = "INR";
+  const transactionNote = "MPL Registration Fee";
+
+  // build UPI URI with a transaction reference
+  const buildUpiUri = () => {
+    const tr = `MPL-${Date.now()}`; // unique-ish transaction ref
+    const params = new URLSearchParams({
+      pa: merchantVPA,
+      pn: merchantName,
+      am: registrationAmount,
+      cu: currency,
+      tn: transactionNote,
+      tr,
+    });
+    return `upi://pay?${params.toString()}`;
+  };
+
+  // one UPI URI for this render (used for QR & open link)
+  const [upiUri] = useState(() => buildUpiUri());
+
+  // QR image (auto-filled amount)
+  const qrSize = 220;
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(
+    upiUri
+  )}`;
+
+  // PhonePe static QR (put your image in public/images/phonepe_qr.png)
+  const phonePeQrPublicPath = "/images/phonepe_qr.png";
+
+  // Example screenshot path (replace with your own if needed)
+  const exampleFailureScreenshot = "/images/upi_security_error_example.jpg";
+  // ------------------------------------------
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleFileChange = (e) => {
     const name = e.target.name;
     const file = e.target.files[0];
+    if (!file) return;
 
-    // Validate file size (less than 200KB)
-    if (file.size > 200 * 1024) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "File size must be less than 200KB.",
+    if (file.size > 2 * 1024 * 1024) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "File size must be less than 2MB.",
       }));
     } else {
-      setFormData({ ...formData, [name]: file });
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "",
-      }));
+      setFormData((prev) => ({ ...prev, [name]: file }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
-  
-const validateForm = () => {
-  let valid = true;
-  let tempErrors = { ...errors };
+  const validateForm = () => {
+    let valid = true;
+    const tempErrors = {
+      name: "",
+      mobile: "",
+      age: "",
+      position: "",
+      passPhoto: "",
+      transactionId: "",
+      transactionPhoto: "",
+    };
 
-  if (!formData.name.trim()) {
-    tempErrors.name = "Name is required.";
-    valid = false;
-  }
-  if (!formData.mobile.match(/^\d{10}$/)) {
-    tempErrors.mobile = "Mobile number must be 10 digits.";
-    valid = false;
-  } else {
-    tempErrors.mobile = " ";
-  }
-  if (formData.age <= 0 || formData.age > 100) {
-    tempErrors.age = "Please enter a valid age.";
-    valid = false;
-  } else {
-    tempErrors.age = " ";
-  }
-  if (!formData.position) {
-    tempErrors.position = "Position is required.";
-    valid = false;
-  }
-  if (!formData.passPhoto) {
-    tempErrors.passPhoto = "Passport photo is required.";
-    valid = false;
-  } else {
-    const fileType = formData.passPhoto.type?.toLowerCase();
-    if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
-      tempErrors.passPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
+    if (!formData.name.trim()) {
+      tempErrors.name = "Name is required.";
       valid = false;
     }
-  }
-  if (!formData.transactionId.trim()) {
-    tempErrors.transactionId = "Transaction ID is required.";
-    valid = false;
-  }
-  if (!formData.transactionPhoto) {
-    tempErrors.transactionPhoto = "Transaction photo is required.";
-    valid = false;
-  } else {
-    const fileType = formData.transactionPhoto.type?.toLowerCase();
-    if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(fileType)) {
-      tempErrors.transactionPhoto = "Only jpg, jpeg, png, and webp images are allowed.";
+
+    if (!/^\d{10}$/.test(formData.mobile || "")) {
+      tempErrors.mobile = "Mobile number must be 10 digits.";
       valid = false;
     }
-  }
 
-  setErrors(tempErrors);
-  return valid;
-};
+    if (!formData.age || formData.age <= 0 || formData.age > 100) {
+      tempErrors.age = "Please enter a valid age.";
+      valid = false;
+    }
 
+    if (!formData.position) {
+      tempErrors.position = "Position is required.";
+      valid = false;
+    }
+
+    if (!formData.passPhoto) {
+      tempErrors.passPhoto = "Passport photo is required.";
+      valid = false;
+    } else {
+      const fileType = formData.passPhoto.type?.toLowerCase();
+      if (
+        !["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
+          fileType
+        )
+      ) {
+        tempErrors.passPhoto =
+          "Only jpg, jpeg, png, and webp images are allowed.";
+        valid = false;
+      }
+    }
+
+    if (!formData.transactionId.trim()) {
+      tempErrors.transactionId = "Transaction ID is required.";
+      valid = false;
+    }
+
+    if (!formData.transactionPhoto) {
+      tempErrors.transactionPhoto = "Transaction photo is required.";
+      valid = false;
+    } else {
+      const fileType = formData.transactionPhoto.type?.toLowerCase();
+      if (
+        !["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
+          fileType
+        )
+      ) {
+        tempErrors.transactionPhoto =
+          "Only jpg, jpeg, png, and webp images are allowed.";
+        valid = false;
+      }
+    }
+
+    setErrors(tempErrors);
+    return valid;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) {
+      toast.error("Please fix the errors before submitting.");
       return;
     }
 
@@ -128,7 +182,8 @@ const validateForm = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      toast.success(result.data.message);
+      toast.success(result.data.message || "Registration submitted");
+
       setFormData({
         name: "",
         mobile: "",
@@ -138,8 +193,12 @@ const validateForm = () => {
         transactionId: "",
         transactionPhoto: null,
       });
-      document.getElementById("passportPhoto").value = "";
-      document.getElementById("transactionPhoto").value = "";
+
+      const passportEl = document.getElementById("passportPhoto");
+      const transEl = document.getElementById("transactionPhoto");
+      if (passportEl) passportEl.value = "";
+      if (transEl) transEl.value = "";
+
       setErrors({
         name: "",
         mobile: "",
@@ -149,190 +208,377 @@ const validateForm = () => {
         transactionId: "",
         transactionPhoto: "",
       });
-    } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
     }
   };
 
+  // open UPI deep link
+  const openUpiApp = () => {
+    window.location.href = upiUri;
+  };
+
+  const copyUpiLink = async () => {
+    try {
+      await navigator.clipboard.writeText(upiUri);
+      toast.success("UPI link copied to clipboard");
+    } catch (e) {
+      toast.error("Could not copy link");
+    }
+  };
+
+  const copyVpa = async () => {
+    try {
+      await navigator.clipboard.writeText(merchantVPA);
+      toast.success("VPA copied to clipboard");
+    } catch (e) {
+      toast.error("Could not copy VPA");
+    }
+  };
+
   return (
-    <div className="register-page">
-      <div className="registration-section">
-        <div className="registration-container">
-          <div className="important-notes">
-            <h4 className="heading-notes">खालील माहिती काळजीपूर्वक वाचा</h4>
-            <p>
-              1. तुमच्याकडून दिलेली सर्व माहिती पडताळून घेतली जाईल आणि नोंद केली
-              जाईल.
-            </p>
-            <p>
-              2. व्यवहार आयडी (Transaction ID) आणि पेमेंट पावतीचा फोटो अचूक आहे
-              याची खात्री करा.
-            </p>
-            <p>
-              3. सर्व आवश्यक माहिती भरणे अनिवार्य आहे; अन्यथा तुमची नोंदणी
-              स्वीकारली जाणार नाही.
-            </p>
-            <p>
-              4. व्यवहार आयडी आणि पेमेंट पावतीवर दिलेला आयडी जुळत आहे याची
-              पडताळणी करा.
-            </p>
-            <p>
-              5. नोंदणी केल्यानंतर, 24 तासांच्या आत MPL लेखक तुमच्या मोबाईल
-              क्रमांकावर सीट निश्चितीचा संदेश पाठवतील.
-            </p>
-            <p>
-              6. तुम्हाला ऑनलाइन पेमेंटमध्ये अडचण असल्यास, तुम्ही ऑफलाइन
-              पद्धतीने पेमेंट करू शकता.
-            </p>
-            <p>
-              7. ऑफलाइन पेमेंटसाठी MPL लेखक बबन नाईक यांची भेट घ्या आणि तुमचा
-              आधार कार्ड सोबत ठेवा.
-            </p>
-            <p>
-              8. पेमेंट कसे करावे हे जाणून घेण्यासाठी खाली दिलेला व्हिडिओ पाहा.
-            </p>
-            <p className="video-link">
-              <a
-                href="https://youtube.com/shorts/4dAZ0ua4P3U?si=cReXjfz1MRaJwJH-"
-                target="_blank"
-              >
-                Watch Video
-              </a>
-            </p>
-            <p>खालील वेबसाइटचा वापर करून 200KB च्या आत फोटो अपलोड करा.</p>
-            <p>
-              <a
-                className="kb-btn"
-                href="https://image.pi7.org/reduce-image-size-in-kb"
-                target="_blank"
-              >
-                वेबसाइट 200kb
-              </a>
-            </p>
+    <div className={styles.registerPage}>
+      <div className={styles.registrationSection}>
+        <div className={styles.container}>
+          {/* Important Notes */}
+          <div className={styles.importantNotes}>
+            <div className={styles.notesHeader}>
+              <h3>📋 Important Instructions</h3>
+              <p>काळजीपूर्वक वाचा / Read Carefully</p>
+            </div>
+            <div className={styles.notesContent}>
+              <div className={styles.noteItem}>
+                <span className={styles.noteIcon}>✅</span>
+                <p>तुमच्याकडून दिलेली सर्व माहिती पडताळून घेतली जाईल</p>
+              </div>
+              <div className={styles.noteItem}>
+                <span className={styles.noteIcon}>✅</span>
+                <p>
+                  व्यवहार आयडी (Transaction ID) आणि पेमेंट पावतीचा फोटो अचूक आहे
+                  याची खात्री करा
+                </p>
+              </div>
+              <div className={styles.noteItem}>
+                <span className={styles.noteIcon}>✅</span>
+                <p>सर्व आवश्यक माहिती भरणे अनिवार्य आहे</p>
+              </div>
+            </div>
           </div>
-          <h2>Cricket Player Registration</h2>
-          <div className="scan-img">
-            <img
-              src="./images/vivek_scanner.jpeg"
-              alt="Scanner"
-              width={"200px"}
-            />
-            <p>Registration Fees: 200₹</p>
-            {/* <h2>🚫Registration End ‼️</h2> */}
-          </div>
-          {/* onSubmit={handleSubmit} */}
-          <form onSubmit={handleSubmit} className="registration-form">
-            <div className="form-group">
-              <label htmlFor="fullName">Full Name</label>
-              <input
-                type="text"
-                name="name"
-                id="fullName"
-                value={formData.name}
-                onChange={handleChange}
-                required
+
+          {/* Payment / QR area */}
+          <div style={{ textAlign: "center", margin: 16 }}>
+            <div style={{ display: "inline-block", textAlign: "center" }}>
+              <img
+                src={qrSrc}
+                alt="UPI QR (prefill ₹)"
+                width={qrSize}
+                height={qrSize}
+                style={{ display: "block", margin: "0 auto", borderRadius: 8 }}
               />
-              {errors.name && <span className="error">{errors.name}</span>}
+              <p style={{ marginTop: 8 }}>
+                Auto-filled amount: <strong>₹{registrationAmount}</strong>
+                <br />
+                UPI ID: <strong>{merchantVPA}</strong>
+              </p>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="mobileNo">Mobile No</label>
-              <input
-                type="tel"
-                name="mobile"
-                id="mobileNo"
-                value={formData.mobile}
-                onChange={handleChange}
-                required
-              />
-              {errors.mobile && <span className="error">{errors.mobile}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="age">Age</label>
-              <input
-                type="number"
-                name="age"
-                id="age"
-                value={formData.age}
-                onChange={handleChange}
-                required
-              />
-              {errors.age && <span className="error">{errors.age}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="position">Position</label>
-              <select
-                name="position"
-                id="position"
-                value={formData.position}
-                onChange={handleChange}
-                required
+            {/* <div style={{ marginTop: 12 }}>
+              <button
+                onClick={openUpiApp}
+                className={styles.submitBtn}
+                style={{ marginRight: 8 }}
               >
-                <option value="">Select Position</option>
-                <option value="batsman">Batsman</option>
-                <option value="bowler">Bowler</option>
-                <option value="allrounder">Allrounder</option>
-                <option value="keeperBatsman">Keeper-Batsman</option>
-              </select>
-              {errors.position && (
-                <span className="error">{errors.position}</span>
-              )}
-            </div>
+                Open UPI app (mobile)
+              </button>
+              <button
+                onClick={copyVpa}
+                className={styles.submitBtn}
+                style={{ marginRight: 8 }}
+              >
+                Copy VPA
+              </button>
+              <button onClick={copyUpiLink} className={styles.submitBtn}>
+                Copy UPI link
+              </button>
+            </div> */}
 
-            <div className="form-group">
-              <label htmlFor="passportPhoto">Upload Passport Photo</label>
-              <input
-                type="file"
-                name="passPhoto"
-                id="passportPhoto"
-                onChange={handleFileChange}
-                required
+            {/* <p
+              style={{
+                color: "#555",
+                fontSize: 13,
+                maxWidth: 680,
+                margin: "12px auto",
+              }}
+            >
+              If your UPI app shows a message like{" "}
+              <strong>
+                "Your payment is declined for security reasons" / "same account"
+              </strong>
+              , it is a restriction by the bank / UPI app. In that case:
+              <br />• Open your UPI app manually (GPay / PhonePe / Paytm)
+              <br />• Choose "UPI ID" and enter <strong>{merchantVPA}</strong>
+              <br />• Or choose "Scan QR" and scan the QR shown above
+            </p> */}
+
+            {/* PhonePe static QR (backup) */}
+            {/* <div style={{ marginTop: 10 }}>
+              <p style={{ marginBottom: 6 }}>
+                PhonePe QR (scan from another phone):
+              </p>
+              <img
+                src={phonePeQrPublicPath}
+                alt="PhonePe QR"
+                width={220}
+                height={220}
+                style={{ borderRadius: 8, display: "inline-block" }}
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
               />
-              {errors.passPhoto && (
-                <span className="error">{errors.passPhoto}</span>
-              )}
-            </div>
+            </div> */}
 
-            <div className="form-group">
-              <label htmlFor="transactionId">Transaction ID</label>
-              <input
-                type="text"
-                name="transactionId"
-                id="transactionId"
-                value={formData.transactionId}
-                onChange={handleChange}
-                required
+            {/* Example screenshot of the app error (optional) */}
+            <div style={{ marginTop: 12 }}>
+              <p style={{ fontSize: 13, color: "#666" }}>
+                Example: what some users may see inside their UPI app
+              </p>
+              <img
+                src={exampleFailureScreenshot}
+                alt="example failure"
+                width={300}
+                style={{
+                  borderRadius: 6,
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                }}
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
               />
-              {errors.transactionId && (
-                <span className="error">{errors.transactionId}</span>
-              )}
+            </div>
+          </div>
+
+          {/* Registration form */}
+          <div className={styles.registrationWrapper}>
+            <div className={styles.paymentSection}>
+              <div className={styles.paymentCard}>
+                <h3>💰 Payment Information</h3>
+                <div className={styles.paymentDetails}>
+                  <p className={styles.note}>
+                    After payment, paste Transaction ID / UTR and upload
+                    screenshot below to complete registration.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="transactionPhoto">Upload Transaction Photo</label>
-              <input
-                type="file"
-                name="transactionPhoto"
-                id="transactionPhoto"
-                onChange={handleFileChange}
-                required
-              />
-              {errors.transactionPhoto && (
-                <span className="error">{errors.transactionPhoto}</span>
-              )}
-            </div>
+            <div className={styles.formSection}>
+              <div className={styles.formHeader}>
+                <h2>🏏 Player Registration</h2>
+                <p>Join Malkheda Premier League 2024</p>
+              </div>
 
-            <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? "Processing..." : "Submit"}
-            </button>
-          </form>
+              <form onSubmit={handleSubmit} className={styles.registrationForm}>
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="fullName">Full Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="fullName"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className={errors.name ? styles.errorInput : ""}
+                      placeholder="Enter your full name"
+                    />
+                    {errors.name && (
+                      <span className={styles.errorText}>{errors.name}</span>
+                    )}
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="mobileNo">Mobile Number *</label>
+                    <input
+                      type="tel"
+                      name="mobile"
+                      id="mobileNo"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      className={errors.mobile ? styles.errorInput : ""}
+                      placeholder="10-digit mobile number"
+                    />
+                    {errors.mobile && (
+                      <span className={styles.errorText}>{errors.mobile}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="age">Age *</label>
+                    <input
+                      type="number"
+                      name="age"
+                      id="age"
+                      value={formData.age}
+                      onChange={handleChange}
+                      className={errors.age ? styles.errorInput : ""}
+                      placeholder="Your age"
+                      min="16"
+                      max="60"
+                    />
+                    {errors.age && (
+                      <span className={styles.errorText}>{errors.age}</span>
+                    )}
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="position">Playing Position *</label>
+                    <select
+                      name="position"
+                      id="position"
+                      value={formData.position}
+                      onChange={handleChange}
+                      className={errors.position ? styles.errorInput : ""}
+                    >
+                      <option className={styles.option} value="">
+                        Select your position
+                      </option>
+                      <option className={styles.option} value="batsman">
+                        🏏 Batsman
+                      </option>
+                      <option className={styles.option} value="bowler">
+                        🎯 Bowler
+                      </option>
+                      <option className={styles.option} value="allrounder">
+                        🌟 All-rounder
+                      </option>
+                      <option className={styles.option} value="keeperBatsman">
+                        🧤 Wicketkeeper-Batsman
+                      </option>
+                    </select>
+                    {errors.position && (
+                      <span className={styles.errorText}>
+                        {errors.position}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="passportPhoto">Passport Photo *</label>
+                    <div className={styles.fileInputWrapper}>
+                      <input
+                        type="file"
+                        name="passPhoto"
+                        id="passportPhoto"
+                        onChange={handleFileChange}
+                        className={styles.fileInput}
+                        accept="image/jpeg,image/png,image/jpg,image/webp"
+                      />
+                      <label
+                        htmlFor="passportPhoto"
+                        className={styles.fileLabel}
+                      >
+                        <span className={styles.fileIcon}>📷</span>
+                        {formData.passPhoto
+                          ? formData.passPhoto.name
+                          : "Choose passport photo"}
+                      </label>
+                    </div>
+                    {errors.passPhoto && (
+                      <span className={styles.errorText}>
+                        {errors.passPhoto}
+                      </span>
+                    )}
+                    <p className={styles.fileHint}>Max 2MB • JPG, PNG, WebP</p>
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="transactionId">Transaction ID *</label>
+                    <input
+                      type="text"
+                      name="transactionId"
+                      id="transactionId"
+                      value={formData.transactionId}
+                      onChange={handleChange}
+                      className={errors.transactionId ? styles.errorInput : ""}
+                      placeholder="Enter UTR/Transaction ID"
+                    />
+                    {errors.transactionId && (
+                      <span className={styles.errorText}>
+                        {errors.transactionId}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="transactionPhoto">
+                      Transaction Screenshot *
+                    </label>
+                    <div className={styles.fileInputWrapper}>
+                      <input
+                        type="file"
+                        name="transactionPhoto"
+                        id="transactionPhoto"
+                        onChange={handleFileChange}
+                        className={styles.fileInput}
+                        accept="image/jpeg,image/png,image/jpg,image/webp"
+                      />
+                      <label
+                        htmlFor="transactionPhoto"
+                        className={styles.fileLabel}
+                      >
+                        <span className={styles.fileIcon}>🧾</span>
+                        {formData.transactionPhoto
+                          ? formData.transactionPhoto.name
+                          : "Choose transaction screenshot"}
+                      </label>
+                    </div>
+                    {errors.transactionPhoto && (
+                      <span className={styles.errorText}>
+                        {errors.transactionPhoto}
+                      </span>
+                    )}
+                    <p className={styles.fileHint}>Max 2MB • JPG, PNG, WebP</p>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className={`${styles.submitBtn} ${
+                    loading ? styles.loading : ""
+                  }`}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <span className={styles.spinner}></span> Processing
+                      Registration...
+                    </>
+                  ) : (
+                    "Submit Registration"
+                  )}
+                </button>
+
+                <div className={styles.formFooter}>
+                  <p>📞 Need help? Contact: +91 7276746341</p>
+                  <p>📍 Offline payments also accepted</p>
+                </div>
+              </form>
+            </div>
+          </div>
+          {/* end registration wrapper */}
         </div>
       </div>
     </div>
   );
 };
 
+export default CricketPlayerRegistration;

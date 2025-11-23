@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./design/Matches.css";
+import styles from "./design/Matches.module.css";
 
 export const Matches = () => {
-  const [matches, setMatches] = useState([]); // State to hold matches
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch matches from the backend
     const fetchMatches = async () => {
-      try { 
+      try {
         const response = await axios.get(
           "https://mpl-backend-5gc6.onrender.com/api/match/getmatches"
         );
-        setMatches(response.data); // Update the matches state
-        console.log(response);
-        setLoading(false); // Set loading to false
+        setMatches(response.data);
+        setLoading(false);
       } catch (err) {
         console.error(err);
         setError("Failed to load matches");
@@ -27,66 +25,72 @@ export const Matches = () => {
     fetchMatches();
   }, []);
 
-  // Show loading or error message
-  if (loading) return <p className="loader">Loading matches...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className={styles.loader}>Loading matches...</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
-    <div className="match-page">
-      <div className="matches-container">
-        <h1 className="Upcomeing-heading">Upcoming Cricket Matches</h1>
-        {matches.length === 0 ? ( // Check if matches array is empty
-          <p className="no-matches">No matches found</p>
+    <div className={styles.matchPage}>
+      <div className={styles.matchesContainer}>
+        <h1 className={styles.upcomingHeading}>Upcoming Cricket Matches</h1>
+
+        {matches.length === 0 ? (
+          <p className={styles.noMatches}>No matches found</p>
         ) : (
           matches.map((match) => (
-            <div className="match-card" key={match._id}>
-              <div className="team">
+            <div className={styles.matchCard} key={match._id}>
+              {/* Team 1 */}
+              <div className={styles.team}>
                 <img
                   src={match.team1.logo}
                   alt={`${match.team1.name} logo`}
-                  className="team-logo"
+                  className={styles.teamLogo}
                 />
-                <p>{match.team1.name}</p>
+                <p className={styles.teamName}>{match.team1.name}</p>
               </div>
-              <h2 className="vs">vs</h2>
-              <div className="team">
+
+              {/* VS */}
+              <div className={styles.vsWrapper}>
+                <h2 className={styles.vs}>VS</h2>
+              </div>
+
+              {/* Team 2 */}
+              <div className={styles.team}>
                 <img
                   src={match.team2.logo}
                   alt={`${match.team2.name} logo`}
-                  className="team-logo"
+                  className={styles.teamLogo}
                 />
-                <p>{match.team2.name}</p>
+                <p className={styles.teamName}>{match.team2.name}</p>
               </div>
 
-              <div className="match-infoo">
-                {/* <li className="Time">Time: {match.time}</li> */}
-                <li className="Time">
-                  Time:{" "}
-                  {new Date(`1970-01-01T${match.time}`).toLocaleTimeString(
-                    "en-IN",
-                    {
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: true,
+              {/* Match Meta Info */}
+              <div className={styles.matchMeta}>
+                <div className={styles.metaItem}>
+                  <span className={styles.metaLabel}>Time</span>
+                  <span className={styles.metaValue}>
+                    {new Date(`1970-01-01T${match.time}`).toLocaleTimeString(
+                      "en-IN",
+                      {
+                        hour: "numeric",
+                        minute: "numeric",
+                        hour12: true,
+                        timeZone: "Asia/Kolkata",
+                      }
+                    )}
+                  </span>
+                </div>
+
+                <div className={styles.metaItem}>
+                  <span className={styles.metaLabel}>Date</span>
+                  <span className={styles.metaValue}>
+                    {new Date(match.date).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
                       timeZone: "Asia/Kolkata",
-                    }
-                  )}
-                </li>
-              </div>
-              <div></div>
-              <div className="match-infoo">
-                {/* <li className="Date">
-                  Date: {new Date(match.date).toLocaleDateString()}
-                </li> */}
-                <li className="Date">
-                  Date:{" "}
-                  {new Date(match.date).toLocaleDateString("en-IN", {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    timeZone: "Asia/Kolkata",
-                  })}
-                </li>
+                    })}
+                  </span>
+                </div>
               </div>
             </div>
           ))

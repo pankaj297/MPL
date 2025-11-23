@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./design/Teams.css";
+import styles from "./design/Teams.module.css"; // Importing the CSS Module
 
 export const Teams = () => {
   const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedTeamId, setSelectedTeamId] = useState(null);
 
-  // Teams data (can be fetched if dynamic, but this is hardcoded for now)
+  // Teams metadata
   const teamData = [
     {
       id: 1,
@@ -14,7 +15,7 @@ export const Teams = () => {
       owner: "Vishwanath Chavan",
       logo: "./images/logo2.jpeg",
       profile: "./images/O1.jpeg",
-      totalPurse: 7000, // Total budget for the team
+      totalPurse: 8000,
     },
     {
       id: 2,
@@ -23,7 +24,7 @@ export const Teams = () => {
       owner: "Dipak Ashok Naik",
       logo: "./images/logo3.jpg",
       profile: "./images/O2.jpeg",
-      totalPurse: 7000,
+      totalPurse: 8000,
     },
     {
       id: 3,
@@ -32,7 +33,7 @@ export const Teams = () => {
       owner: "Ankush Ramlal Rathod",
       logo: "./images/logo4.jpeg",
       profile: "./images/O3.jpeg",
-      totalPurse: 7000,
+      totalPurse: 8000,
     },
     {
       id: 4,
@@ -41,7 +42,7 @@ export const Teams = () => {
       owner: "Sachin Indrajit Pawar",
       logo: "./images/logo5.jpeg",
       profile: "./images/O4.jpeg",
-      totalPurse: 7000,
+      totalPurse: 8000,
     },
     {
       id: 5,
@@ -50,7 +51,7 @@ export const Teams = () => {
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
       profile: "./images/O5.jpeg",
-      totalPurse: 7000,
+      totalPurse: 8000,
     },
     {
       id: 6,
@@ -59,29 +60,26 @@ export const Teams = () => {
       owner: "Jagan Yuvraj Rathod",
       logo: "./images/logo7.jpeg",
       profile: "./images/O6.jpeg",
-      totalPurse: 7000,
+      totalPurse: 8000,
     },
   ];
 
-  // Fetch player data from the API
   useEffect(() => {
     const fetchPlayerData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/getfinalisedbiddings"
         );
         const data = await response.json();
 
-        // Update teams with player data
         const updatedTeams = teamData.map((team) => {
-          // Find players who belong to the current team based on lastBiddingTeam
           const teamPlayers = data.filter(
             (player) =>
               player.lastBiddingTeam?.trim().toLowerCase() ===
               team.name.trim().toLowerCase()
           );
 
-          // Calculate remaining purse
           const totalSpent = teamPlayers.reduce(
             (sum, player) => sum + player.currentBid,
             0
@@ -92,54 +90,110 @@ export const Teams = () => {
             players: teamPlayers.map((player, index) => ({
               id: index + 1,
               name: player.name,
-              role: player.position,
+              role: player.position || "All Rounder", // Default if missing
+              age: player.age || "N/A",
               price: player.currentBid,
-              age: player.age,
-              position: player.position,
-              currentBid: player.currentBid,
-              lastBiddingTeam: player.lastBiddingTeam,
             })),
             remainingPurse: team.totalPurse - totalSpent,
+            squadSize: teamPlayers.length,
           };
         });
 
         setTeams(updatedTeams);
       } catch (error) {
         console.error("Error fetching player data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPlayerData();
   }, []);
 
-  const handleShowTeamDetails = (teamId) => {
+  const handleToggleDetails = (teamId) => {
     setSelectedTeamId((prevId) => (prevId === teamId ? null : teamId));
   };
 
+  // Modernized Print Function
   const handlePrint = (teamId) => {
-    const printContent = document.getElementById(`team-${teamId}`);
-    const team = teams.find((team) => team.id === teamId);
+    const team = teams.find((t) => t.id === teamId);
+    if (!team) return;
 
-    const newWindow = window.open("", "", "width=600,height=600");
+    const newWindow = window.open("", "", "width=800,height=800");
+
+    // We inject inline styles into the print window to ensure it looks good
+    // without relying on the external CSS file which might not load fast enough in print view
     newWindow.document.write(`
       <html>
         <head>
-          <title>${team.name} Details</title>
+          <title>${team.name} - Squad List</title>
           <style>
-            body { font-family: Arial, sans-serif; position: relative; min-height: 100vh; margin: 0; padding-bottom: 40px; box-sizing: border-box; }
-            h1, h2 { text-align: center; font-size: large; font-weight: bold;}
-            img { display: block; margin: 0 auto; }
-            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-            th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-            th { background-color: #3498db; color: white; }
-            .author { right: 10px; font-weight: bold; font-size: 15px; color: #666; }
+            body { font-family: 'Helvetica Neue', Arial, sans-serif; padding: 40px; color: #333; }
+            .header { text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 20px; margin-bottom: 30px; }
+            .logo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #333; }
+            h1 { margin: 10px 0 5px; font-size: 24px; text-transform: uppercase; }
+            h2 { margin: 0; font-size: 14px; color: #666; }
+            .meta { display: flex; justify-content: space-between; margin-bottom: 20px; background: #f4f4f4; padding: 15px; border-radius: 8px; }
+            .meta-item strong { display: block; font-size: 12px; color: #666; text-transform: uppercase; }
+            .meta-item span { font-size: 16px; font-weight: bold; }
+            table { width: 100%; border-collapse: collapse; font-size: 14px; }
+            th { background-color: #3498db; color: white; padding: 12px; text-align: left; }
+            td { padding: 10px; border-bottom: 1px solid #ddd; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .total-row { font-weight: bold; background-color: #eee; }
+            .footer { margin-top: 50px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #ddd; padding-top: 10px; }
           </style>
         </head>
         <body>
-          <h2>${team.mpl}</h2>
-          <img src="${team.logo}" alt="${team.name} Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; border: 3px solid #3498db;"/>
-          <div>${printContent.innerHTML}</div>
-          <div class="author">Author: Pankaj Naik</div>
+          <div class="header">
+            <img src="${team.logo}" class="logo" alt="Logo" />
+            <h1>${team.name}</h1>
+            <h2>${team.mpl} - Owner: ${team.owner}</h2>
+          </div>
+
+          <div class="meta">
+            <div class="meta-item"><strong>Total Purse</strong><span>₹${
+              team.totalPurse
+            }</span></div>
+            <div class="meta-item"><strong>Spent</strong><span>₹${
+              team.totalPurse - team.remainingPurse
+            }</span></div>
+            <div class="meta-item"><strong>Remaining</strong><span>₹${
+              team.remainingPurse
+            }</span></div>
+            <div class="meta-item"><strong>Squad Size</strong><span>${
+              team.players.length
+            }</span></div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player Name</th>
+                <th>Role</th>
+                <th>Age</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${team.players
+                .map(
+                  (p) => `
+                <tr>
+                  <td>${p.id}</td>
+                  <td>${p.name}</td>
+                  <td>${p.role}</td>
+                  <td>${p.age}</td>
+                  <td>₹${p.price}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+          </table>
+          
+          <div class="footer">Generated by MPL Official Portal</div>
         </body>
       </html>
     `);
@@ -148,298 +202,126 @@ export const Teams = () => {
   };
 
   return (
-    <>
-      <div className="mpl-teams-page">
-        <div className="participating-teams">
-          <div className="teams-container">
-            <h2 className="participating-team-title">
-              Participating Teams In MPL
-            </h2>
-            <div className="team-list">
-              {teams.map((team) => (
-                <div key={team.id} className="team-profile">
-                  <div className="profile-content">
-                    <img
-                      src={team.logo}
-                      alt={`${team.name} Logo`}
-                      className="team-logo"
-                    />
-                    <img
-                      src={team.profile}
-                      alt={`${team.name} Logo`}
-                      className="team-logo2"
-                    />
-                    <div className="team-info">
-                      <h3>{team.name}</h3>
-                      <p>Owner: {team.owner}</p>
-                      <p>Remaining Purse: ₹{team.remainingPurse}</p>
-                    </div>
+    <div className={styles.pageContainer}>
+      <div className={styles.headerContainer}>
+        <h2 className={styles.title}>Participating Teams</h2>
+        <p className={styles.subtitle}>
+          Malkheda Premier League Auction Status
+        </p>
+      </div>
 
-                    <a
-                      className="teams-btn"
-                      onClick={() => handleShowTeamDetails(team.id)}
-                    >
-                      {selectedTeamId === team.id
-                        ? "Hide Details"
-                        : "Show Details"}
-                    </a>
-                    <a
-                      className="teams-btn"
-                      onClick={() => handlePrint(team.id)}
-                    >
-                      Print Details
-                    </a>
+      {loading ? (
+        <div className={styles.loadingContainer}>Loading Teams Data...</div>
+      ) : (
+        <div className={styles.teamsGrid}>
+          {teams.map((team) => (
+            <div key={team.id} className={styles.teamCard}>
+              {/* Top Section: Logos */}
+              <div className={styles.cardHeader}>
+                <div className={styles.logoContainer}>
+                  <img
+                    src={team.logo}
+                    alt="Team Logo"
+                    className={styles.teamLogo}
+                  />
+                  <span className={styles.imageLabel}>Team</span>
+                </div>
+                <div className={styles.logoContainer}>
+                  <img
+                    src={team.profile}
+                    alt="Owner"
+                    className={styles.ownerImage}
+                  />
+                  <span className={styles.imageLabel}>Owner</span>
+                </div>
+              </div>
+
+              {/* Middle Section: Info */}
+              <div className={styles.cardBody}>
+                <h3 className={styles.teamName}>{team.name}</h3>
+                <div className={styles.ownerName}>Owner: {team.owner}</div>
+
+                <div className={styles.statsContainer}>
+                  <div className={styles.statItem}>
+                    <span className={styles.statLabel}>Squad</span>
+                    <span className={styles.statValue}>{team.squadSize}</span>
                   </div>
-                  <div className="table-content" id={`team-${team.id}`}>
-                    {selectedTeamId === team.id && (
-                      <div className="team-details">
-                        <h2>{team.name} Players</h2>
-                        <table className="players-table">
-                          <thead>
-                            <tr>
-                              <th>Sr No</th>
-                              <th>Player Name</th>
-                              <th>Role</th>
-                              <th>Age</th>
-                              <th>Sold Price</th>
+                  <div className={styles.statItem}>
+                    <span className={styles.statLabel}>Total Purse</span>
+                    <span className={`${styles.statValue} ${styles.highlight}`}>
+                      ₹{team.totalPurse}
+                    </span>
+                  </div>
+                  <div className={styles.statItem}>
+                    <span className={styles.statLabel}>Remaining</span>
+                    <span className={`${styles.statValue} ${styles.highlight}`}>
+                      ₹{team.remainingPurse}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={styles.buttonGroup}>
+                  <button
+                    className={`${styles.btn} ${styles.btnPrimary}`}
+                    onClick={() => handleToggleDetails(team.id)}
+                  >
+                    {selectedTeamId === team.id ? "Close Squad" : "View Squad"}
+                  </button>
+                  <button
+                    className={`${styles.btn} ${styles.btnOutline}`}
+                    onClick={() => handlePrint(team.id)}
+                  >
+                    Print
+                  </button>
+                </div>
+              </div>
+
+              {/* Bottom Section: Collapsible Table */}
+              {selectedTeamId === team.id && (
+                <div className={styles.detailsSection}>
+                  <h4 className={styles.detailsTitle}>Squad List</h4>
+                  <div className={styles.tableWrapper}>
+                    {team.players.length > 0 ? (
+                      <table className={styles.table}>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {team.players.map((player) => (
+                            <tr key={player.id}>
+                              <td>{player.id}</td>
+                              <td>{player.name}</td>
+                              <td>
+                                <span className={styles.roleBadge}>
+                                  {player.role}
+                                </span>
+                              </td>
+                              <td className={styles.priceTag}>
+                                ₹{player.price}
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {team.players.map((player, index) => (
-                              <tr key={index}>
-                                <td>{player.id}</td>
-                                <td>{player.name}</td>
-                                <td>{player.role}</td>
-                                <td>{player.age}</td>
-                                <td className="sold-price">
-                                  ₹{player.currentBid}
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <p style={{ textAlign: "center", color: "#94a3b8" }}>
+                        No players purchased yet.
+                      </p>
                     )}
                   </div>
                 </div>
-              ))}
+              )}
             </div>
-          </div>
+          ))}
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 
-//! ===============================================
-
-// import React, { useState, useEffect } from "react";
-// import "./design/Teams.css";
-
-// export const Teams = () => {
-//   const [teams, setTeams] = useState([]);
-//   const [selectedTeamId, setSelectedTeamId] = useState(null);
-
-//   // Teams data (can be fetched if dynamic, but this is hardcoded for now)
-//   const teamData = [
-//     {
-//       id: 1,
-//       mpl: "Malkheda Primer League",
-//       name: "Vishwanath warriors",
-//       owner: "Vishwanath Chavan",
-//       logo: "./images/logo2.jpeg",
-//     },
-//     {
-//       id: 2,
-//       mpl: "Malkheda Primer League",
-//       name: "Dipak Warriors",
-//       owner: "Dipak Ashok Naik",
-//       logo: "./images/logo3.jpg",
-//     },
-//     {
-//       id: 3,
-//       mpl: "Malkheda Primer League",
-//       name: "Black Panthers",
-//       owner: "Ankush Ramlal Rathod",
-//       logo: "./images/logo4.jpeg",
-//     },
-//     {
-//       id: 4,
-//       mpl: "Malkheda Primer League",
-//       name: "Shree Yodha",
-//       owner: "Sachin Indrajit Pawar",
-//       logo: "./images/logo5.jpeg",
-//     },
-//     {
-//       id: 5,
-//       mpl: "Malkheda Primer League",
-//       name: "Vishnu Blaster",
-//       owner: "Vishnu Kailash Rathod",
-//       logo: "./images/logo6.jpeg",
-//     },
-//     {
-//       id: 6,
-//       mpl: "Malkheda Primer League",
-//       name: "Jagan Super Strikers",
-//       owner: "Jagan Yuvraj Rathod",
-//       logo: "./images/logo7.jpeg",
-//     },
-//   ];
-
-//   // Fetch player data from the API
-//   useEffect(() => {
-//     const fetchPlayerData = async () => {
-//       try {
-//         const response = await fetch(
-//           "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/getfinalisedbiddings"
-//         );
-//         const data = await response.json();
-
-//         // Update teams with player data
-//         const updatedTeams = teamData.map((team) => {
-//           // Find players who belong to the current team based on lastBiddingTeam
-//           const teamPlayers = data.filter(
-//             (player) => player.lastBiddingTeam === team.name
-//           );
-
-//           return {
-//             ...team,
-//             players: teamPlayers.map((player, index) => ({
-//               id: index + 1,
-//               name: player.name,
-//               role: player.position,
-//               price: player.currentBid,
-//               age: player.age,
-//               position: player.position,
-//               currentBid: player.currentBid,
-//               lastBiddingTeam: player.lastBiddingTeam,
-//             })),
-//           };
-//         });
-
-//         setTeams(updatedTeams);
-//       } catch (error) {
-//         console.error("Error fetching player data:", error);
-//       }
-//     };
-
-//     fetchPlayerData();
-//   }, []);
-
-//   const handleShowTeamDetails = (teamId) => {
-//     if (selectedTeamId === teamId) {
-//       setSelectedTeamId(null);
-//     } else {
-//       setSelectedTeamId(teamId);
-//     }
-//   };
-
-//   const handlePrint = (teamId) => {
-//     const printContent = document.getElementById(`team-${teamId}`);
-//     const team = teams.find((team) => team.id === teamId);
-
-//     const newWindow = window.open("", "", "width=600,height=600");
-//     newWindow.document.write(`
-//       <html>
-//         <head>
-//           <title>${team.name} Details</title>
-//           <style>
-//             body { font-family: Arial, sans-serif; position: relative; min-height: 100vh; margin: 0; padding-bottom: 40px; box-sizing: border-box; }
-//             h1, h2 { text-align: center; }
-//             img { display: block; margin: 0 auto; }
-//             table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-//             th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-//             th { background-color: #3498db; color: white; }
-//             .author { right: 10px; font-weight: bold; font-size: 15px; color: #666; }
-//           </style>
-//         </head>
-//         <body>
-//           <h2>${team.mpl}</h2>
-//           <img src="${team.logo}" alt="${team.name} Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; border: 3px solid #3498db;"/>
-//           <div>${printContent.innerHTML}</div>
-//           <div class="author">Author: Pankaj Naik</div>
-//         </body>
-//       </html>
-//     `);
-//     newWindow.document.close();
-//     newWindow.print();
-//   };
-
-//   return (
-//     <>
-//       <div className="mpl-teams-page">
-//         <div className="participating-teams">
-//           <div className="teams-container">
-//             <h2 className="participating-team-title">
-//               Participating Teams In MPL
-//             </h2>
-//             <div className="team-list">
-//               {teams.map((team) => (
-//                 <div key={team.id} className="team-profile">
-//                   <div className="profile-content">
-//                     <img
-//                       src={team.logo}
-//                       alt={`${team.name} Logo`}
-//                       className="team-logo"
-//                     />
-//                     <div className="team-info">
-//                       <h3>{team.name}</h3>
-//                       <p>Owner: {team.owner}</p>
-//                     </div>
-//                     <a
-//                       className="teams-btn"
-//                       onClick={() => handleShowTeamDetails(team.id)}
-//                     >
-//                       {selectedTeamId === team.id
-//                         ? "Hide Details"
-//                         : "Show Details"}
-//                     </a>
-//                     <a
-//                       className="teams-btn"
-//                       onClick={() => handlePrint(team.id)}
-//                     >
-//                       Print Details
-//                     </a>
-//                   </div>
-//                   <div className="table-content" id={`team-${team.id}`}>
-//                     {selectedTeamId === team.id && (
-//                       <div className="team-details">
-//                         <h2>{team.name} Players</h2>
-//                         <table className="players-table">
-//                           <thead>
-//                             <tr>
-//                               <th>Sir No</th>
-//                               <th>Player Name</th>
-//                               <th>Role</th>
-//                               <th>Age</th>
-//                               <th>Position</th>
-//                               <th>Sold Price</th>
-//                             </tr>
-//                           </thead>
-//                           <tbody>
-//                             {team.players.map((player, index) => (
-//                               <tr key={index}>
-//                                 <td>{player.id}</td>
-//                                 <td>{player.name}</td>
-//                                 <td>{player.position}</td>
-//                                 <td>{player.age}</td>
-//                                 <td>{player.position}</td>
-//                                 <td className="sold-price">₹{player.currentBid}</td>
-//                               </tr>
-//                             ))}
-//                           </tbody>
-//                         </table>
-//                       </div>
-//                     )}
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// // ====================================================
+export default Teams;

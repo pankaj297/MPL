@@ -1,18 +1,22 @@
+// src/components/Header.jsx (or wherever you keep it)
 import React, { useState, useEffect, useRef } from "react";
-import "./design/Header.css";
 import { Link } from "react-router-dom";
+import styles from "./design/Header.module.css";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null); // Reference for the menu
-  const buttonRef = useRef(null); // Reference for the toggle button
+  const [isScrolled, setIsScrolled] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  // Toggle menu function
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
 
-  // Close the menu if the user clicks outside of it
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -21,161 +25,121 @@ export const Header = () => {
         buttonRef.current &&
         !buttonRef.current.contains(e.target)
       ) {
-        setIsMenuOpen(false); // Close the menu
+        setIsMenuOpen(false);
       }
     };
 
-    // Add the event listener to detect outside clicks
-    document.addEventListener("click", handleClickOutside);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 100);
+    };
 
-    // Cleanup the event listener on component unmount
+    document.addEventListener("click", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <>
-      <div className="header header-section">
+    <header
+      className={`${styles.headerSection} ${isScrolled ? styles.scrolled : ""}`}
+    >
+      <div className={styles.headerContainer}>
         {/* Title and Logo */}
-        <div className="title-logo">
-          <img src="./images/logo1.png" alt="logo" className="logo" />
+        <div className={styles.titleLogo}>
+          <img
+            src="./images/logo1.png"
+            alt="MPL Logo"
+            className={styles.logo}
+          />
           <h2>MPL</h2>
         </div>
 
-        {/* Icon for small devices */}
-        <div className="toggle-btn" onClick={toggleMenu} ref={buttonRef}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        {/* Mobile Hamburger Icon */}
+        <button
+          type="button"
+          className={styles.toggleBtn}
+          onClick={toggleMenu}
+          ref={buttonRef}
+          aria-label="Toggle navigation menu"
+        >
+          <span className={isMenuOpen ? styles.open : ""}></span>
+          <span className={isMenuOpen ? styles.open : ""}></span>
+          <span className={isMenuOpen ? styles.open : ""}></span>
+        </button>
 
-        {/* Navigation List */}
-        <div
-          className={`list-nav ${isMenuOpen ? "active" : ""}`}
-          id="navbar"
+        {/* Navigation Menu */}
+        <nav
+          className={`${styles.navMenu} ${isMenuOpen ? styles.active : ""}`}
           ref={menuRef}
         >
-          <ul className="nav-links">
+          <ul className={styles.navLinks}>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={closeMenu}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/gallary">Gallery</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/matches">Matches</Link>
-            </li>
-            <li>
-              <Link to="/live">Live</Link>
-            </li>
-            <li>
-              <Link to="/teams">Teams</Link>
+              <Link to="/about" onClick={closeMenu}>
+                About
+              </Link>
             </li>
             {/* <li>
-              <Link to="/update">Update</Link>
+              <Link to="/gallery" onClick={closeMenu}>
+                Gallery
+              </Link>
             </li> */}
             <li>
-              <Link to="/table">Points Table</Link>
+              <Link to="/register" onClick={closeMenu}>
+                Register
+              </Link>
             </li>
             <li>
-              <Link to="/schedule">Schedule Matches</Link>
+              <Link to="/top" onClick={closeMenu}>
+                Top Player
+              </Link>
+            </li>
+            <li>
+              <Link to="/matches" onClick={closeMenu}>
+                Matches
+              </Link>
+            </li>
+            <li>
+              <Link to="/live" onClick={closeMenu}>
+                Live
+              </Link>
+            </li>
+            <li>
+              <Link to="/teams" onClick={closeMenu}>
+                Teams
+              </Link>
+            </li>
+            <li>
+              <Link to="/table" onClick={closeMenu}>
+                Points Table
+              </Link>
+            </li>
+            <li>
+              <Link to="/schedule" onClick={closeMenu}>
+                Schedule
+              </Link>
             </li>
             {/* <li>
-              <Link to="/political">Investor Profile</Link>
+              <Link to="/price" onClick={closeMenu}>
+                Prize Money
+              </Link>
             </li> */}
             <li>
-              <Link to="/price">PriceMoney</Link>
-            </li>
-            <li>
-              <Link to="/login" className="admin-btn">
+              <Link to="/login" className={styles.adminBtn} onClick={closeMenu}>
                 Admin
               </Link>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
-      {/* header header-section end */}
-    </>
+    </header>
   );
 };
-
-//! =================================
-// import React, { useState } from "react";
-// import "./design/Header.css";
-// import { Link } from "react-router-dom";
-
-// export const Header = () => {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-//   // Toggle menu function
-//   const toggleMenu = () => {
-//     setIsMenuOpen(!isMenuOpen);
-//   };
-
-//   return (
-//     <>
-//       <div className="header header-section">
-//         {/* Title and Logo */}
-//         <div className="title-logo">
-//           <img src="./images/logo1.png" alt="logo" className="logo" />
-//           <h2>MPL</h2>
-//         </div>
-//         {/*  icon for small devices */}
-//         <div className="toggle-btn" onClick={toggleMenu}>
-//           <span></span>
-//           <span></span>
-//           <span></span>
-//         </div>
-
-//         ;{/* Navigation List */}
-//         <div className={`list-nav ${isMenuOpen ? "active" : ""}`} id="navbar">
-//           <ul className="nav-links">
-//             <li>
-//               <Link to="/">Home</Link>
-//             </li>
-//             <li>
-//               <Link to="/about">About</Link>
-//             </li>
-//             <li>
-//               <Link to="/gallary">Gallery</Link>
-//             </li>
-//             <li>
-//               <Link to="/register">Register</Link>
-//             </li>
-//             <li>
-//               <Link to="/matches">Matches</Link>
-//             </li>
-//             <li>
-//               <Link to="/live">Live</Link>
-//             </li>
-//             <li>
-//               <Link to="/teams">Teams</Link>
-//             </li>
-//             <li>
-//               <Link to="/update">Update</Link>
-//             </li>
-//             <li>
-//               <Link to="/political">Investor Profile</Link>
-//             </li>
-//             <li>
-//               <Link to="/price">PriceMoney</Link>
-//             </li>
-//             <li>
-//               <Link to="/login" className="admin-btn">
-//                 Admin
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-//       {/* header header-section end */}
-//     </>
-//   );
-// };

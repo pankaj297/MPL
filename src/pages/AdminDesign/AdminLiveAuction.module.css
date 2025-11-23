@@ -1,0 +1,473 @@
+.liveAuction {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 4rem;
+  padding: 18px 14px 24px;
+  background: radial-gradient(circle at top, #0f172a, #020617 55%);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #e5e7eb;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 0.85rem;
+}
+
+.filterSelect {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+/* Layout */
+
+.layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.6fr;
+  gap: 16px;
+}
+
+/* Player Panel */
+
+.playerPanel {
+  background: #020617;
+  border-radius: 16px;
+  padding: 12px 10px;
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  display: flex;
+  flex-direction: column;
+}
+
+.panelTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.playerList {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.playerItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: none;
+  background: #020617;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.playerItem:hover {
+  background: rgba(30, 64, 175, 0.5);
+  transform: translateY(-1px);
+}
+
+.playerItemActive {
+  background: linear-gradient(90deg, #1d4ed8, #0ea5e9);
+}
+
+.playerAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(248, 250, 252, 0.9);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+.playerMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.playerName {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.playerInfo {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.emptyText {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+/* Main panel */
+
+.mainPanel {
+  background: #020617;
+  border-radius: 16px;
+  padding: 12px 12px 14px;
+  border: 1px solid rgba(55, 65, 81, 0.7);
+}
+
+.playerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playerCardHeader {
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.playerImageWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.mainPlayerImage {
+  width: 100%;
+  max-width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid rgba(248, 250, 252, 0.9);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.95);
+}
+
+.playerCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mainPlayerName {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.mainPlayerMeta {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.bidLabel {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #93c5fd;
+}
+
+.bidCurrency {
+  color: #22c55e;
+}
+
+.currentBid {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #22c55e;
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.75);
+}
+
+.highestBidderLabel {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
+}
+
+.highestBidder {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f97316;
+}
+
+/* Team buttons */
+
+.teamsSection {
+  margin-top: 4px;
+}
+
+.sectionTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.teamButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.teamButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: #020617;
+  color: #f9fafb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+  transition: background 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.teamButton:hover {
+  background: rgba(37, 99, 235, 0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.95);
+}
+
+.teamButtonActive {
+  background: linear-gradient(90deg, #f97316, #facc15);
+  color: #111827;
+}
+
+.teamKey {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #f9fafb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+/* Controls */
+
+.controlsSection {
+  margin-top: 6px;
+}
+
+.bidButtonsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.controlBtnGreen,
+.controlBtnRed {
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.95);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.controlBtnGreen {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  color: #f9fafb;
+}
+
+.controlBtnRed {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+  color: #f9fafb;
+}
+
+.controlBtnGreen:hover,
+.controlBtnRed:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.95);
+}
+
+.finalizeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.finalizeBtn {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  color: #f9fafb;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.finalizeBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 1);
+}
+
+.hintText {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Finalized */
+
+.finalizedBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.12), transparent);
+  border-left: 3px solid #22c55e;
+  font-size: 0.85rem;
+}
+
+/* No player selected */
+
+.noPlayerSelected {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Loading */
+
+.loadingBox {
+  max-width: 400px;
+  margin: 80px auto;
+  text-align: center;
+  color: #e5e7eb;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 3px solid #1d4ed8;
+  border-top-color: transparent;
+  display: inline-block;
+  margin-bottom: 10px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .playerPanel {
+    max-height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .liveAuction {
+    padding: 12px 8px 20px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .playerCardHeader {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mainPlayerImage {
+    max-width: 220px;
+    height: 220px;
+  }
+
+  .bidButtonsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .finalizeRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .finalizeBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .subtitle {
+    font-size: 0.7rem;
+  }
+
+  .teamButtons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .playerList {
+    max-height: 210px;
+  }
+}

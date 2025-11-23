@@ -1,0 +1,155 @@
+.tableContainer {
+  padding: 20px 12px 30px;
+  background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
+  width: 95%;
+  max-width: 1200px;
+  margin: 80px auto 32px;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #38bdf8, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Wrapper to allow horizontal scroll on small devices */
+.scrollWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: radial-gradient(circle at top, #0b1120, #020617);
+}
+
+/* Table styles */
+
+.pointsTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+  font-size: 0.9rem;
+}
+
+.pointsTable thead {
+  background: linear-gradient(90deg, #1d4ed8, #0ea5e9);
+  color: #f9fafb;
+}
+
+.pointsTable th,
+.pointsTable td {
+  border-bottom: 1px solid rgba(30, 64, 175, 0.5);
+  text-align: center;
+  padding: 10px 8px;
+  white-space: nowrap;
+}
+
+.pointsTable th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.pointsTable tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.pointsTable tbody tr:nth-child(odd) {
+  background: rgba(17, 24, 39, 0.9);
+}
+
+.pointsTable tbody tr:hover {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.15), transparent);
+}
+
+/* Highlight top-ranked team */
+.topRow {
+  background: linear-gradient(90deg, #22c55e, #16a34a) !important;
+  color: #0b1120;
+  font-weight: 700;
+}
+
+/* Team name + logo */
+
+.teamNameCell {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(248, 250, 252, 0.9);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+}
+
+/* Note text */
+
+.note {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: left;
+}
+
+/* Scrollbar styling */
+
+.scrollWrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollWrapper::-webkit-scrollbar-thumb {
+  background: #0ea5e9;
+  border-radius: 999px;
+}
+
+.scrollWrapper::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .tableContainer {
+    margin-top: 90px;
+    padding: 16px 8px 24px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .pointsTable th,
+  .pointsTable td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.3rem;
+  }
+
+  .pointsTable {
+    min-width: 640px;
+  }
+
+  .pointsTable th,
+  .pointsTable td {
+    padding: 6px 4px;
+    font-size: 0.75rem;
+  }
+}

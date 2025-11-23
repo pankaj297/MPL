@@ -1,71 +1,105 @@
 import React, { useState } from "react";
-import "./design/AdminLogin.css";
 import { useNavigate } from "react-router-dom";
+import styles from "./design/AdminLogin.module.css";
 
 // Sample admin data
 const adminUsers = [
-  {
-    username: "pankaj1807",
-    password: "pankaj0718",
-    image: "./images/pankaj.jpeg",
-  },
-  {
-    username: "1807",
-    password: "0718",
-    image: "./images/pankaj.jpeg",
-  },
+  { username: "pankaj1807", password: "pankaj0718" },
+  { username: "1807", password: "0718" },
 ];
 
-
-// The main AdminLogin component
 export const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const admin = adminUsers.find(
-      (user) => user.username === username && user.password === password
-    );
+    setIsSubmitting(true);
+    setError("");
 
-    if (admin) {
-      setError("");
-      // Redirect to the admin page after successful login
-      navigate("/admin");
-    } else {
-      setError("Invalid username or password.");
-    }
+    setTimeout(() => {
+      const admin = adminUsers.find(
+        (user) => user.username === username && user.password === password
+      );
+
+      if (admin) {
+        localStorage.setItem(
+          "adminUser",
+          JSON.stringify({ username: admin.username })
+        );
+        navigate("/admin");
+      } else {
+        setError("Invalid username or password.");
+      }
+
+      setIsSubmitting(false);
+    }, 500);
   };
 
   return (
-    <div className="admin-login-container">
-      <div className="login-form1">
-        <h2>Admin Login</h2>
-        <form className="" onSubmit={handleLogin}>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-            required
-            className="input-field"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            className="input-field"
-          />
-          <button type="submit" className="login-button" target="_blank">
-            Login
-          </button>
-          {error && <p className="error-msg">{error}</p>}
-        </form>
+    <div className={styles.page}>
+      <div className={styles.bgOverlay} />
+
+      <div className={styles.cardWrap}>
+        <div className={styles.card}>
+          {/* TITLE ONLY (NO IMAGE) */}
+          <div className={styles.brand}>
+            <h2 className={styles.title}>Admin Login</h2>
+          </div>
+
+          <form
+            className={styles.form}
+            onSubmit={handleLogin}
+            autoComplete="off"
+          >
+            <label className={styles.field}>
+              <input
+                className={styles.input}
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder=" "
+                required
+              />
+              <span className={styles.placeholder}>Username</span>
+              <span className={styles.underline} />
+            </label>
+
+            <label className={styles.field}>
+              <input
+                className={styles.input}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=" "
+                required
+              />
+              <span className={styles.placeholder}>Password</span>
+              <span className={styles.underline} />
+            </label>
+
+            <button
+              type="submit"
+              className={`${styles.btn} ${isSubmitting ? styles.loading : ""}`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Checking..." : "Login"}
+              <span className={styles.ripple} />
+            </button>
+
+            {error && <p className={styles.error}>{error}</p>}
+          </form>
+
+          {/* <div className={styles.hint}>
+            Demo credentials: <strong>pankaj1807 / pankaj0718</strong>
+          </div> */}
+        </div>
       </div>
     </div>
   );
 };
+
+export default AdminLogin;

@@ -1,40 +1,40 @@
-import React, {useState} from "react";
-import "./AdminDesign/HeaderAdmin.css";
+import React, { useState } from "react";
+import styles from "./AdminDesign/HeaderAdmin.module.css";
 
 export const HeaderAdmin = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   return (
-    <>
-      <div className="nav-section">
-        <div className="header-left">
-          <img src="../images/logo1.png" alt="Logo" className="Admin-logo" />
+    <header className={styles.navSection}>
+      <div className={styles.headerLeft}>
+        <img
+          src="../images/logo1.png"
+          alt="Logo"
+          className={styles.adminLogo}
+        />
+        <span className={styles.mplText}>MPL Admin</span>
+      </div>
 
-          <span className="mpl-text">MPL</span>
-        </div>
-        <div className="header-right">
-          <div className="admin-info" onClick={toggleDropdown}>
-            <img
-              src="../images/pankaj.jpeg"
-              alt="Admin"
-              className="admin-image"
-            />
-            <span className="admin-name">pankaj1807</span>
-            {dropdownOpen && (
-              <div className="dropdown-menu">
-                <a href="#profile">Profile</a>
-                <a href="#settings">Settings</a>
-                <a href="#logout">Logout</a>
-              </div>
-            )}
-          </div>
+      <div className={styles.headerRight}>
+        <div className={styles.adminInfo} onClick={toggleDropdown}>
+          <img
+            src="../images/pankaj1.jpeg"
+            alt="Admin"
+            className={styles.adminImage}
+          />
+          <span className={styles.adminName}>pankaj1807</span>
+
+          {dropdownOpen && (
+            <div className={styles.dropdownMenu}>
+              <button className={styles.dropdownItem}>Profile</button>
+              <button className={styles.dropdownItem}>Settings</button>
+              <button className={styles.dropdownItem}>Logout</button>
+            </div>
+          )}
         </div>
       </div>
-    </>
+    </header>
   );
 };

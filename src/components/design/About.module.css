@@ -1,0 +1,253 @@
+/* ROOT CONTAINER */
+.aboutPage {
+  background: radial-gradient(circle at top, #020617, #020617 40%, #0f172a);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* TOP HERO */
+.aboutHero {
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  background: linear-gradient(135deg, #1e293b, #020617);
+}
+
+.aboutHero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #d500f9, #7c4dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aboutHero p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* INTRO SECTION */
+.mainSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.5rem 3rem;
+  gap: 3rem;
+}
+
+.textBlock {
+  flex: 1;
+}
+
+.textBlock h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.textBlock p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  opacity: 0.95;
+  margin-bottom: 1rem;
+}
+
+.imageBlock {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.imageBlock img {
+  width: 80%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* HISTORY / TIMELINE */
+.historySection {
+  padding: 3rem 3rem 2.5rem;
+  background: linear-gradient(135deg, #020617, #111827);
+}
+
+.historySection h2 {
+  font-size: 2.1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.timelineItem {
+  background: #0b1120;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.year {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* STRUCTURE SECTION */
+.structureSection {
+  padding: 3rem 3rem 2.5rem;
+}
+
+.structureSection h2 {
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.structureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.structureCard {
+  background: linear-gradient(135deg, #111827, #020617);
+  border-radius: 16px;
+  padding: 1.5rem 1.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.structureCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+}
+
+/* COMMUNITY SECTION */
+.communitySection {
+  padding: 3rem 3rem 2.5rem;
+  background: linear-gradient(135deg, #020617, #111827);
+}
+
+.communitySection h2 {
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.communityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.communityCard {
+  background: #020617;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(75, 85, 99, 0.9);
+}
+
+/* STATS */
+.statsSection {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2.5rem 3rem;
+  background: #020617;
+}
+
+.statCard {
+  background: #0b1120;
+  padding: 1.4rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  text-align: center;
+  min-width: 200px;
+}
+
+.statNumber {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #22c55e;
+}
+
+.statLabel {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* FOOTER INFO */
+.footerInfo {
+  text-align: center;
+  padding: 3rem 1.5rem 3.5rem;
+  background: #020617;
+}
+
+.footerInfo h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footerInfo p {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  opacity: 0.95;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .mainSection {
+    flex-direction: column;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .imageBlock img {
+    width: 100%;
+  }
+
+  .timeline,
+  .structureGrid,
+  .communityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .statsSection {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutHero h1 {
+    font-size: 2.2rem;
+  }
+
+  .mainSection,
+  .historySection,
+  .structureSection,
+  .communitySection,
+  .statsSection {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .timeline,
+  .structureGrid,
+  .communityGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutHero h1 {
+    font-size: 1.9rem;
+  }
+}

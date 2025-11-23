@@ -1,0 +1,243 @@
+:root{
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.08);
+  --accent: #3db1ff;
+  --accent-2: #6f7dff;
+  --danger: #ff6b6b;
+}
+
+/* full-page animated gradient */
+.page{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #eef2ff;
+  background: linear-gradient(120deg, rgba(8,10,20,1) 0%, rgba(6,8,23,1) 100%);
+}
+
+/* animated background shapes (subtle) */
+.bgOverlay{
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 10% 20%, rgba(59,177,255,0.06), transparent 8%),
+              radial-gradient(circle at 90% 80%, rgba(111,125,255,0.05), transparent 10%);
+  filter: blur(40px);
+  animation: floatBg 12s linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatBg{
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(3deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* wrapper for a centered floating card */
+.cardWrap{
+  z-index: 2;
+  width: 94%;
+  max-width: 420px;
+  padding: 24px;
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 26px;
+  box-shadow: 0 10px 30px rgba(6,8,23,0.6), 0 2px 8px rgba(59,177,255,0.03) inset;
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px) saturate(1.1);
+  transform: translateY(0);
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+/* gentle floating */
+@keyframes floatCard{
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* brand row */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom: 12px;
+}
+
+.avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  object-fit:cover;
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 6px 18px rgba(59,177,255,0.06);
+  transform: translateZ(0);
+}
+
+.title{
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  margin:0;
+}
+
+/* form */
+.form{
+  margin-top: 6px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+/* floating label field container */
+.field{
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+/* input styles */
+.input{
+  width:100%;
+  padding: 14px 12px 10px 12px;
+  background: transparent;
+  border: none;
+  color: #f5f7ff;
+  outline: none;
+  font-size: 15px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+/* placeholder text (we use a sibling span to animate) */
+.placeholder{
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  transition: all 200ms ease;
+  background: transparent;
+  padding: 0 6px;
+  z-index: 0;
+}
+
+/* underline animation */
+.underline{
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 2px;
+  transform-origin: left center;
+  overflow: hidden;
+}
+.underline::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 260ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* when input is focused (we shift label and reveal underline) */
+.input:focus + .placeholder,
+.input:not(:placeholder-shown) + .placeholder {
+  transform: translateY(-135%);
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.2px;
+}
+
+.input:focus + .placeholder + .underline::after,
+.input:not(:placeholder-shown) + .placeholder + .underline::after {
+  width: 100%;
+}
+
+/* button */
+.btn{
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+  padding: 12px 14px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #021226;
+  box-shadow: 0 8px 20px rgba(111,125,255,0.14);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(111,125,255,0.18);
+}
+
+/* disabled / loading */
+.loading{
+  opacity: 0.9;
+  cursor: default;
+}
+
+/* ripple (subtle) */
+.btn .ripple{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 10%, transparent 40%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+.btn:active .ripple{
+  opacity: 1;
+  transition: opacity 120ms ease-out;
+}
+
+/* error message */
+.error{
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* small hint */
+.hint{
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  text-align:center;
+}
+
+/* responsive */
+@media (max-width: 520px) {
+  .card{
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .avatar{
+    width:50px;
+    height:50px;
+  }
+  .title{
+    font-size:18px;
+  }
+}

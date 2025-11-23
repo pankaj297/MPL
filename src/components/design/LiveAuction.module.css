@@ -1,0 +1,811 @@
+/* THEME */
+:root {
+  --bg-dark: #020617;
+  --primary: #3b82f6;
+  --accent: #f97316;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --card-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* PAGE */
+.pageContainer {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(circle at 10% 0%, #0f172a 0, transparent 55%),
+    radial-gradient(circle at 90% 100%, #1d4ed8 0, transparent 55%),
+    #020617;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffffff, #60a5fa, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.liveBadge {
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+  background-color: rgba(239, 68, 68, 0.15);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.liveDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--danger);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+  }
+  70% {
+    box-shadow: 0 0 0 13px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* MAIN CARD */
+.card {
+  width: 100%;
+  max-width: 1050px;
+  background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(18px);
+  position: relative;
+  isolation: isolate;
+  animation: cardIn 0.6s ease-out;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card.sold {
+  border: 1px solid rgba(250, 204, 21, 0.9);
+  box-shadow: 0 0 40px rgba(250, 204, 21, 0.3);
+  animation: soldPulse 1s ease-out 1;
+}
+
+@keyframes soldPulse {
+  0% {
+    transform: scale(0.97);
+  }
+  40% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* LEFT SIDE */
+.imageSection {
+  position: relative;
+  padding: 1.8rem 1.6rem 1.8rem 1.8rem;
+  background: radial-gradient(circle at 10% 0%, #1e293b 0, #020617 60%);
+}
+
+.playerBanner {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #020617 0%, #020617 50%, #020617 100%);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  padding: 0.2rem;
+}
+
+/* SOLD ribbon on banner */
+.soldRibbon {
+  position: absolute;
+  top: 14px;
+  right: -30px;
+  transform: rotate(35deg);
+  background: linear-gradient(90deg, #f97316, #facc15);
+  color: #020617;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.35rem 3rem;
+  font-size: 0.75rem;
+  z-index: 3;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  animation: soldRibbonIn 0.7s ease-out;
+}
+
+@keyframes soldRibbonIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) rotate(35deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(35deg);
+  }
+}
+
+/* colored background shapes */
+.bannerGraphic,
+.bannerGraphicSecondary {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bannerGraphic::before {
+  content: "";
+  position: absolute;
+  left: -80px;
+  top: -40px;
+  width: 280px;
+  height: 220px;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  transform: skewX(-18deg) rotate(-8deg);
+  border-radius: 24px;
+  box-shadow: 0 0 30px rgba(248, 113, 113, 0.5);
+}
+
+.bannerGraphic::after {
+  content: "";
+  position: absolute;
+  right: -110px;
+  top: 40px;
+  width: 280px;
+  height: 230px;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  transform: skewX(-18deg) rotate(-18deg);
+  opacity: 0.9;
+}
+
+.bannerGraphicSecondary::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  bottom: -70px;
+  width: 200px;
+  height: 130px;
+  background: radial-gradient(
+    circle at 0 100%,
+    rgba(248, 250, 252, 0.3),
+    transparent 70%
+  );
+  filter: blur(4px);
+}
+
+/* content inside banner */
+.bannerContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 260px 1fr; /* fixed image column */
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.4rem 1.4rem 1.3rem 1.6rem;
+}
+
+/* BIG CONSTANT PROFILE SIZE */
+.bannerImageWrapper {
+  width: 260px;
+  height: 260px;
+  border-radius: 26px;
+  padding: 6px;
+  background: radial-gradient(circle at 0 0, #f97316, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 3px solid rgba(15, 23, 42, 0.9);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+  background-color: #020617;
+}
+
+/* right side text in banner */
+.bannerTextBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.6rem;
+}
+
+.bannerLabel {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #e5e7eb;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.bannerName {
+  width: 250px;
+  margin-top: 0.35rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f9fafb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bannerSub {
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(249, 250, 251, 0.85);
+}
+
+/* team pill */
+.bannerTeamBox {
+  margin-top: 1.1rem;
+  margin-right: 1rem;
+  align-self: flex-start;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(249, 250, 251, 0.25);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.bannerTeamLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(156, 163, 175, 0.95);
+}
+
+.bannerTeamValue {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f97316;
+}
+
+/* RIGHT SIDE INFO */
+.infoSection {
+  padding: 1.9rem 2.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(31, 41, 55, 0.9);
+  background: radial-gradient(
+      circle at 100% 0%,
+      rgba(56, 189, 248, 0.25),
+      transparent 60%
+    ),
+    #020617;
+}
+
+.playerNameHeading {
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+.playerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.metaTag {
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.metaTag strong {
+  color: #60a5fa;
+}
+
+/* BID BOX */
+.bidContainer {
+  border-radius: 18px;
+  padding: 1.2rem 1.2rem 1.1rem;
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(34, 197, 94, 0.12),
+      transparent 55%
+    ),
+    rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.bidLabel {
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.bidPrice {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--success);
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  text-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+}
+
+.lastBidder {
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed rgba(75, 85, 99, 0.7);
+}
+
+.teamName {
+  margin-top: 0.15rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* SOLD INFO */
+.soldSection {
+  margin-top: 1.4rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(250, 204, 21, 0.7);
+  background: linear-gradient(
+      120deg,
+      rgba(250, 204, 21, 0.08),
+      transparent 55%
+    ),
+    rgba(15, 23, 42, 0.92);
+}
+
+.soldTitle {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #facc15;
+}
+
+.congratsText {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+}
+
+/* WAITING STATE */
+.waitingState {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 540px;
+  padding: 3rem 1.8rem;
+  border-radius: 20px;
+  border: 2px dashed rgba(148, 163, 184, 0.4);
+  background: radial-gradient(circle at 0 0, #111827 0, #020617 60%);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.waitingSpinner {
+  display: block;
+  font-size: 2.8rem;
+  margin-bottom: 0.8rem;
+  animation: slowSpin 4s linear infinite;
+}
+
+@keyframes slowSpin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* FIREWORKS & CONFETTI */
+.fireworksContainer,
+.confettiContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.firework {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: #facc15;
+  border-radius: 999px;
+  animation-name: fireworkUp;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fireworkUp {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-40vh) scale(1);
+  }
+  100% {
+    transform: translateY(-60vh) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #f97316, #3b82f6);
+  animation: confettiFall 3.5s linear infinite;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* HAMMER – auction hammer, centered over player side */
+.hammerContainer {
+  position: fixed;
+  top: 50%;
+  left: 28%;
+  transform: translate(-50%, -50%);
+  z-index: 60;
+  pointer-events: none;
+}
+
+.hammer {
+  font-size: 4rem;
+  animation: hammerHit 0.9s ease-out 2;
+  transform-origin: top right;
+}
+
+@keyframes hammerHit {
+  0% {
+    transform: translateY(-40px) rotate(0deg) scale(1);
+  }
+  35% {
+    transform: translateY(0) rotate(-55deg) scale(1.1);
+  }
+  100% {
+    transform: translateY(-25px) rotate(0deg) scale(1);
+  }
+}
+
+/* MILESTONE OVERLAY (1000/2000/3000) */
+
+.milestoneOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: milestoneFade 3.4s ease-out forwards;
+}
+
+@keyframes milestoneFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}
+
+.milestoneCard {
+  position: relative;
+  padding: 1.4rem 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(248, 250, 252, 0.6);
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), #020617);
+}
+
+.milestoneLevel1 {
+  background: linear-gradient(
+    120deg,
+    rgba(59, 130, 246, 0.95),
+    rgba(15, 23, 42, 0.98)
+  );
+}
+
+.milestoneLevel2 {
+  background: linear-gradient(
+    120deg,
+    rgba(234, 179, 8, 0.98),
+    rgba(15, 23, 42, 0.98)
+  );
+}
+
+.milestoneLevel3 {
+  background: linear-gradient(
+    120deg,
+    rgba(249, 115, 22, 1),
+    rgba(24, 24, 27, 0.98)
+  );
+}
+
+.milestoneRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: 4px solid rgba(248, 250, 252, 0.7);
+  box-shadow: 0 0 25px rgba(248, 250, 252, 0.7);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.milestoneRing::before {
+  content: "₹";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #0f172a;
+}
+
+.milestoneInner {
+  display: flex;
+  flex-direction: column;
+}
+
+.milestoneLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.8);
+}
+
+.milestoneTitle {
+  margin: 0.2rem 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0b1120;
+}
+
+.milestoneAmount {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0b1120;
+}
+
+.milestoneSub {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: #020617;
+}
+
+.milestoneSpark1,
+.milestoneSpark2,
+.milestoneSpark3 {
+  position: absolute;
+  font-size: 1.2rem;
+  color: #fef9c3;
+  text-shadow: 0 0 15px rgba(250, 250, 210, 0.9);
+}
+
+.milestoneSpark1 {
+  top: -8px;
+  left: 16px;
+  animation: sparkle 1.1s infinite alternate;
+}
+
+.milestoneSpark2 {
+  bottom: -8px;
+  right: 24px;
+  animation: sparkle 1.3s infinite alternate;
+}
+
+.milestoneSpark3 {
+  top: -6px;
+  right: 35%;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-5px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .imageSection {
+    padding-right: 1.4rem;
+  }
+
+  .bannerContent {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 1.2rem 1.2rem 1.3rem;
+  }
+
+  .bannerImageWrapper {
+    margin-bottom: 0.5rem;
+  }
+
+  .bannerTextBlock {
+    padding-left: 0;
+    align-items: center;
+  }
+
+  .bannerName {
+    font-size: 1.1rem;
+  }
+
+  .bannerTeamBox {
+    align-self: center;
+  }
+
+  .infoSection {
+    border-left: none;
+    border-top: 1px solid rgba(31, 41, 55, 0.9);
+    padding: 1.6rem 1.5rem 1.8rem;
+  }
+
+  .playerNameHeading {
+    text-align: center;
+  }
+
+  .playerMeta {
+    justify-content: center;
+  }
+
+  .hammerContainer {
+    top: 40%;
+    left: 50%;
+  }
+
+  .milestoneCard {
+    padding: 1rem 1.4rem;
+    border-radius: 18px;
+    gap: 1rem;
+  }
+
+  .milestoneRing {
+    width: 60px;
+    height: 60px;
+  }
+
+  .milestoneTitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .title {
+    font-size: 1.8rem;
+    letter-spacing: 0.15em;
+  }
+
+  .imageSection {
+    padding: 1.3rem 1.1rem 1.5rem;
+  }
+
+  .bannerImageWrapper {
+    width: 210px;
+    height: 210px;
+  }
+
+  .bannerName {
+    font-size: 1rem;
+  }
+
+  .bidPrice {
+    font-size: 2.3rem;
+  }
+
+  .milestoneCard {
+    flex-direction: column;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .milestoneRing {
+    margin-bottom: 0.4rem;
+  }
+}
