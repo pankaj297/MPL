@@ -105,20 +105,20 @@ export const Footer = () => {
             <span className={styles.authors}>MPL Organizers</span>
             <br />
             <div className={styles.nameGroup}>
+              <div className={styles.nameGroup}>
+                <span className={styles.firstName}>Atul</span>
+                <span className={styles.lastName}>Naik</span>
+              </div>
               <span className={styles.firstName}>Baban</span>
               <span className={styles.lastName}>Naik</span>
-            </div>
-            <div className={styles.nameGroup}>
-              <span className={styles.firstName}>Vivek</span>
-              <span className={styles.lastName}>Chavan</span>
             </div>
           </div>
 
           <div className={styles.contactLinks}>
-            <a href="tel:+917276746341" className={styles.contactIcon}>
+            <a href="tel:+917820874167" className={styles.contactIcon}>
               <i className="fa-solid fa-phone-flip"></i>
             </a>
-            <a href="tel:+919511271868" className={styles.contactIcon}>
+            <a href="tel:+917276746341" className={styles.contactIcon}>
               <i className="fa-solid fa-phone-flip"></i>
             </a>
           </div>
@@ -128,14 +128,6 @@ export const Footer = () => {
             <div className={styles.socialIcons}>
               <a
                 href="https://www.instagram.com/_bunty_naik_17"
-                className={styles.socialIcon}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fa-brands fa-instagram"></i>
-              </a>
-              <a
-                href="https://www.instagram.com/vivek_chavan07"
                 className={styles.socialIcon}
                 target="_blank"
                 rel="noopener noreferrer"

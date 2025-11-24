@@ -26,9 +26,9 @@ export const CricketPlayerRegistration = () => {
   });
 
   // ---------- UPI / Payment config ----------
-  const merchantVPA = "7276028036@ybl"; // your UPI ID
-  const merchantName = "Pankaj Suklal Naik"; // payee name
-  const registrationAmount = "3"; // as string
+  const merchantVPA = "naikatul202@axl"; // your UPI ID
+  const merchantName = "MPL Author"; // payee name
+  const registrationAmount = "300"; // as string
   const currency = "INR";
   const transactionNote = "MPL Registration Fee";
 

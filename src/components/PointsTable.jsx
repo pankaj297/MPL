@@ -50,8 +50,8 @@ export const PointsTable = () => {
     },
     {
       id: 5,
-      name: "Black Panthers",
-      logo: "./images/logo4.jpeg",
+      name: "Jijau Fighter",
+      logo: "./images/logoJijau.jpeg",
       played: 0,
       won: 0,
       lost: 0,
@@ -61,8 +61,8 @@ export const PointsTable = () => {
     },
     {
       id: 6,
-      name: "Shree Yodha",
-      logo: "./images/logo5.jpeg",
+      name: "Mato Shree Group",
+      logo: "./images/logo8.jpeg",
       played: 0,
       won: 0,
       lost: 0,

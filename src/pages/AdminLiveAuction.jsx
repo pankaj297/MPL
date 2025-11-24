@@ -22,8 +22,8 @@ export const AdminLiveAuction = () => {
   const teams = [
     "Vishwanath warriors",
     "Dipak Warriors",
-    "Black Panthers",
-    "Shree Yodha",
+    "Jijau fighter",
+    "Mato Shree Group",
     "Vishnu Blaster",
     "Jagan Super Strikers",
   ];
