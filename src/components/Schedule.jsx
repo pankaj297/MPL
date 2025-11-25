@@ -9,14 +9,14 @@ export const Schedule = () => {
       day: 1,
       date: "07/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Malkheda Panthers", logo: "./images/logo4.jpeg" },
+      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
     },
     {
       id: 2,
       day: 1,
       date: "07/01/2025",
-      teamA: { name: "Shree Yodha", logo: "./images/logo5.jpeg" },
-      teamB: { name: "Jagan Super Strikers", logo: "./images/logo7.jpeg" },
+      teamA: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export const Schedule = () => {
       day: 2,
       date: "08/01/2025",
       teamA: { name: "Vishnu Blaster", logo: "./images/logo6.jpeg" },
-      teamB: { name: "Jagan Super Strikers", logo: "./images/logo7.jpeg" },
+      teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
     {
       id: 5,
@@ -45,8 +45,8 @@ export const Schedule = () => {
       id: 6,
       day: 2,
       date: "08/01/2025",
-      teamA: { name: "Malkheda Panthers", logo: "./images/logo4.jpeg" },
-      teamB: { name: "Shree Yodha", logo: "./images/logo5.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
     },
 
     // Day 3
@@ -55,20 +55,20 @@ export const Schedule = () => {
       day: 3,
       date: "09/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Shree Yodha", logo: "./images/logo5.jpeg" },
+      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
     },
     {
       id: 8,
       day: 3,
       date: "09/01/2025",
       teamA: { name: "Vishwanath Warriors", logo: "./images/logo2.jpeg" },
-      teamB: { name: "Jagan Super Strikers", logo: "./images/logo7.jpeg" },
+      teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
     {
       id: 9,
       day: 3,
       date: "09/01/2025",
-      teamA: { name: "Malkheda Panthers", logo: "./images/logo4.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
       teamB: { name: "Vishnu Blaster", logo: "./images/logo6.jpeg" },
     },
 
@@ -78,7 +78,7 @@ export const Schedule = () => {
       day: 4,
       date: "10/01/2025",
       teamA: { name: "Vishwanath Warriors", logo: "./images/logo2.jpeg" },
-      teamB: { name: "Shree Yodha", logo: "./images/logo5.jpeg" },
+      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
     },
     {
       id: 11,
@@ -91,8 +91,8 @@ export const Schedule = () => {
       id: 12,
       day: 4,
       date: "10/01/2025",
-      teamA: { name: "Malkheda Panthers", logo: "./images/logo4.jpeg" },
-      teamB: { name: "Jagan Super Strikers", logo: "./images/logo7.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
 
     // Day 5
@@ -100,14 +100,17 @@ export const Schedule = () => {
       id: 13,
       day: 5,
       date: "11/01/2025",
-      teamA: { name: "Malkheda Panthers", logo: "./images/logo4.jpeg" },
+      teamA: {
+        name: "Jijau Fighter",
+        logo: "./images/logoJijau.jpeg",
+      },
       teamB: { name: "Vishwanath Warriors", logo: "./images/logo2.jpeg" },
     },
     {
       id: 14,
       day: 5,
       date: "11/01/2025",
-      teamA: { name: "Shree Yodha", logo: "./images/logo5.jpeg" },
+      teamA: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
       teamB: { name: "Vishnu Blaster", logo: "./images/logo6.jpeg" },
     },
     {
@@ -115,7 +118,7 @@ export const Schedule = () => {
       day: 5,
       date: "11/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Jagan Super Strikers", logo: "./images/logo7.jpeg" },
+      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
     },
 
     // Semi Finals - Day 6
@@ -124,12 +127,12 @@ export const Schedule = () => {
       day: 6,
       date: "12/01/2025",
       teamA: {
-        name: "Vishwanath Warriors (Qualify 1)",
-        logo: "./images/logo2.jpeg",
+        name: "TBC (Qualify 1)",
+        logo: "./images/logo1.png",
       },
       teamB: {
-        name: "Jagan Super Strikers (Qualify 3)",
-        logo: "./images/logo7.jpeg",
+        name: "TBC (Qualify 3)",
+        logo: "./images/logo1.png",
       },
     },
     {
@@ -137,10 +140,10 @@ export const Schedule = () => {
       day: 6,
       date: "12/01/2025",
       teamA: {
-        name: "Vishnu Blaster (Qualify 2)",
-        logo: "./images/logo6.jpeg",
+        name: "TBC (Qualify 2)",
+        logo: "./images/logo1.png",
       },
-      teamB: { name: "Dipak Warriors (Qualify 4)", logo: "./images/logo3.jpg" },
+      teamB: { name: "TBC (Qualify 4)", logo: "./images/logo1.png" },
     },
 
     // Third Place - Day 7
@@ -166,7 +169,8 @@ export const Schedule = () => {
     <div className={styles.schedulePage}>
       <div className={styles.scheduleContainer}>
         <h2 className={styles.heading}>
-          MPL Schedule – Upcoming Cricket Matches
+          {/* MPL Schedule – Upcoming Cricket Matches */}
+          MPL Schedule – Demo
         </h2>
 
         <div className={styles.matchesGrid}>

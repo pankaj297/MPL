@@ -12,7 +12,7 @@ export const Teams = () => {
       id: 1,
       mpl: "Malkheda Primer League",
       name: "Vishwanath Warriors",
-      owner: "Vishwanath Chavan",
+      owner: "Ganesh Chavan",
       logo: "./images/logo2.jpeg",
       profile: "./images/O1.jpeg",
       totalPurse: 8000,
@@ -56,10 +56,10 @@ export const Teams = () => {
     {
       id: 6,
       mpl: "Malkheda Primer League",
-      name: "Jagan Super Strikers",
-      owner: "Jagan Yuvraj Rathod",
-      logo: "./images/logo7.jpeg",
-      profile: "./images/O6.jpeg",
+      name: "Ram Rajya Pratishthan",
+      owner: "Umesh Rathod",
+      logo: "./images/logo4.jpeg",
+      profile: "./images/04.jpeg",
       totalPurse: 8000,
     },
   ];

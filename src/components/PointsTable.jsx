@@ -28,8 +28,8 @@ export const PointsTable = () => {
     },
     {
       id: 3,
-      name: "Jagan Super Strikers",
-      logo: "./images/logo7.jpeg",
+      name: "Ram Rajya Pratishthan",
+      logo: "./images/logo4.jpeg",
       played: 0,
       won: 0,
       lost: 0,

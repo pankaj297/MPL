@@ -230,7 +230,7 @@ export const LiveAuction = () => {
       </div>
 
       {/* Content */}
-      {selectedPlayer == 0 ? (
+      {selectedPlayer? (
         <div className={`${styles.card} ${isBidFinalised ? styles.sold : ""}`}>
           {/* LEFT: PLAYER BANNER */}
           <div className={styles.imageSection}>

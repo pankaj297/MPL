@@ -25,7 +25,7 @@ export const AdminLiveAuction = () => {
     "Jijau fighter",
     "Mato Shree Group",
     "Vishnu Blaster",
-    "Jagan Super Strikers",
+    "Ram Rajya Pratishthan",
   ];
 
   /* ----------------------------- FETCH PLAYERS ---------------------------- */
