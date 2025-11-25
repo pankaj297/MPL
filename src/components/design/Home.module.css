@@ -1,46 +1,50 @@
-/* Home page container */
+/* Home page container (hero + background video) */
 .homeContainer {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* full viewport hero */
   overflow: hidden;
   margin: 0;
   padding: 0;
+  display: block;
 }
 
+/* Background video fills container and stays centered */
 .backgroundVideo {
   position: absolute;
-  top: 0;
-  left: 50%;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
   width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  transform: translateX(-50%);
-  filter: brightness(0.7);
+  height: 100%;
+  object-fit: cover; /* keep aspect and fill */
+  object-position: center center;
+  z-index: 0;
+  transform: none;
+  /* hardware-accelerate for smooth playback */
+  will-change: transform;
 }
 
-.heroContent {
+/* subtle overlay on video so hero text is readable */
+.videoOverlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2,6,23,0.45) 0%, rgba(2,6,23,0.55) 60%, rgba(2,6,23,0.75) 100%);
   z-index: 1;
+  pointer-events: none;
+}
+
+/* hero content on top of video */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.heroContent h1 {
-  font-size: 3.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-.heroContent p {
-  font-size: 1.5rem;
-  color: #e2e8f0;
+  padding: 2rem;
+  box-sizing: border-box;
+  color: white;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.65);
 }
 
 /* About Section */
@@ -49,20 +53,22 @@
   justify-content: space-between;
   align-items: center;
   padding: 4rem 2rem;
-  min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   color: #ffffff;
   gap: 3rem;
+  box-sizing: border-box;
 }
 
+/* text column */
 .aboutContent {
   flex: 1;
   max-width: 600px;
 }
 
+/* responsive heading */
 .aboutContent h2 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
+  font-size: 2.6rem;
+  margin-bottom: 1.25rem;
   color: #9c27b0;
   background: linear-gradient(45deg, #9c27b0, #e91e63);
   -webkit-background-clip: text;
@@ -70,69 +76,91 @@
   background-clip: text;
 }
 
+/* paragraph */
 .aboutContent p {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  line-height: 1.75;
   color: #cbd5e0;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: justify;
 }
 
+/* CTA */
 .learnMoreBtn {
   background: linear-gradient(45deg, #9c27b0, #6a1b9a);
   color: white;
   border: none;
-  padding: 20px 40px;
+  padding: 14px 28px;
   text-decoration: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 14px rgba(156, 39, 176, 0.25);
 }
-
 .learnMoreBtn:hover {
-  background: linear-gradient(45deg, #8e24aa, #4a148c);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(124, 58, 237, 0.28);
 }
 
-.aboutImg {
+/* MEDIA COLUMN - responsive video wrapper */
+.aboutMedia {
   flex: 1;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.aboutImg img {
-  max-width: 90%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+/* Video wrapper uses modern aspect-ratio with a fallback */
+.videoWrapper {
+  width: 100%;
+  max-width: 720px; /* keeps video from growing too wide on large screens */
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.03);
+  /* Modern way: maintain aspect ratio */
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+/* Fallback for browsers that do not support aspect-ratio */
+@supports not (aspect-ratio: 16/9) {
+  .videoWrapper {
+    height: 0;
+    padding-top: 56.25%; /* 16:9 fallback */
+  }
+  .videoWrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* actual video element - fill wrapper */
+.aboutVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  object-position: center center;
 }
 
-.aboutImg img:hover {
-  transform: scale(1.02);
-}
-
-/* Responsive Styles */
+/* Responsive behaviour for different screen sizes */
 @media (max-width: 1024px) {
   .aboutSection {
     padding: 3rem 1.5rem;
     gap: 2rem;
   }
-
   .aboutContent h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
-
-  .heroContent h1 {
-    font-size: 2.8rem;
-  }
-
-  .heroContent p {
-    font-size: 1.3rem;
+  .videoWrapper {
+    max-width: 640px;
   }
 }
 
@@ -141,58 +169,53 @@
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
-    gap: 2rem;
   }
-
-  .aboutImg {
-    margin-top: 1rem;
-  }
-
-  .aboutImg img {
+  .aboutContent {
+    order: 1;
     width: 100%;
-    max-width: 400px;
+  }
+  .aboutMedia {
+    order: 2;
+    width: 100%;
+  }
+  .videoWrapper {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16/9;
   }
 
-  .aboutContent h2 {
-    font-size: 2.2rem;
-  }
-
-  .aboutContent p {
-    font-size: 1rem;
-  }
-
-  .heroContent h1 {
-    font-size: 2.2rem;
-  }
-
-  .heroContent p {
-    font-size: 1.1rem;
-  }
-
+  /* adjust hero height for smaller screens */
   .homeContainer {
     height: 60vh;
   }
-
   .backgroundVideo {
     height: 60vh;
   }
 }
 
 @media (max-width: 480px) {
-  .heroContent h1 {
-    font-size: 1.8rem;
-  }
-
-  .heroContent p {
-    font-size: 1rem;
-  }
-
   .aboutContent h2 {
     font-size: 1.8rem;
   }
-
+  .aboutContent p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+  .videoWrapper {
+    max-width: 100%;
+    border-radius: 10px;
+  }
   .learnMoreBtn {
     width: 100%;
-    padding: 15px 50px;
+    padding: 12px 20px;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundVideo,
+  .aboutVideo {
+    animation: none;
+    transition: none;
   }
 }

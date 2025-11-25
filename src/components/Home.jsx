@@ -6,6 +6,7 @@ export const Home = () => {
   return (
     <>
       <div className={styles.homeContainer}>
+        {/* Background video - covers whole hero area */}
         <video
           className={styles.backgroundVideo}
           src="./images/video1.mp4"
@@ -13,8 +14,17 @@ export const Home = () => {
           loop
           muted
           playsInline
-        ></video>
+          preload="auto"
+          poster="./images/app1.png"
+        >
+          Your browser does not support the video tag.
+        </video>
+
+        {/* subtle dark overlay to keep text readable */}
+        <div className={styles.videoOverlay} />
+
         <div className={styles.heroContent}>
+          {/* optional hero text if you want later */}
           {/* <h1>Malkheda Premier League</h1>
           <p>Experience the Spirit of Cricket</p> */}
         </div>
@@ -25,7 +35,7 @@ export const Home = () => {
         <div className={styles.aboutContent}>
           <h2>About MPL</h2>
           <p>
-            बंजारा समाजाची एक अत्यंत सुंदर क्रिकेट स्पर्धा यंदा मालखेडा गावात
+            बंजara समाजाची एक अत्यंत सुंदर क्रिकेट स्पर्धा यंदा मालखेडा गावात
             आयोजित करण्यात येत आहे. मालखेडा प्रीमियर लीग स्पर्धेचे हे दुसरे वर्ष
             असून ही केवळ एक क्रिकेट स्पर्धा नसून, गावातील लोकांना एकत्र आणण्याचा
             आणि एकजूट वाढवण्याचा उपक्रम आहे. <br /> आपल्यामध्ये व आपल्या गावातील
@@ -41,10 +51,26 @@ export const Home = () => {
             About MPL
           </a>
         </div>
-        <div className={styles.aboutImg}>
-          <img src="./images/g6.jpeg" alt="About MPL" />
+
+        {/* Responsive video block (keeps aspect ratio & scales) */}
+        <div className={styles.aboutMedia}>
+          <div className={styles.videoWrapper}>
+            <video
+              className={styles.aboutVideo}
+              src="./images/video2.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="./images/g6.jpeg"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </div>
+
       <Gallery />
     </>
   );

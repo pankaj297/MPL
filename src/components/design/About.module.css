@@ -16,9 +16,6 @@
   font-size: 2.8rem;
   margin-bottom: 1rem;
   color: blanchedalmond;
-  /* background: linear-gradient(45deg, #d500f9, #7c4dff); */
-  -webkit-background-clip: text;
-  /* -webkit-text-fill-color: transparent; */
 }
 
 .aboutHero p {
@@ -53,17 +50,22 @@
   margin-bottom: 1rem;
 }
 
-.imageBlock {
+/* VIDEO BLOCK (replaces imageBlock) */
+.videoBlock {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.imageBlock img {
+.aboutVideo {
   width: 80%;
-  max-width: 450px;
-  border-radius: 20px;
+  max-width: 620px;
+  height: auto;
+  border-radius: 16px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  border: 1px solid rgba(148, 163, 184, 0.12);
 }
 
 /* HISTORY / TIMELINE */
@@ -212,8 +214,9 @@
     text-align: center;
   }
 
-  .imageBlock img {
+  .aboutVideo {
     width: 100%;
+    max-width: 720px;
   }
 
   .timeline,
@@ -253,16 +256,16 @@
   }
 }
 
-
-.M{
-   color: orange;
-    font-weight: bold;
+/* Colored letters in title */
+.M {
+  color: orange;
+  font-weight: bold;
 }
-.P{
+.P {
   color: white;
-   font-weight: bold;
+  font-weight: bold;
 }
-.L{
+.L {
   color: green;
   font-weight: bold;
 }

@@ -34,8 +34,19 @@ export const About = () => {
           </p>
         </div>
 
-        <div className={styles.imageBlock}>
-          <img src="./images/g6.jpeg" alt="MPL Tournament" />
+        {/* VIDEO BLOCK (replaces image) */}
+        <div className={styles.videoBlock}>
+          <video
+            className={styles.aboutVideo}
+            src="./images/video2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="./images/g6.jpeg"
+          >
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
 
