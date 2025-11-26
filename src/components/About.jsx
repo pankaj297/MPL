@@ -34,7 +34,7 @@ export const About = () => {
           </p>
         </div>
 
-        {/* VIDEO BLOCK (replaces image) */}
+        {/* VIDEO BLOCK */}
         <div className={styles.videoBlock}>
           <video
             className={styles.aboutVideo}
@@ -53,10 +53,29 @@ export const About = () => {
       {/* HISTORY / TIMELINE SECTION */}
       <section className={styles.historySection}>
         <h2>MPL History</h2>
+        <p className={styles.sectionSubtext}>
+          प्रत्येक सिझनमध्ये वेगळी रोमांचक कथा, नवे हिरो आणि अविस्मरणीय क्षण.
+        </p>
         <div className={styles.timeline}>
           {/* Season 1 */}
           <div className={styles.timelineItem}>
-            <span className={styles.year}>Season 1</span>
+            <div className={styles.timelineTopRow}>
+              <span className={styles.year}>Season 1</span>
+              <span className={styles.championTag}>Champions</span>
+            </div>
+
+            <div className={styles.winnerRow}>
+              <img
+                src="./images/logo9.jpeg"
+                alt="Black Panther Team Logo"
+                className={styles.winnerLogo}
+              />
+              <div>
+                <h3 className={styles.winnerName}>Black Panther</h3>
+                <span className={styles.winnerCaption}>vs Dipak Warriors</span>
+              </div>
+            </div>
+
             <p>
               पहिल्या सिझनमध्ये अंतिम सामना <strong>Black Panther</strong>{" "}
               विरुद्ध <strong>Dipak Warriors</strong> असा रंगला. रोमांचक लढत देत{" "}
@@ -67,7 +86,25 @@ export const About = () => {
 
           {/* Season 2 */}
           <div className={styles.timelineItem}>
-            <span className={styles.year}>Season 2</span>
+            <div className={styles.timelineTopRow}>
+              <span className={styles.year}>Season 2</span>
+              <span className={styles.championTag}>Champions</span>
+            </div>
+
+            <div className={styles.winnerRow}>
+              <img
+                src="./images/logo3.jpg"
+                alt="Dipak Warriors Team Logo"
+                className={styles.winnerLogo}
+              />
+              <div>
+                <h3 className={styles.winnerName}>Dipak Warriors</h3>
+                <span className={styles.winnerCaption}>
+                  vs Vishwanath Warriors
+                </span>
+              </div>
+            </div>
+
             <p>
               दुसऱ्या सिझनमध्ये अंतिम सामना <strong>Dipak Warriors</strong>{" "}
               विरुद्ध <strong>Vishwanath Warriors</strong> असा झाला. दमदार खेळ
@@ -78,19 +115,107 @@ export const About = () => {
 
           {/* Season 3 (Current) */}
           <div className={styles.timelineItem}>
-            <span className={styles.year}>Season 3 (Current)</span>
+            <div className={styles.timelineTopRow}>
+              <span className={styles.year}>Season 3 (Current)</span>
+              <span className={styles.championTagCurrent}>Live Season</span>
+            </div>
+
             <p>
               हा MPL चा तिसरा सिझन आहे. अधिक संघ, उत्तम आयोजन, लाईव्ह ऑक्शन आणि
               रोमांचक सामने – यंदा कोणता संघ विजेता ठरणार, हे पाहणे सगळ्यांसाठीच
               उत्सुकतेचे ठरणार आहे.
             </p>
+            <p className={styles.highlightNote}>
+              👀 लाईव्ह स्कोअर्स, अपडेट्स आणि ऑक्शन हायलाइट्ससाठी MPL च्या
+              अधिकृत पेजवर नजर ठेवा.
+            </p>
           </div>
         </div>
       </section>
 
+      {/* NEW: ALL TEAMS SECTION */}
+      <section className={styles.teamsSection}>
+        <h2>All MPL Teams</h2>
+        <p className={styles.sectionSubtext}>
+          सहा दमदार संघ, वेगवेगळ्या खेळशैली आणि एकच स्वप्न – MPL ट्रॉफी 🏆
+        </p>
+
+        <div className={styles.teamsGrid}>
+          {/* Team 1 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo2.jpeg"
+              alt="Vishwanath Warriors Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Vishwanath Warriors</h3>
+            <p className={styles.teamOwner}>Owner: Ganesh Chavan</p>
+          </div>
+
+          {/* Team 2 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo3.jpg"
+              alt="Dipak Warriors"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Dipak Warriors</h3>
+            <p className={styles.teamOwner}>Owner: Dipak Ashok Naik</p>
+          </div>
+
+          {/* Team 3 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logoJijau.jpeg"
+              alt="Jijau Fighter Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Jijau Fighter</h3>
+            <p className={styles.teamOwner}>Owner: Samadhan Naik</p>
+          </div>
+
+          {/* Team 4 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo8.jpeg"
+              alt="Mato Shree Group"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Mato Shree Group</h3>
+            <p className={styles.teamOwner}>Owner: Manish Pawar</p>
+          </div>
+
+          {/* Team 5 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo6.jpeg"
+              alt="Vishnu Blaster Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Vishnu Blaster</h3>
+            <p className={styles.teamOwner}>Owner: Vishnu Kailash Rathod</p>
+          </div>
+
+          {/* Team 6 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo4.jpeg"
+              alt="Ram Rajya Pratishthan Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Ram Rajya Pratishthan</h3>
+            <p className={styles.teamOwner}>Owner: Umesh Rathod</p>
+          </div>
+        </div>
+      </section>
+      
       {/* TOURNAMENT STRUCTURE */}
       <section className={styles.structureSection}>
         <h2>Tournament Structure</h2>
+        <p className={styles.sectionSubtext}>
+          प्रत्येक सिझनमध्ये स्पष्ट आणि रोमांचक टुर्नामेंट फॉरमॅट ठेवण्यात आले
+          आहे.
+        </p>
         <div className={styles.structureGrid}>
           <div className={styles.structureCard}>
             <h3>League Stage</h3>

@@ -19,6 +19,10 @@ export const AdminLiveAuction = () => {
   const [filterPosition, setFilterPosition] = useState("All");
   const [finalized, setFinalized] = useState(false);
 
+  // NEW: search + sort
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("default"); // default | nameAsc | ageAsc | ageDesc
+
   const teams = [
     "Vishwanath warriors",
     "Dipak Warriors",
@@ -46,7 +50,10 @@ export const AdminLiveAuction = () => {
               name: user.name || "Unknown Player",
               age: user.age,
               position:
-                user.position.charAt(0).toUpperCase() + user.position.slice(1),
+                user.position && user.position.length > 0
+                  ? user.position.charAt(0).toUpperCase() +
+                    user.position.slice(1)
+                  : "Unknown",
               finalTeam: "",
             }))
           );
@@ -64,12 +71,47 @@ export const AdminLiveAuction = () => {
     fetchPlayers();
   }, []);
 
-  /* ------------------------------ FILTERING ------------------------------- */
+  /* ------------------------------ FILTERING + SEARCH + SORT --------------- */
 
-  const filteredPlayers =
-    filterPosition === "All"
-      ? players
-      : players.filter((player) => player.position === filterPosition);
+  const filteredPlayers = (() => {
+    let list = players;
+
+    // filter by position
+    if (filterPosition !== "All") {
+      list = list.filter((player) => player.position === filterPosition);
+    }
+
+    // filter by search query (name)
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase();
+      list = list.filter((player) =>
+        (player.name || "").toLowerCase().includes(q)
+      );
+    }
+
+    // sort
+    if (sortBy === "nameAsc") {
+      list = [...list].sort((a, b) =>
+        (a.name || "").localeCompare(b.name || "")
+      );
+    } else if (sortBy === "ageAsc") {
+      list = [...list].sort((a, b) => {
+        if (!a.age && !b.age) return 0;
+        if (!a.age) return 1;
+        if (!b.age) return -1;
+        return a.age - b.age;
+      });
+    } else if (sortBy === "ageDesc") {
+      list = [...list].sort((a, b) => {
+        if (!a.age && !b.age) return 0;
+        if (!a.age) return 1;
+        if (!b.age) return -1;
+        return b.age - a.age;
+      });
+    }
+
+    return list;
+  })();
 
   /* ----------------------------- AUCTION LOGIC ---------------------------- */
 
@@ -151,6 +193,44 @@ export const AdminLiveAuction = () => {
     }
   };
 
+  /* ------------------------ EXTRA: NEXT / PREV PLAYER --------------------- */
+
+  const handleNextPlayer = () => {
+    if (!filteredPlayers.length) return;
+
+    if (!selectedPlayer) {
+      handlePlayerSelect(filteredPlayers[0]);
+      return;
+    }
+
+    const currentIndex = filteredPlayers.findIndex(
+      (p) => p.id === selectedPlayer.id
+    );
+    const nextIndex =
+      currentIndex === -1 || currentIndex === filteredPlayers.length - 1
+        ? 0
+        : currentIndex + 1;
+
+    handlePlayerSelect(filteredPlayers[nextIndex]);
+  };
+
+  const handlePrevPlayer = () => {
+    if (!filteredPlayers.length) return;
+
+    if (!selectedPlayer) {
+      handlePlayerSelect(filteredPlayers[0]);
+      return;
+    }
+
+    const currentIndex = filteredPlayers.findIndex(
+      (p) => p.id === selectedPlayer.id
+    );
+    const prevIndex =
+      currentIndex <= 0 ? filteredPlayers.length - 1 : currentIndex - 1;
+
+    handlePlayerSelect(filteredPlayers[prevIndex]);
+  };
+
   /* --------------------------- KEYBOARD SHORTCUTS ------------------------- */
 
   useEffect(() => {
@@ -214,29 +294,97 @@ export const AdminLiveAuction = () => {
           </p>
         </div>
 
-        <div className={styles.filterRow}>
-          <label htmlFor="position-filter" className={styles.filterLabel}>
-            Filter by position
-          </label>
-          <select
-            id="position-filter"
-            value={filterPosition}
-            onChange={(e) => setFilterPosition(e.target.value)}
-            className={styles.filterSelect}
+        {/* NEW: HEADER CONTROLS BAR */}
+        <div className={styles.headerControls}>
+          <div className={styles.searchBox}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search player name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.filterRow}>
+            <label htmlFor="position-filter" className={styles.filterLabel}>
+              Position
+            </label>
+            <select
+              id="position-filter"
+              value={filterPosition}
+              onChange={(e) => setFilterPosition(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="All">All</option>
+              <option value="Batsman">Batsman</option>
+              <option value="Bowler">Bowler</option>
+              <option value="Allrounder">All-Rounder</option>
+              <option value="KeeperBatsman">Wicket-Keeper</option>
+            </select>
+          </div>
+
+          <div className={styles.sortRow}>
+            <label htmlFor="sort-by" className={styles.filterLabel}>
+              Sort
+            </label>
+            <select
+              id="sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="default">Default</option>
+              <option value="nameAsc">Name (A-Z)</option>
+              <option value="ageAsc">Age (Youngest)</option>
+              <option value="ageDesc">Age (Oldest)</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            className={styles.clearFiltersBtn}
+            onClick={() => {
+              setSearchQuery("");
+              setFilterPosition("All");
+              setSortBy("default");
+            }}
           >
-            <option value="All">All</option>
-            <option value="Batsman">Batsman</option>
-            <option value="Bowler">Bowler</option>
-            <option value="Allrounder">All-Rounder</option>
-            <option value="KeeperBatsman">Wicket-Keeper</option>
-          </select>
+            Reset
+          </button>
         </div>
       </header>
 
       <div className={styles.layout}>
         {/* LEFT: PLAYER LIST */}
         <aside className={styles.playerPanel}>
-          <h3 className={styles.panelTitle}>Players</h3>
+          <div className={styles.playerPanelHeader}>
+            <h3 className={styles.panelTitle}>Players</h3>
+            <div className={styles.playerSummaryRow}>
+              <span className={styles.playerCount}>
+                {filteredPlayers.length} / {players.length}
+              </span>
+              <div className={styles.playerNavButtons}>
+                <button
+                  type="button"
+                  className={styles.navBtn}
+                  onClick={handlePrevPlayer}
+                  disabled={!filteredPlayers.length}
+                >
+                  ◀
+                </button>
+                <button
+                  type="button"
+                  className={styles.navBtn}
+                  onClick={handleNextPlayer}
+                  disabled={!filteredPlayers.length}
+                >
+                  ▶
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div className={styles.playerList}>
             {filteredPlayers.map((player) => (
               <button
@@ -263,7 +411,7 @@ export const AdminLiveAuction = () => {
               </button>
             ))}
             {filteredPlayers.length === 0 && (
-              <p className={styles.emptyText}>No players for this category.</p>
+              <p className={styles.emptyText}>No players found.</p>
             )}
           </div>
         </aside>

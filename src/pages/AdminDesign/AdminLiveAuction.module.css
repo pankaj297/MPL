@@ -35,14 +35,49 @@
   margin-top: 4px;
 }
 
-.filterRow {
+/* NEW: Header controls bar */
+
+.headerControls {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchInput {
+  padding: 6px 10px;
+  min-width: 160px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.filterRow,
+.sortRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .filterLabel {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  color: #e5e7eb;
 }
 
 .filterSelect {
@@ -57,6 +92,23 @@
 .filterSelect:focus {
   outline: none;
   border-color: #38bdf8;
+}
+
+.clearFiltersBtn {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.clearFiltersBtn:hover {
+  background: #f97316;
+  border-color: #f97316;
+  color: #0b1120;
 }
 
 /* Layout */
@@ -78,14 +130,60 @@
   flex-direction: column;
 }
 
+.playerPanelHeader {
+  margin-bottom: 6px;
+}
+
 .panelTitle {
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.playerSummaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.playerCount {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.playerNavButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.navBtn {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.navBtn:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .playerList {
-  margin-top: 4px;
+  margin-top: 6px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -430,6 +528,11 @@
     align-items: flex-start;
   }
 
+  .headerControls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .title {
     font-size: 1.5rem;
   }
@@ -456,11 +559,24 @@
     width: 100%;
     text-align: center;
   }
+
+  .searchInput {
+    min-width: 130px;
+  }
 }
 
 @media (max-width: 480px) {
   .subtitle {
     font-size: 0.7rem;
+  }
+
+  .headerControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchInput {
+    width: 100%;
   }
 
   .teamButtons {
@@ -469,5 +585,10 @@
 
   .playerList {
     max-height: 210px;
+  }
+
+  .playerSummaryRow {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

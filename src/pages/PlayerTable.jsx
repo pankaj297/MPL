@@ -10,6 +10,10 @@ export const PlayerTable = () => {
     JSON.parse(localStorage.getItem("checkedStatus")) || {}
   );
 
+  // NEW: search + filter
+  const [searchQuery, setSearchQuery] = useState("");
+  const [positionFilter, setPositionFilter] = useState("All");
+
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -45,6 +49,18 @@ export const PlayerTable = () => {
   const totalWicketkeeper = players.filter(
     (player) => player.position === "keeperBatsman"
   ).length;
+
+  // FILTER + SEARCH
+  const filteredPlayers = players.filter((player) => {
+    const matchesPosition =
+      positionFilter === "All" || player.position === positionFilter;
+
+    const name = (player.name || "").toLowerCase();
+    const query = searchQuery.trim().toLowerCase();
+    const matchesName = !query || name.includes(query);
+
+    return matchesPosition && matchesName;
+  });
 
   const handleCheckboxChange = (id) => {
     setCheckedStatus((prevState) => {
@@ -226,6 +242,38 @@ export const PlayerTable = () => {
         </button>
       </div>
 
+      {/* NEW: FILTER + SEARCH CONTROLS */}
+      <div className={styles.controlsRow}>
+        <div className={styles.searchBox}>
+          <input
+            type="text"
+            placeholder="Search by player name..."
+            className={styles.searchInput}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        <div className={styles.filterBox}>
+          <label className={styles.filterLabel}>Filter by Position:</label>
+          <select
+            className={styles.filterSelect}
+            value={positionFilter}
+            onChange={(e) => setPositionFilter(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="batsman">Batsman</option>
+            <option value="bowler">Bowler</option>
+            <option value="allrounder">Allrounder</option>
+            <option value="keeperBatsman">Wicketkeeper</option>
+          </select>
+        </div>
+
+        <div className={styles.showingInfo}>
+          Showing: {filteredPlayers.length} / {players.length}
+        </div>
+      </div>
+
       <div className={styles.statsBar}>
         <div className={styles.statItem}>Total Players: {totalPlayers}</div>
         <div className={styles.statItem}>Total Money: ₹{totalPaid}</div>
@@ -255,7 +303,7 @@ export const PlayerTable = () => {
             </tr>
           </thead>
           <tbody>
-            {players.map((player, index) => (
+            {filteredPlayers.map((player, index) => (
               <tr key={player._id}>
                 <td>{index + 1}</td>
                 <td>
@@ -320,6 +368,13 @@ export const PlayerTable = () => {
                 </td>
               </tr>
             ))}
+            {filteredPlayers.length === 0 && (
+              <tr>
+                <td colSpan="13" style={{ padding: "12px" }}>
+                  No players found for this filter / search.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

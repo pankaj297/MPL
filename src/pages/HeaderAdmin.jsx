@@ -30,7 +30,7 @@ export const HeaderAdmin = () => {
             <div className={styles.dropdownMenu}>
               <button className={styles.dropdownItem}>Profile</button>
               <button className={styles.dropdownItem}>Settings</button>
-              <button className={styles.dropdownItem}>Logout</button>
+              <a className={styles.dropdownItem} href="/">Logout</a>
             </div>
           )}
         </div>

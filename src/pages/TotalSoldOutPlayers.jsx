@@ -26,6 +26,28 @@ export const TotalSoldOutPlayers = () => {
 
   const handlePrintTable = () => {
     const newWindow = window.open("", "", "width=800,height=800");
+
+    // Build table rows with Retain / Sold status logic for print
+    const rowsHtml = soldOutPlayers
+      .map((player, index) => {
+        const isRetain = index < 12;
+        const statusText = isRetain ? "Retain" : "Sold";
+        const statusClass = isRetain ? "status retain" : "status sold";
+
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${player.name}</td>
+            <td>${player.age}</td>
+            <td>${player.position}</td>
+            <td>${player.currentBid}</td>
+            <td>${player.lastBiddingTeam}</td>
+            <td class="${statusClass}">${statusText}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
     newWindow.document.write(`
       <html>
         <head>
@@ -36,7 +58,9 @@ export const TotalSoldOutPlayers = () => {
             table { width: 100%; border-collapse: collapse; margin: 20px 0; }
             th, td { padding: 10px; border: 1px solid #ddd; }
             th { background-color: #3498db; color: white; }
-            .status { color: green; font-weight: bold; }
+            .status { font-weight: bold; }
+            .status.retain { color: #2563eb; } /* blue */
+            .status.sold { color: #16a34a; }   /* green */
             .author {
               position: fixed;
               bottom: 0;
@@ -76,21 +100,7 @@ export const TotalSoldOutPlayers = () => {
               </tr>
             </thead>
             <tbody>
-              ${soldOutPlayers
-                .map(
-                  (player, index) => `
-                  <tr>
-                    <td>${index + 1}</td>
-                    <td>${player.name}</td>
-                    <td>${player.age}</td>
-                    <td>${player.position}</td>
-                    <td>${player.currentBid}</td>
-                    <td>${player.lastBiddingTeam}</td>
-                    <td class="status">Sold</td>
-                  </tr>
-                `
-                )
-                .join("")}
+              ${rowsHtml}
             </tbody>
           </table>
           <div class="author">Author: Pankaj Naik</div>
@@ -149,25 +159,33 @@ export const TotalSoldOutPlayers = () => {
             </tr>
           </thead>
           <tbody>
-            {soldOutPlayers.map((player, index) => (
-              <tr key={player._id}>
-                <td>{index + 1}</td>
-                <td>{player.name}</td>
-                <td>{player.age}</td>
-                <td>{player.position}</td>
-                <td>{player.currentBid}</td>
-                <td>{player.lastBiddingTeam}</td>
-                <td className={styles.statusText}>Sold</td>
-                <td>
-                  <button
-                    onClick={() => handleDeletePlayer(player._id)}
-                    className={styles.deleteButton}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {soldOutPlayers.map((player, index) => {
+              const isRetain = index < 12;
+              const statusText = isRetain ? "Retain" : "Sold";
+              const statusClass = isRetain
+                ? styles.statusRetain
+                : styles.statusSold;
+
+              return (
+                <tr key={player._id}>
+                  <td>{index + 1}</td>
+                  <td>{player.name}</td>
+                  <td>{player.age}</td>
+                  <td>{player.position}</td>
+                  <td>{player.currentBid}</td>
+                  <td>{player.lastBiddingTeam}</td>
+                  <td className={statusClass}>{statusText}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDeletePlayer(player._id)}
+                      className={styles.deleteButton}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
             {soldOutPlayers.length === 0 && (
               <tr>
                 <td colSpan={8} className={styles.emptyRow}>

@@ -41,6 +41,69 @@
   box-shadow: 0 12px 30px rgba(15, 23, 42, 1);
 }
 
+/* NEW: controls row (search + filter + info) */
+
+.controlsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchInput {
+  padding: 6px 10px;
+  min-width: 180px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.filterBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filterLabel {
+  font-size: 0.8rem;
+  color: #e5e7eb;
+}
+
+.filterSelect {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.showingInfo {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
 /* stats bar */
 
 .statsBar {
@@ -243,7 +306,6 @@
     height: 32px;
   }
 
-  /* enable horizontal scroll on very small screens */
   .tableWrapper {
     overflow-x: auto;
   }
@@ -257,5 +319,19 @@
 
   .statItem {
     text-align: center;
+  }
+
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchInput,
+  .filterSelect {
+    width: 100%;
+  }
+
+  .showingInfo {
+    text-align: right;
   }
 }
