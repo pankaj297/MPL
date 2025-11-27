@@ -61,7 +61,7 @@ export const PointsTable = () => {
     },
     {
       id: 6,
-      name: "Mato Shree Group",
+      name: "Mata Nagar",
       logo: "./images/logo8.jpeg",
       played: 0,
       won: 0,

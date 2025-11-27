@@ -15,7 +15,7 @@ export const Schedule = () => {
       id: 2,
       day: 1,
       date: "07/01/2025",
-      teamA: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamA: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
       teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
     {
@@ -46,7 +46,7 @@ export const Schedule = () => {
       day: 2,
       date: "08/01/2025",
       teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
-      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamB: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
     },
 
     // Day 3
@@ -55,7 +55,7 @@ export const Schedule = () => {
       day: 3,
       date: "09/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamB: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
     },
     {
       id: 8,
@@ -78,7 +78,7 @@ export const Schedule = () => {
       day: 4,
       date: "10/01/2025",
       teamA: { name: "Vishwanath Warriors", logo: "./images/logo2.jpeg" },
-      teamB: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamB: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
     },
     {
       id: 11,
@@ -110,7 +110,7 @@ export const Schedule = () => {
       id: 14,
       day: 5,
       date: "11/01/2025",
-      teamA: { name: "Mato Shree Group", logo: "./images/logo8.jpeg" },
+      teamA: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
       teamB: { name: "Vishnu Blaster", logo: "./images/logo6.jpeg" },
     },
     {

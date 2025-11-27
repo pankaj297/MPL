@@ -27,7 +27,7 @@ export const AdminLiveAuction = () => {
     "Vishwanath warriors",
     "Dipak Warriors",
     "Jijau fighter",
-    "Mato Shree Group",
+    "Mata Nagar",
     "Vishnu Blaster",
     "Ram Rajya Pratishthan",
   ];

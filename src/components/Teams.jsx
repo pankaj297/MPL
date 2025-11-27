@@ -38,8 +38,8 @@ export const Teams = () => {
     {
       id: 4,
       mpl: "Malkheda Primer League",
-      name: "Mato Shree Group",
-      owner: "Manish Pawar",
+      name: "Mata Nagar",
+      owner: "Kiran Pawar",
       logo: "./images/logo8.jpeg",
       profile: "./images/08.jpeg",
       totalPurse: 8000,

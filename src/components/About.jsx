@@ -178,11 +178,11 @@ export const About = () => {
           <div className={styles.teamCard}>
             <img
               src="./images/logo8.jpeg"
-              alt="Mato Shree Group"
+              alt="Mata Nagar"
               className={styles.teamLogo}
             />
-            <h3 className={styles.teamName}>Mato Shree Group</h3>
-            <p className={styles.teamOwner}>Owner: Manish Pawar</p>
+            <h3 className={styles.teamName}>Mata Nagar</h3>
+            <p className={styles.teamOwner}>Owner: Kiran Pawar</p>
           </div>
 
           {/* Team 5 */}
