@@ -51,7 +51,7 @@ const Confetti = () => {
   );
 };
 
-// Hammer Animation Component (auction hammer, centered on profile side)
+// Hammer Animation Component
 const HammerAnimation = () => {
   return (
     <div className={styles.hammerContainer}>
@@ -60,7 +60,7 @@ const HammerAnimation = () => {
   );
 };
 
-// Milestone Celebration Overlay (for 1000+, 2000+, 3000+)
+// Milestone Celebration Overlay
 const MilestoneCelebration = ({ threshold, amount, level }) => {
   const levelClass =
     level === 1
@@ -74,7 +74,7 @@ const MilestoneCelebration = ({ threshold, amount, level }) => {
       <div className={`${styles.milestoneCard} ${levelClass}`}>
         <div className={styles.milestoneRing} />
         <div className={styles.milestoneInner}>
-          <span className={styles.milestoneLabel}>BID MILESTONE</span>
+          <span className={styles.milestoneLabel}>Bid Milestone</span>
           <h2 className={styles.milestoneTitle}>₹ {threshold}+ Crossed!</h2>
           <p className={styles.milestoneAmount}>Current Bid: ₹ {amount}</p>
           <p className={styles.milestoneSub}>The auction is heating up! 🔥</p>
@@ -99,9 +99,9 @@ export const LiveAuction = () => {
   const milestoneIndexRef = useRef(-1); // which milestone index already celebrated (-1 = none)
 
   const formatCurrency = (amount) =>
-    new Intl.NumberFormat("en-IN").format(amount);
+    new Intl.NumberFormat("en-IN").format(amount || 0);
 
-  // auto-hide milestone overlay after some seconds
+  // auto-hide milestone overlay
   useEffect(() => {
     if (!milestoneCelebration) return;
     const t = setTimeout(() => setMilestoneCelebration(null), 3500);
@@ -153,12 +153,10 @@ export const LiveAuction = () => {
     };
 
     const handleAuctionState = (data) => {
-      // state sync without toast
       applyAuctionState(data);
     };
 
     const handlePlayerSelected = (data) => {
-      // New player: reset milestones
       milestoneIndexRef.current = -1;
       setMilestoneCelebration(null);
       setShowFireworks(false);
@@ -230,28 +228,36 @@ export const LiveAuction = () => {
       </div>
 
       {/* Content */}
-      {selectedPlayer == 0 ? (
+      {selectedPlayer ? (
         <div className={`${styles.card} ${isBidFinalised ? styles.sold : ""}`}>
           {/* LEFT: PLAYER BANNER */}
           <div className={styles.imageSection}>
             <div className={styles.playerBanner}>
+              <div className={styles.bannerGlow} />
               <div className={styles.bannerGraphic} />
               <div className={styles.bannerGraphicSecondary} />
 
               {isBidFinalised && <div className={styles.soldRibbon}>SOLD</div>}
 
               <div className={styles.bannerContent}>
+                {/* CONSTANT, CLEAN PROFILE FRAME */}
                 <div className={styles.bannerImageWrapper}>
-                  <img
-                    src={selectedPlayer.profileImg || "./images/default.jpeg"}
-                    alt={selectedPlayer.name}
-                    className={styles.playerImage}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://via.placeholder.com/400?text=No+Image";
-                    }}
-                  />
+                  <div className={styles.profileRingOuter}>
+                    <div className={styles.profileRingInner}>
+                      <img
+                        src={
+                          selectedPlayer.profileImg || "./images/default.jpeg"
+                        }
+                        alt={selectedPlayer.name}
+                        className={styles.playerImage}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "https://via.placeholder.com/400?text=No+Image";
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className={styles.bannerTextBlock}>
@@ -259,14 +265,23 @@ export const LiveAuction = () => {
                   {/* <span className={styles.bannerName}>
                     {selectedPlayer.name}
                   </span> */}
-                  {/* <span className={styles.bannerSub}>LIVE IN MPL AUCTION</span> */}
+                  {/* <span className={styles.bannerSub}>Live in MPL Auction</span> */}
 
-                  {/* <div className={styles.bannerTeamBox}>
-                    <span className={styles.bannerTeamLabel}>Team</span>
+                  <div className={styles.bannerMetaRow}>
+                    <span className={styles.bannerMetaChip}>
+                      Age: {selectedPlayer.age || "N/A"}
+                    </span>
+                    <span className={styles.bannerMetaChip}>
+                      Role: {selectedPlayer.position || "All Rounder"}
+                    </span>
+                  </div>
+
+                  <div className={styles.bannerTeamBox}>
+                    <span className={styles.bannerTeamLabel}>Current Team</span>
                     <span className={styles.bannerTeamValue}>
                       {lastBiddingTeam}
                     </span>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,15 +291,9 @@ export const LiveAuction = () => {
           <div className={styles.infoSection}>
             <h2 className={styles.playerNameHeading}>{selectedPlayer.name}</h2>
 
-            <div className={styles.playerMeta}>
-              <span className={styles.metaTag}>
-                <strong>Age:</strong> {selectedPlayer.age || "N/A"}
-              </span>
-              <span className={styles.metaTag}>
-                <strong>Role:</strong>{" "}
-                {selectedPlayer.position || "All Rounder"}
-              </span>
-            </div>
+            <p className={styles.smallCaption}>
+              Base price: ₹ {formatCurrency(selectedPlayer.basePrice || 200)}
+            </p>
 
             <div className={styles.bidContainer}>
               <p className={styles.bidLabel}>
@@ -304,10 +313,10 @@ export const LiveAuction = () => {
 
             {isBidFinalised && (
               <div className={styles.soldSection}>
-                <h3 className={styles.soldTitle}>SOLD OUT</h3>
+                <h3 className={styles.soldTitle}>Sold Out</h3>
                 <p className={styles.congratsText}>
                   Congratulations to <strong>{selectedPlayer.name}</strong> for
-                  joining {lastBiddingTeam}! 🥳
+                  joining <strong>{lastBiddingTeam}</strong>! 🥳
                 </p>
               </div>
             )}

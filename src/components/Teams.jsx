@@ -14,7 +14,7 @@ export const Teams = () => {
       name: "Vishwanath Warriors",
       owner: "Ganesh Chavan",
       logo: "./images/logo2.jpeg",
-      profile: "./images/O1.jpeg",
+      profile: "./images/001.jpeg",
       totalPurse: 8000,
     },
     {
