@@ -29,7 +29,7 @@ export const PointsTable = () => {
     {
       id: 3,
       name: "Ram Rajya Pratishthan",
-      logo: "./images/logo4.jpeg",
+      logo: "./images/logo4.png",
       played: 0,
       won: 0,
       lost: 0,

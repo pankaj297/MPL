@@ -58,7 +58,7 @@ export const Teams = () => {
       mpl: "Malkheda Primer League",
       name: "Ram Rajya Pratishthan",
       owner: "Umesh Rathod",
-      logo: "./images/logo4.jpeg",
+      logo: "./images/logo4.png",
       profile: "./images/04.jpeg",
       totalPurse: 8000,
     },

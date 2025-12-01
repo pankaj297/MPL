@@ -199,7 +199,7 @@ export const About = () => {
           {/* Team 6 */}
           <div className={styles.teamCard}>
             <img
-              src="./images/logo4.jpeg"
+              src="./images/logo4.png"
               alt="Ram Rajya Pratishthan Logo"
               className={styles.teamLogo}
             />

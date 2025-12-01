@@ -9,7 +9,7 @@ export const Schedule = () => {
       day: 1,
       date: "07/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.png" },
     },
     {
       id: 2,
@@ -45,7 +45,7 @@ export const Schedule = () => {
       id: 6,
       day: 2,
       date: "08/01/2025",
-      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.png" },
       teamB: { name: "Mata Nagar", logo: "./images/logo8.jpeg" },
     },
 
@@ -68,7 +68,7 @@ export const Schedule = () => {
       id: 9,
       day: 3,
       date: "09/01/2025",
-      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.png" },
       teamB: { name: "Vishnu Blaster", logo: "./images/logo6.jpeg" },
     },
 
@@ -91,7 +91,7 @@ export const Schedule = () => {
       id: 12,
       day: 4,
       date: "10/01/2025",
-      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamA: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.png" },
       teamB: { name: "Jijau Fighter", logo: "./images/logoJijau.jpeg" },
     },
 
@@ -118,7 +118,7 @@ export const Schedule = () => {
       day: 5,
       date: "11/01/2025",
       teamA: { name: "Dipak Warriors", logo: "./images/logo3.jpg" },
-      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.jpeg" },
+      teamB: { name: "Ram Rajya Pratishthan", logo: "./images/logo4.png" },
     },
 
     // Semi Finals - Day 6
