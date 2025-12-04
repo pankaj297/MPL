@@ -74,7 +74,26 @@ export const PlayerTable = () => {
     setImage(image);
   };
 
+  // UPDATED: Print uses filteredPlayers and shows profile image
   const handlePrint = () => {
+    // Use the currently filtered list for printing (position-wise / search-wise)
+    const printablePlayers = filteredPlayers;
+
+    const printableTotalPlayers = printablePlayers.length;
+    const printableTotalPaid = printableTotalPlayers * 300;
+    const printableTotalBatsman = printablePlayers.filter(
+      (player) => player.position === "batsman"
+    ).length;
+    const printableTotalAllrounder = printablePlayers.filter(
+      (player) => player.position === "allrounder"
+    ).length;
+    const printableTotalBowler = printablePlayers.filter(
+      (player) => player.position === "bowler"
+    ).length;
+    const printableTotalWicketkeeper = printablePlayers.filter(
+      (player) => player.position === "keeperBatsman"
+    ).length;
+
     const newWindow = window.open("", "", "width=800,height=800");
     newWindow.document.write(`
       <html>
@@ -84,8 +103,9 @@ export const PlayerTable = () => {
             body { font-family: Arial, sans-serif; }
             h2 { text-align: center; }
             table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-            th, td { padding: 10px; border: 1px solid #ddd; }
+            th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
             th { background-color: #3498db; color: white; }
+            img { max-width: 100%; max-height: 90px;}
             .author {
               position: fixed;
               bottom: 0;
@@ -106,6 +126,7 @@ export const PlayerTable = () => {
                 text-align: center;
                 background: white;
                 padding: 5px 0;
+                margin-top: 10px;
               }
             }
             .tableInfoData {
@@ -120,41 +141,55 @@ export const PlayerTable = () => {
         <body>
           <h2>MPL Registered Players</h2>
           <div class="tableInfoData">
-            <p>Total Players : ${totalPlayers}</p>
-            <p>Total Money : ${totalPaid}</p>
-            <p>Total Batsman : ${totalBatsman}</p>
-            <p>Total Allrounder : ${totalAllrounder}</p>
-            <p>Total Bowler : ${totalBowler}</p>
-            <p>Total Wicketkeeper : ${totalWicketkeeper}</p>
+            <p>Total Players : ${printableTotalPlayers}</p>
+            <p>Total Money : ${printableTotalPaid}</p>
+            <p>Total Batsman : ${printableTotalBatsman}</p>
+            <p>Total Allrounder : ${printableTotalAllrounder}</p>
+            <p>Total Bowler : ${printableTotalBowler}</p>
+            <p>Total Wicketkeeper : ${printableTotalWicketkeeper}</p>
           </div>
           <table>
             <thead>
               <tr>
-                <th>Sir No</th>
+                <th>Sr No</th>
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Age</th>
                 <th>Position</th>
                 <th>Payment</th>
+                <th>Profile Image</th>
                 <th>Select Team Name</th>
               </tr>
             </thead>
             <tbody>
-              ${players
-                .map(
-                  (player, index) => `
+              ${
+                printablePlayers.length === 0
+                  ? `<tr><td colspan="8">No players for current filter.</td></tr>`
+                  : printablePlayers
+                      .map(
+                        (player, index) => `
                 <tr>
                   <td>${index + 1}</td>
-                  <td>${player.name}</td>
-                  <td>${player.mobile}</td>
-                  <td>${player.age}</td>
-                  <td>${player.position}</td>
+                  <td>${player.name || ""}</td>
+                  <td>${player.mobile || ""}</td>
+                  <td>${player.age || ""}</td>
+                  <td>${player.position || ""}</td>
                   <td>300</td>
+                  <td>
+                    ${
+                      player.passPhoto
+                        ? `<img src="${player.passPhoto}" alt="${
+                            player.name || "Player"
+                          }" />`
+                        : "No Image"
+                    }
+                  </td>
                   <td></td>
                 </tr>
               `
-                )
-                .join("")}
+                      )
+                      .join("")
+              }
             </tbody>
           </table>
           <div class="author">Author: Pankaj Naik</div>
@@ -238,7 +273,7 @@ export const PlayerTable = () => {
       <div className={styles.headerRow}>
         <h2 className={styles.title}>MPL Registered Players</h2>
         <button className={styles.primaryButton} onClick={handlePrint}>
-          Print All Players
+          Print Players (Current Filter)
         </button>
       </div>
 
