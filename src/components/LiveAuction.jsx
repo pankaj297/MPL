@@ -228,7 +228,7 @@ export const LiveAuction = () => {
       </div>
 
       {/* Content */}
-      {selectedPlayer ? (
+      {selectedPlayer == 0 ? (
         <div className={`${styles.card} ${isBidFinalised ? styles.sold : ""}`}>
           {/* LEFT: PLAYER BANNER */}
           <div className={styles.imageSection}>
@@ -325,8 +325,8 @@ export const LiveAuction = () => {
       ) : (
         <div className={styles.waitingState}>
           <span className={styles.waitingSpinner}>⏳</span>
-          <h2>MPL Live Auction</h2>
-          <p>Date : 04/12/2025 At 8PM</p>
+          <h2>MPL 2025 Auction Complete✅</h2>
+          <p>💫Thanks For Watching💫</p>
         </div>
       )}
     </div>
