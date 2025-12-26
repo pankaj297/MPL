@@ -18,17 +18,61 @@
   max-width: 1100px;
 }
 
+/* Header row (title + print button) */
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* Heading */
 
 .heading {
   font-size: 2.1rem;
-  margin-bottom: 2.2rem;
+  margin-bottom: 0.5rem;
   font-weight: 800;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #f9fafb;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+/* Small text below heading */
+
+.subheading {
+  margin: 0 0 1.8rem 0;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  text-align: left;
+  opacity: 0.9;
+}
+
+/* Print button */
+
+.printButton {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: black;
+  /* background: linear-gradient(135deg, #22c55e, #16a34a); */
+  /* box-shadow: 0 8px 20px rgba(22, 163, 74, 0.55); */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+
+
+.printButton:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 14px rgba(22, 163, 74, 0.55);
+  opacity: 0.9;
 }
 
 /* ============================= */
@@ -68,7 +112,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.25), transparent 60%);
+  background: radial-gradient(
+    circle at top,
+    rgba(59, 130, 246, 0.25),
+    transparent 60%
+  );
   opacity: 0;
   transition: opacity 0.25s ease;
   pointer-events: none;
@@ -194,6 +242,22 @@
 }
 
 /* ============================= */
+/* PRINT TABLE (for printing)    */
+/* ============================= */
+
+.printTable {
+  display: none; /* will be shown only in @media print */
+  margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.printVs {
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ============================= */
 /* RESPONSIVE                    */
 /* ============================= */
 
@@ -214,6 +278,10 @@
   .teamName {
     font-size: 0.95rem;
   }
+
+  .subheading {
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -232,5 +300,120 @@
 
   .dateValue {
     font-size: 0.95rem;
+  }
+}
+
+/* ============================= */
+/* PRINT STYLES                  */
+/* ============================= */
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #ffffff;
+  }
+
+  .schedulePage {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .scheduleContainer {
+    max-width: none;
+    width: 100%;
+    padding: 10mm;
+  }
+
+  /* Hide button & card layout when printing */
+  .printButton {
+    display: none !important;
+  }
+
+  .matchesGrid {
+    display: none !important;
+  }
+
+  /* Heading / subheading for print */
+  .heading {
+    text-align: center;
+    font-size: 18pt;
+    color: #111827;
+    text-shadow: none;
+    margin-bottom: 4mm;
+  }
+
+  .subheading {
+    text-align: center;
+    font-size: 10pt;
+    color: #4b5563;
+    margin-bottom: 6mm;
+  }
+
+  /* Show printable table */
+  .printTable {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    color: #111827;
+  }
+
+  .printTable thead {
+    background: #111827;
+    color: #ffffff;
+  }
+
+  .printTable th,
+  .printTable td {
+    border: 0.3pt solid #d1d5db;
+    padding: 3px 6px;
+  }
+
+  .printTable th {
+    font-weight: 700;
+    text-align: left;
+  }
+
+  /* Column sizing */
+  .printTable th:nth-child(1),
+  .printTable td:nth-child(1) {
+    width: 10%;
+    text-align: center;
+  }
+  .printTable th:nth-child(2),
+  .printTable td:nth-child(2) {
+    width: 16%;
+    text-align: center;
+  }
+  .printTable th:nth-child(3),
+  .printTable td:nth-child(3) {
+    width: 10%;
+    text-align: center;
+  }
+  .printTable th:nth-child(4),
+  .printTable td:nth-child(4),
+  .printTable th:nth-child(6),
+  .printTable td:nth-child(6) {
+    width: 28%;
+  }
+  .printTable th:nth-child(5),
+  .printTable td:nth-child(5) {
+    width: 8%;
+    text-align: center;
+  }
+
+  /* Zebra rows */
+  .printTable tbody tr:nth-child(odd) {
+    background: #f9fafb;
+  }
+
+  .printTable tbody tr:nth-child(even) {
+    background: #eef2ff;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
   }
 }
