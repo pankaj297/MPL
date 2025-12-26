@@ -145,7 +145,7 @@ export const Schedule = () => {
     // Third Place - Day 7
     {
       id: 18,
-      day: 6,
+      day: 7,
       date: "12/01/2026",
       teamA: { name: "Semi Final Loser 1", logo: "./images/logo1.png" },
       teamB: { name: "Semi Final Loser 2", logo: "./images/logo1.png" },
@@ -154,7 +154,7 @@ export const Schedule = () => {
     // Final - Day 8
     {
       id: 19,
-      day: 6,
+      day: 8,
       date: "12/01/2026",
       teamA: { name: "Finalist 1", logo: "./images/logo1.png" },
       teamB: { name: "Finalist 2", logo: "./images/logo1.png" },
@@ -181,7 +181,7 @@ export const Schedule = () => {
           </button>
         </div>
 
-        {/* Screen layout: your card design */}
+        {/* Screen layout: card design */}
         <div className={styles.matchesGrid}>
           {matches.map((match) => (
             <div key={match.id} className={styles.matchCard}>

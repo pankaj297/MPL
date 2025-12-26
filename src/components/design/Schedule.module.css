@@ -40,7 +40,7 @@
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
 
-/* Small text below heading */
+/* Small text below heading (unused but kept) */
 
 .subheading {
   margin: 0 0 1.8rem 0;
@@ -56,18 +56,15 @@
   border: none;
   outline: none;
   cursor: pointer;
+  margin-bottom: 1rem;
   padding: 0.5rem 1.4rem;
   border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 600;
   color: black;
-  /* background: linear-gradient(135deg, #22c55e, #16a34a); */
-  /* box-shadow: 0 8px 20px rgba(22, 163, 74, 0.55); */
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
   white-space: nowrap;
 }
-
-
 
 .printButton:active {
   transform: translateY(0);
@@ -325,6 +322,11 @@
     padding: 10mm;
   }
 
+  /* Hide footer in print */
+  footer {
+    display: none !important;
+  }
+
   /* Hide button & card layout when printing */
   .printButton {
     display: none !important;
@@ -333,6 +335,10 @@
   .matchesGrid {
     display: none !important;
   }
+  .printHeader {
+    display: none !important;
+  }
+
 
   /* Heading / subheading for print */
   .heading {
