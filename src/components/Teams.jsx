@@ -15,7 +15,7 @@ export const Teams = () => {
       owner: "Ganesh Chavan",
       logo: "./images/logo2.jpeg",
       profile: "./images/001.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ export const Teams = () => {
       owner: "Dipak Ashok Naik",
       logo: "./images/logo3.jpg",
       profile: "./images/O2.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
     },
     {
       id: 3,
@@ -33,16 +33,16 @@ export const Teams = () => {
       owner: "Samadhan Naik  ",
       logo: "./images/logoJijau.jpeg",
       profile: "./images/07.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
     },
     {
       id: 4,
       mpl: "Malkheda Primer League",
       name: "Mata Nagar",
-      owner: "Kiran Pawar",
+      owner: "Kiran Pawar & Rahul Pawar",
       logo: "./images/logo8.jpeg",
       profile: "./images/08.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
     },
     {
       id: 5,
@@ -51,7 +51,7 @@ export const Teams = () => {
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
       profile: "./images/O5.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
     },
     {
       id: 6,
@@ -60,7 +60,25 @@ export const Teams = () => {
       owner: "Umesh Rathod",
       logo: "./images/logo4.png",
       profile: "./images/04.jpeg",
-      totalPurse: 8000,
+      totalPurse: 6000,
+    },
+    {
+      id: 7,
+      mpl: "Malkheda Primer League",
+      name: "Malkheda Sunrisers",
+      owner: "Sagar Chavan",
+      logo: "./images/logo07.jpg",
+      profile: "./images/app1.png",
+      totalPurse: 6000,
+    },
+    {
+      id: 8,
+      mpl: "Malkheda Primer League",
+      name: "Jagan Suparstaikar",
+      owner: "Suresh Naik",
+      logo: "./images/logo08.jpg",
+      profile: "./images/app1.png",
+      totalPurse: 6000,
     },
   ];
 
