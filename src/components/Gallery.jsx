@@ -4,6 +4,12 @@ import styles from "./design/Gallery.module.css";
 const images = [
   { id: 1, src: "./images/g1.jpeg", alt: "MPL Event" },
   { id: 2, src: "./images/g2.jpeg", alt: "MPL Event" },
+  { id: 33, src: "./images/33.jpg", alt: "MPL Event" },
+  { id: 34, src: "./images/34.jpg", alt: "MPL Event" },
+  { id: 35, src: "./images/35.jpg", alt: "MPL Event" },
+  { id: 36, src: "./images/36.jpg", alt: "MPL Event" },
+  { id: 37, src: "./images/37.jpg", alt: "MPL Event" },
+  { id: 38, src: "./images/38.jpg", alt: "MPL Event" },
   { id: 3, src: "./images/g3.jpeg", alt: "MPL Event" },
   { id: 4, src: "./images/g4.jpeg", alt: "MPL Event" },
   { id: 6, src: "./images/g6.jpeg", alt: "MPL Event" },

@@ -376,7 +376,7 @@ export const CricketPlayerRegistration = () => {
             <div className={styles.formSection}>
               <div className={styles.formHeader}>
                 <h2>🏏 Player Registration</h2>
-                <p>Join Malkheda Premier League 2024</p>
+                <p>Join Malkheda Premier League 2026-2027</p>
               </div>
 
               <form onSubmit={handleSubmit} className={styles.registrationForm}>

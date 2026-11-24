@@ -5,7 +5,7 @@ import styles from "./design/AdminLogin.module.css";
 // Sample admin data
 const adminUsers = [
   { username: "pankaj1807", password: "pankaj0718" },
-  { username: "1807", password: "0718" },
+  { username: "atul1807", password: "atul0718" },
 ];
 
 export const AdminLogin = () => {

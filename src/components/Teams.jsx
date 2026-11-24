@@ -30,9 +30,9 @@ export const Teams = () => {
       id: 3,
       mpl: "Malkheda Primer League",
       name: "Jijau Fighter",
-      owner: "Samadhan Naik  ",
+      owner: "Dr Ravindra Rathod",
       logo: "./images/logoJijau.jpeg",
-      profile: "./images/07.jpeg",
+      profile: "./images/003.jpg",
       totalPurse: 6000,
     },
     {
@@ -68,7 +68,7 @@ export const Teams = () => {
       name: "Malkheda Sunrisers",
       owner: "Sagar Chavan",
       logo: "./images/logo07.jpg",
-      profile: "./images/app1.png",
+      profile: "./images/007.jpg",
       totalPurse: 6000,
     },
     {
@@ -77,7 +77,7 @@ export const Teams = () => {
       name: "Jagan Suparstaikar",
       owner: "Suresh Naik",
       logo: "./images/logo08.jpg",
-      profile: "./images/app1.png",
+      profile: "./images/008.jpg",
       totalPurse: 6000,
     },
   ];

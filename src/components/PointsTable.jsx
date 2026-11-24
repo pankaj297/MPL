@@ -70,6 +70,28 @@ export const PointsTable = () => {
       exp: "0",
       points: 0,
     },
+    {
+      id: 7,
+      name: "Malkheda Sunrisers",
+      logo: "./images/logo07.jpg",
+      played: 0,
+      won: 0,
+      lost: 0,
+      tied: 0,
+      exp: "0",
+      points: 0,
+    },
+    {
+      id: 8,
+      name: "Jagan Suparstaikar",
+      logo: "./images/logo08.jpg",
+      played: 0,
+      won: 0,
+      lost: 0,
+      tied: 0,
+      exp: "0",
+      points: 0,
+    },
   ]);
 
   // Enrich teams with autoPoints (from wins/ties) and numeric EXP

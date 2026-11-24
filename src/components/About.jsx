@@ -112,16 +112,42 @@ export const About = () => {
               आपल्या नावे केले.
             </p>
           </div>
-
-          {/* Season 3 (Current) */}
+          {/* Session 3 */}
           <div className={styles.timelineItem}>
             <div className={styles.timelineTopRow}>
-              <span className={styles.year}>Season 3 (Current)</span>
+              <span className={styles.year}>Season 3</span>
+              <span className={styles.championTag}>Champions</span>
+            </div>
+
+            <div className={styles.winnerRow}>
+              <img
+                src="./images/logoJijau.jpeg"
+                alt="Dipak Warriors Team Logo"
+                className={styles.winnerLogo}
+              />
+              <div>
+                <h3 className={styles.winnerName}>Jijau Fighter</h3>
+                <span className={styles.winnerCaption}>vs Mata Nagar</span>
+              </div>
+            </div>
+
+            <p>
+              तिसऱ्या सिझनच्या अंतिम सामन्यात <strong>Jijau Fighter</strong>{" "}
+              विरुद्ध <strong> Mata Nagar </strong> असा झाला. दमदार खेळ करीत{" "}
+              <strong>Jijau Fighter</strong> यांनी या सिझनचे विजेतेपद आपल्या
+              नावे केले.
+            </p>
+          </div>
+
+          {/* Season 4 (Current) */}
+          <div className={styles.timelineItem}>
+            <div className={styles.timelineTopRow}>
+              <span className={styles.year}>Season 4 (Current)</span>
               <span className={styles.championTagCurrent}>Live Season</span>
             </div>
 
             <p>
-              हा MPL चा तिसरा सिझन आहे. अधिक संघ, उत्तम आयोजन, लाईव्ह ऑक्शन आणि
+              हा MPL चा चौथ्या सिझन आहे. अधिक संघ, उत्तम आयोजन, लाईव्ह ऑक्शन आणि
               रोमांचक सामने – यंदा कोणता संघ विजेता ठरणार, हे पाहणे सगळ्यांसाठीच
               उत्सुकतेचे ठरणार आहे.
             </p>
@@ -137,7 +163,7 @@ export const About = () => {
       <section className={styles.teamsSection}>
         <h2>All MPL Teams</h2>
         <p className={styles.sectionSubtext}>
-          सहा दमदार संघ, वेगवेगळ्या खेळशैली आणि एकच स्वप्न – MPL ट्रॉफी 🏆
+          8 दमदार संघ, वेगवेगळ्या खेळशैली आणि एकच स्वप्न – MPL ट्रॉफी 🏆
         </p>
 
         <div className={styles.teamsGrid}>
@@ -206,9 +232,29 @@ export const About = () => {
             <h3 className={styles.teamName}>Ram Rajya Pratishthan</h3>
             <p className={styles.teamOwner}>Owner: Umesh Rathod</p>
           </div>
+          {/* Team 7 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo07.jpg"
+              alt="Malkheda Sunrisers Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Malkheda Sunrisers</h3>
+            <p className={styles.teamOwner}>Owner: Sagar Chavan</p>
+          </div>
+          {/* Team 8 */}
+          <div className={styles.teamCard}>
+            <img
+              src="./images/logo08.jpg"
+              alt="Jagan Suparstaikar Logo"
+              className={styles.teamLogo}
+            />
+            <h3 className={styles.teamName}>Jagan Suparstaikar</h3>
+            <p className={styles.teamOwner}>Owner: Suresh Naik</p>
+          </div>
         </div>
       </section>
-      
+
       {/* TOURNAMENT STRUCTURE */}
       <section className={styles.structureSection}>
         <h2>Tournament Structure</h2>
@@ -273,7 +319,7 @@ export const About = () => {
       {/* SIMPLE STATS / HIGHLIGHTS */}
       <section className={styles.statsSection}>
         <div className={styles.statCard}>
-          <span className={styles.statNumber}>6+</span>
+          <span className={styles.statNumber}>8+</span>
           <span className={styles.statLabel}>Participating Teams</span>
         </div>
         <div className={styles.statCard}>

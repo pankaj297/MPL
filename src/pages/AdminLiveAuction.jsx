@@ -30,6 +30,8 @@ export const AdminLiveAuction = () => {
     "Mata Nagar",
     "Vishnu Blaster",
     "Ram Rajya Pratishthan",
+    "Malkheda Sunrisers",
+    "Jagan Suparstaikar",
   ];
 
   /* ----------------------------- FETCH PLAYERS ---------------------------- */
