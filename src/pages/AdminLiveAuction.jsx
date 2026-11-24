@@ -14,7 +14,7 @@ export const AdminLiveAuction = () => {
   const [loading, setLoading] = useState(true);
 
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [currentBid, setCurrentBid] = useState(200);
+  const [currentBid, setCurrentBid] = useState(300);
   const [lastBiddingTeam, setLastBiddingTeam] = useState("No bids yet");
   const [filterPosition, setFilterPosition] = useState("All");
   const [finalized, setFinalized] = useState(false);
@@ -119,7 +119,7 @@ export const AdminLiveAuction = () => {
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
-    setCurrentBid(200);
+    setCurrentBid(300);
     setLastBiddingTeam("No bids yet");
     setFinalized(false);
 
@@ -254,14 +254,14 @@ export const AdminLiveAuction = () => {
         handleBidChange(-20);
       } else if (e.key === "+") {
         e.preventDefault();
-        handleBidChange(50);
+        handleBidChange(60);
       } else if (e.key === "-") {
         e.preventDefault();
-        handleBidChange(-50);
+        handleBidChange(-60);
       } else if (e.key === "Enter") {
         e.preventDefault();
         handleFinalizeBid();
-      } else if (/^[1-6]$/.test(e.key)) {
+      } else if (/^[1-8]$/.test(e.key)) {
         const idx = Number(e.key) - 1;
         if (teams[idx]) {
           e.preventDefault();
@@ -291,7 +291,7 @@ export const AdminLiveAuction = () => {
         <div>
           <h1 className={styles.title}>Admin Live Auction</h1>
           <p className={styles.subtitle}>
-            Fast controls: ↑ +₹20 · ↓ −₹20 · +/− ±₹50 · 1–6 select team · Enter
+            Fast controls: ↑ +₹20 · ↓ −₹20 · +/− ±₹60 · 1–8 select team · Enter
             finalize
           </p>
         </div>
@@ -486,9 +486,9 @@ export const AdminLiveAuction = () => {
                     <button
                       type="button"
                       className={styles.controlBtnGreen}
-                      onClick={() => handleBidChange(50)}
+                      onClick={() => handleBidChange(60)}
                     >
-                      +₹50 (+)
+                      +₹60 (+)
                     </button>
                     <button
                       type="button"
@@ -500,9 +500,9 @@ export const AdminLiveAuction = () => {
                     <button
                       type="button"
                       className={styles.controlBtnRed}
-                      onClick={() => handleBidChange(-50)}
+                      onClick={() => handleBidChange(-60)}
                     >
-                      −₹50 (−)
+                      −₹60 (−)
                     </button>
                   </div>
 

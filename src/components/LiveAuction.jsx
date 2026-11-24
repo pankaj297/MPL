@@ -228,7 +228,7 @@ export const LiveAuction = () => {
       </div>
 
       {/* Content */}
-      {selectedPlayer ? (
+      {selectedPlayer == 0 ? (
         <div className={`${styles.card} ${isBidFinalised ? styles.sold : ""}`}>
           {/* LEFT: PLAYER BANNER */}
           <div className={styles.imageSection}>
@@ -292,7 +292,7 @@ export const LiveAuction = () => {
             <h2 className={styles.playerNameHeading}>{selectedPlayer.name}</h2>
 
             <p className={styles.smallCaption}>
-              Base price: ₹ {formatCurrency(selectedPlayer.basePrice || 200)}
+              Base price: ₹ {formatCurrency(selectedPlayer.basePrice || 300)}
             </p>
 
             <div className={styles.bidContainer}>
@@ -325,8 +325,8 @@ export const LiveAuction = () => {
       ) : (
         <div className={styles.waitingState}>
           <span className={styles.waitingSpinner}>⏳</span>
-          <h2>MPL 2026-2027 Auction Complete✅</h2>
-          <p>💫Thanks For Watching💫</p>
+          <h2>MPL 2026-2027 Auction Coming Soon✅</h2>
+          <p>💫Thanks For Visiting💫</p>
         </div>
       )}
     </div>
