@@ -6,19 +6,12 @@ export const Home = () => {
   return (
     <>
       <div className={styles.homeContainer}>
-        {/* Background video - covers whole hero area */}
-        <video
-          className={styles.backgroundVideo}
-          src="./images/video1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="./images/app1.png"
-        >
-          Your browser does not support the video tag.
-        </video>
+        {/* Background image - covers whole hero area */}
+        <img
+          src="/mpl1.webp"
+          alt="Malkheda Premier League"
+          className={styles.backgroundImage}
+        />
 
         {/* subtle dark overlay to keep text readable */}
         <div className={styles.videoOverlay} />

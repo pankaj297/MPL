@@ -1,50 +1,60 @@
-/* Home page container (hero + background video) */
+/* Home page container (hero + background image) */
 .homeContainer {
   position: relative;
   width: 100%;
-  height: 100vh; /* full viewport hero */
+  min-height: 65vh;
+  max-height: 100vh;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #020617;
 }
 
-/* Background video fills container and stays centered */
-.backgroundVideo {
-  position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+/* Puri photo bina crop hue dikhegi (side players bhi poore dikhenge) */
+.backgroundImage {
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* keep aspect and fill */
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
   object-position: center center;
+  display: block;
   z-index: 0;
   transform: none;
-  /* hardware-accelerate for smooth playback */
-  will-change: transform;
+  will-change: auto;
 }
 
-/* subtle overlay on video so hero text is readable */
+/* subtle overlay on image so hero text is readable */
 .videoOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(2,6,23,0.45) 0%, rgba(2,6,23,0.55) 60%, rgba(2,6,23,0.75) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 23, 0.35) 0%,
+    rgba(2, 6, 23, 0.45) 60%,
+    rgba(2, 6, 23, 0.7) 100%
+  );
   z-index: 1;
   pointer-events: none;
 }
 
-/* hero content on top of video */
+/* hero content on top of image */
 .heroContent {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 2rem;
   box-sizing: border-box;
-  color: white;
-  text-shadow: 0 4px 18px rgba(0,0,0,0.65);
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
 }
 
 /* About Section */
@@ -87,8 +97,9 @@
 
 /* CTA */
 .learnMoreBtn {
+  display: inline-block;
   background: linear-gradient(45deg, #9c27b0, #6a1b9a);
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 14px 28px;
   text-decoration: none;
@@ -98,7 +109,9 @@
   font-weight: 600;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   box-shadow: 0 4px 14px rgba(156, 39, 176, 0.25);
+  box-sizing: border-box;
 }
+
 .learnMoreBtn:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 26px rgba(124, 58, 237, 0.28);
@@ -115,22 +128,21 @@
 /* Video wrapper uses modern aspect-ratio with a fallback */
 .videoWrapper {
   width: 100%;
-  max-width: 720px; /* keeps video from growing too wide on large screens */
+  max-width: 720px;
   border-radius: 14px;
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.03);
-  /* Modern way: maintain aspect ratio */
+  background: #000000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.03);
   aspect-ratio: 16 / 9;
   position: relative;
 }
 
 /* Fallback for browsers that do not support aspect-ratio */
-@supports not (aspect-ratio: 16/9) {
+@supports not (aspect-ratio: 16 / 9) {
   .videoWrapper {
     height: 0;
-    padding-top: 56.25%; /* 16:9 fallback */
+    padding-top: 56.25%;
   }
   .videoWrapper video {
     position: absolute;
@@ -150,71 +162,102 @@
   object-position: center center;
 }
 
-/* Responsive behaviour for different screen sizes */
+/* Tablet and smaller laptops */
 @media (max-width: 1024px) {
   .aboutSection {
     padding: 3rem 1.5rem;
     gap: 2rem;
   }
+
   .aboutContent h2 {
     font-size: 2.2rem;
   }
+
   .videoWrapper {
     max-width: 640px;
   }
 }
 
+/* Mobile & small screens */
 @media (max-width: 768px) {
+  .homeContainer {
+    height: auto;
+    min-height: unset;
+    max-height: none;
+  }
+
+  .backgroundImage {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .heroContent {
+    padding: 1rem;
+  }
+
   .aboutSection {
     flex-direction: column;
     text-align: center;
     padding: 2rem 1rem;
+    gap: 1.75rem;
   }
+
   .aboutContent {
     order: 1;
+    max-width: 100%;
     width: 100%;
   }
+
+  .aboutContent p {
+    text-align: left;
+  }
+
   .aboutMedia {
     order: 2;
     width: 100%;
   }
+
   .videoWrapper {
     width: 100%;
     max-width: 720px;
-    aspect-ratio: 16/9;
-  }
-
-  /* adjust hero height for smaller screens */
-  .homeContainer {
-    height: 60vh;
-  }
-  .backgroundVideo {
-    height: 60vh;
+    aspect-ratio: 16 / 9;
   }
 }
 
+/* Extra small phones */
 @media (max-width: 480px) {
+  .aboutSection {
+    padding: 1.5rem 0.9rem;
+  }
+
   .aboutContent h2 {
     font-size: 1.8rem;
   }
+
   .aboutContent p {
     font-size: 0.98rem;
     line-height: 1.6;
   }
+
   .videoWrapper {
     max-width: 100%;
     border-radius: 10px;
   }
+
   .learnMoreBtn {
     width: 100%;
+    text-align: center;
     padding: 12px 20px;
   }
 }
 
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .backgroundVideo,
-  .aboutVideo {
+  .backgroundImage,
+  .aboutVideo,
+  .learnMoreBtn {
     animation: none;
     transition: none;
   }

@@ -17,7 +17,7 @@ export const PointsTable = () => {
     },
     {
       id: 2,
-      name: "Vishnu Blaster",
+      name: "KB Kings",
       logo: "./images/logo6.jpeg",
       played: 0,
       won: 0,

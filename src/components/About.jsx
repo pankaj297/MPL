@@ -215,10 +215,10 @@ export const About = () => {
           <div className={styles.teamCard}>
             <img
               src="./images/logo6.jpeg"
-              alt="Vishnu Blaster Logo"
+              alt="KB Kings Logo"
               className={styles.teamLogo}
             />
-            <h3 className={styles.teamName}>Vishnu Blaster</h3>
+            <h3 className={styles.teamName}>KB Kings</h3>
             <p className={styles.teamOwner}>Owner: Vishnu Kailash Rathod</p>
           </div>
 
@@ -230,7 +230,7 @@ export const About = () => {
               className={styles.teamLogo}
             />
             <h3 className={styles.teamName}>Ram Rajya Pratishthan</h3>
-            <p className={styles.teamOwner}>Owner: Umesh Rathod</p>
+            <p className={styles.teamOwner}>Owner: Pavan Rathod</p>
           </div>
           {/* Team 7 */}
           <div className={styles.teamCard}>

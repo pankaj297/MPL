@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./design/Teams.module.css"; // Importing the CSS Module
 
+const TOTAL_PURSE = 6000;
+const BASE_PRICE = 200;
+const TARGET_PLAYERS = 12;
+// Set to 1 and 1000 only if retained player is NOT already inside /getfinalisedbiddings
+const RETAINED_PLAYERS_COUNT = 0;
+const RETAINED_COST = 0;
+
 export const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +22,7 @@ export const Teams = () => {
       owner: "Ganesh Chavan",
       logo: "./images/logo2.jpeg",
       profile: "./images/001.jpeg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 2,
@@ -24,7 +31,7 @@ export const Teams = () => {
       owner: "Dipak Ashok Naik",
       logo: "./images/logo3.jpg",
       profile: "./images/O2.jpeg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 3,
@@ -33,7 +40,7 @@ export const Teams = () => {
       owner: "Dr Ravindra Rathod",
       logo: "./images/logoJijau.jpeg",
       profile: "./images/003.jpg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 4,
@@ -42,25 +49,25 @@ export const Teams = () => {
       owner: "Kiran Pawar & Rahul Pawar",
       logo: "./images/logo8.jpeg",
       profile: "./images/08.jpeg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 5,
       mpl: "Malkheda Primer League",
-      name: "Vishnu Blaster",
+      name: "KB Kings",
       owner: "Vishnu Kailash Rathod",
       logo: "./images/logo6.jpeg",
       profile: "./images/O5.jpeg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 6,
       mpl: "Malkheda Primer League",
       name: "Ram Rajya Pratishthan",
-      owner: "Umesh Rathod",
+      owner: "Pavan Rathod",
       logo: "./images/logo4.png",
-      profile: "./images/04.jpeg",
-      totalPurse: 6000,
+      profile: "./images/04.jpg",
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 7,
@@ -69,7 +76,7 @@ export const Teams = () => {
       owner: "Sagar Chavan",
       logo: "./images/logo07.jpg",
       profile: "./images/007.jpg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
     {
       id: 8,
@@ -78,42 +85,99 @@ export const Teams = () => {
       owner: "Suresh Naik",
       logo: "./images/logo08.jpg",
       profile: "./images/008.jpg",
-      totalPurse: 6000,
+      totalPurse: TOTAL_PURSE,
     },
   ];
+
+  const buildAuctionAlert = (squadSize, remainingPurse) => {
+    const playersNeeded = Math.max(0, TARGET_PLAYERS - squadSize);
+
+    if (playersNeeded === 0) {
+      return {
+        isRedAlert: true,
+        playersNeeded: 0,
+        reservedAmount: 0,
+        nextPlayerMaxBid: 0,
+        message: `ALERT: Minimum ${TARGET_PLAYERS} players complete! No more bids needed.`,
+      };
+    }
+
+    // Reserve ₹200 base price for players needed AFTER the current/next player
+    const playersAfterNext = Math.max(0, playersNeeded - 1);
+    const reservedAmount = playersAfterNext * BASE_PRICE;
+    const nextPlayerMaxBid = Math.max(0, remainingPurse - reservedAmount);
+    const totalBaseNeededAllRemaining = playersNeeded * BASE_PRICE;
+
+    if (remainingPurse < totalBaseNeededAllRemaining) {
+      return {
+        isRedAlert: true,
+        playersNeeded,
+        reservedAmount,
+        nextPlayerMaxBid,
+        message: `RED ALERT: Purse ₹${remainingPurse} is below ₹${totalBaseNeededAllRemaining} needed for ${playersNeeded} players (@₹${BASE_PRICE} base)!`,
+      };
+    }
+
+    if (nextPlayerMaxBid <= BASE_PRICE + 120) {
+      return {
+        isRedAlert: true,
+        playersNeeded,
+        reservedAmount,
+        nextPlayerMaxBid,
+        message: `RED ALERT: ${playersNeeded} players left, Purse ₹${remainingPurse} (Reserve ₹${reservedAmount}). Max next bid: ₹${nextPlayerMaxBid}!`,
+      };
+    }
+
+    return {
+      isRedAlert: false,
+      playersNeeded,
+      reservedAmount,
+      nextPlayerMaxBid,
+      message: `${playersNeeded} players needed · Purse ₹${remainingPurse} · Max next bid ₹${nextPlayerMaxBid} (Reserve ₹${reservedAmount})`,
+    };
+  };
 
   useEffect(() => {
     const fetchPlayerData = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/getfinalisedbiddings"
+          "https://mpl-backend-5gc6.onrender.com/api/finalisedbiddings/getfinalisedbiddings",
         );
         const data = await response.json();
+        const records = Array.isArray(data)
+          ? data
+          : data.data || data.biddings || [];
 
         const updatedTeams = teamData.map((team) => {
-          const teamPlayers = data.filter(
+          const teamPlayers = records.filter(
             (player) =>
               player.lastBiddingTeam?.trim().toLowerCase() ===
-              team.name.trim().toLowerCase()
+              team.name.trim().toLowerCase(),
           );
 
-          const totalSpent = teamPlayers.reduce(
-            (sum, player) => sum + player.currentBid,
-            0
+          const bidsSpent = teamPlayers.reduce(
+            (sum, player) => sum + (Number(player.currentBid) || 0),
+            0,
           );
+
+          const totalSpent = bidsSpent + RETAINED_COST;
+          const remainingPurse = Math.max(0, team.totalPurse - totalSpent);
+          const squadSize = teamPlayers.length + RETAINED_PLAYERS_COUNT;
+          const alertInfo = buildAuctionAlert(squadSize, remainingPurse);
 
           return {
             ...team,
             players: teamPlayers.map((player, index) => ({
               id: index + 1,
               name: player.name,
-              role: player.position || "All Rounder", // Default if missing
+              role: player.position || "All Rounder",
               age: player.age || "N/A",
               price: player.currentBid,
             })),
-            remainingPurse: team.totalPurse - totalSpent,
-            squadSize: teamPlayers.length,
+            remainingPurse,
+            squadSize,
+            alertInfo,
           };
         });
 
@@ -139,8 +203,6 @@ export const Teams = () => {
 
     const newWindow = window.open("", "", "width=800,height=800");
 
-    // We inject inline styles into the print window to ensure it looks good
-    // without relying on the external CSS file which might not load fast enough in print view
     newWindow.document.write(`
       <html>
         <head>
@@ -154,11 +216,11 @@ export const Teams = () => {
             .meta { display: flex; justify-content: space-between; margin-bottom: 20px; background: #f4f4f4; padding: 15px; border-radius: 8px; }
             .meta-item strong { display: block; font-size: 12px; color: #666; text-transform: uppercase; }
             .meta-item span { font-size: 16px; font-weight: bold; }
+            .alert-box { padding: 12px 14px; border-radius: 6px; margin-bottom: 20px; font-weight: bold; background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
             table { width: 100%; border-collapse: collapse; font-size: 14px; }
             th { background-color: #3498db; color: white; padding: 12px; text-align: left; }
             td { padding: 10px; border-bottom: 1px solid #ddd; }
             tr:nth-child(even) { background-color: #f9f9f9; }
-            .total-row { font-weight: bold; background-color: #eee; }
             .footer { margin-top: 50px; text-align: center; font-size: 12px; color: #999; border-top: 1px  solid #ddd;  padding-top: 3px; }
           </style>
         </head>
@@ -180,9 +242,11 @@ export const Teams = () => {
               team.remainingPurse
             }</span></div>
             <div class="meta-item"><strong>Squad Size</strong><span>${
-              team.players.length
-            }</span></div>
+              team.squadSize
+            }/${TARGET_PLAYERS}</span></div>
           </div>
+
+          <div class="alert-box">${team.alertInfo?.message || ""}</div>
 
           <table>
             <thead>
@@ -205,7 +269,7 @@ export const Teams = () => {
                   <td>${p.age}</td>
                   <td>₹${p.price}</td>
                 </tr>
-              `
+              `,
                 )
                 .join("")}
             </tbody>
@@ -214,7 +278,6 @@ export const Teams = () => {
           <div class="footer">Generated by MPL Official Portal</div>
         </body>
       </html>
-      
     `);
     newWindow.document.close();
     newWindow.print();
@@ -225,7 +288,8 @@ export const Teams = () => {
       <div className={styles.headerContainer}>
         <h2 className={styles.title}>Participating Teams</h2>
         <p className={styles.subtitle}>
-          Malkheda Premier League Auction Status
+          Malkheda Premier League Auction Status · Purse ₹{TOTAL_PURSE} · Min{" "}
+          {TARGET_PLAYERS} Players · Base ₹{BASE_PRICE}
         </p>
       </div>
 
@@ -233,110 +297,153 @@ export const Teams = () => {
         <div className={styles.loadingContainer}>Loading Teams Data...</div>
       ) : (
         <div className={styles.teamsGrid}>
-          {teams.map((team) => (
-            <div key={team.id} className={styles.teamCard}>
-              {/* Top Section: Logos */}
-              <div className={styles.cardHeader}>
-                <div className={styles.logoContainer}>
-                  <img
-                    src={team.logo}
-                    alt="Team Logo"
-                    className={styles.teamLogo}
-                  />
-                  <span className={styles.imageLabel}>Team</span>
-                </div>
-                <div className={styles.logoContainer}>
-                  <img
-                    src={team.profile}
-                    alt="Owner"
-                    className={styles.ownerImage}
-                  />
-                  <span className={styles.imageLabel}>Owner</span>
-                </div>
-              </div>
+          {teams.map((team) => {
+            const alert = team.alertInfo || {
+              isRedAlert: false,
+              playersNeeded: TARGET_PLAYERS,
+              reservedAmount: (TARGET_PLAYERS - 1) * BASE_PRICE,
+              nextPlayerMaxBid: team.remainingPurse,
+              message: "",
+            };
 
-              {/* Middle Section: Info */}
-              <div className={styles.cardBody}>
-                <h3 className={styles.teamName}>{team.name}</h3>
-                <div className={styles.ownerName}>Owner: {team.owner}</div>
-
-                <div className={styles.statsContainer}>
-                  <div className={styles.statItem}>
-                    <span className={styles.statLabel}>Squad</span>
-                    <span className={styles.statValue}>{team.squadSize}</span>
+            return (
+              <div key={team.id} className={styles.teamCard}>
+                {/* Top Section: Logos */}
+                <div className={styles.cardHeader}>
+                  <div className={styles.logoContainer}>
+                    <img
+                      src={team.logo}
+                      alt="Team Logo"
+                      className={styles.teamLogo}
+                    />
+                    <span className={styles.imageLabel}>Team</span>
                   </div>
-                  <div className={styles.statItem}>
-                    <span className={styles.statLabel}>Total Purse</span>
-                    <span className={`${styles.statValue} ${styles.highlight}`}>
-                      ₹{team.totalPurse}
-                    </span>
-                  </div>
-                  <div className={styles.statItem}>
-                    <span className={styles.statLabel}>Remaining</span>
-                    <span className={`${styles.statValue} ${styles.highlight}`}>
-                      ₹{team.remainingPurse}
-                    </span>
+                  <div className={styles.logoContainer}>
+                    <img
+                      src={team.profile}
+                      alt="Owner"
+                      className={styles.ownerImage}
+                    />
+                    <span className={styles.imageLabel}>Owner</span>
                   </div>
                 </div>
 
-                <div className={styles.buttonGroup}>
-                  <button
-                    className={`${styles.btn} ${styles.btnPrimary}`}
-                    onClick={() => handleToggleDetails(team.id)}
+                {/* Middle Section: Info */}
+                <div className={styles.cardBody}>
+                  <h3 className={styles.teamName}>{team.name}</h3>
+                  <div className={styles.ownerName}>Owner: {team.owner}</div>
+
+                  {/* Bidding Guidance & Red Alert Box */}
+                  <div
+                    role="alert"
+                    style={{
+                      margin: "10px 0 14px",
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      fontSize: "12.5px",
+                      lineHeight: "1.45",
+                      fontWeight: alert.isRedAlert ? "600" : "500",
+                      backgroundColor: alert.isRedAlert ? "#fee2e2" : "#eff6ff",
+                      color: alert.isRedAlert ? "#991b1b" : "#1e3a8a",
+                      border: alert.isRedAlert
+                        ? "1.5px solid #ef4444"
+                        : "1px solid #bfdbfe",
+                    }}
                   >
-                    {selectedTeamId === team.id ? "Close Squad" : "View Squad"}
-                  </button>
-                  <button
-                    className={`${styles.btn} ${styles.btnOutline}`}
-                    onClick={() => handlePrint(team.id)}
-                  >
-                    Print
-                  </button>
-                </div>
-              </div>
+                    <div>{alert.message}</div>
+                    <div style={{ marginTop: "4px", fontSize: "11.5px" }}>
+                      Need <strong>{alert.playersNeeded}</strong> more · Purse{" "}
+                      <strong>₹{team.remainingPurse}</strong> · Max Bid{" "}
+                      <strong>₹{alert.nextPlayerMaxBid}</strong>
+                    </div>
+                  </div>
 
-              {/* Bottom Section: Collapsible Table */}
-              {selectedTeamId === team.id && (
-                <div className={styles.detailsSection}>
-                  <h4 className={styles.detailsTitle}>Squad List</h4>
-                  <div className={styles.tableWrapper}>
-                    {team.players.length > 0 ? (
-                      <table className={styles.table}>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th>Price</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {team.players.map((player) => (
-                            <tr key={player.id}>
-                              <td>{player.id}</td>
-                              <td>{player.name}</td>
-                              <td>
-                                <span className={styles.roleBadge}>
-                                  {player.role}
-                                </span>
-                              </td>
-                              <td className={styles.priceTag}>
-                                ₹{player.price}
-                              </td>
+                  <div className={styles.statsContainer}>
+                    <div className={styles.statItem}>
+                      <span className={styles.statLabel}>Squad</span>
+                      <span className={styles.statValue}>
+                        {team.squadSize}/{TARGET_PLAYERS}
+                      </span>
+                    </div>
+                    <div className={styles.statItem}>
+                      <span className={styles.statLabel}>Total Purse</span>
+                      <span
+                        className={`${styles.statValue} ${styles.highlight}`}
+                      >
+                        ₹{team.totalPurse}
+                      </span>
+                    </div>
+                    <div className={styles.statItem}>
+                      <span className={styles.statLabel}>Remaining</span>
+                      <span
+                        className={`${styles.statValue} ${styles.highlight}`}
+                      >
+                        ₹{team.remainingPurse}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className={styles.buttonGroup}>
+                    <button
+                      className={`${styles.btn} ${styles.btnPrimary}`}
+                      onClick={() => handleToggleDetails(team.id)}
+                    >
+                      {selectedTeamId === team.id
+                        ? "Close Squad"
+                        : "View Squad"}
+                    </button>
+                    <button
+                      className={`${styles.btn} ${styles.btnOutline}`}
+                      onClick={() => handlePrint(team.id)}
+                    >
+                      Print
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bottom Section: Collapsible Table */}
+                {selectedTeamId === team.id && (
+                  <div className={styles.detailsSection}>
+                    <h4 className={styles.detailsTitle}>Squad List</h4>
+                    <div className={styles.tableWrapper}>
+                      {team.players.length > 0 ? (
+                        <table className={styles.table}>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Name</th>
+                              <th>Role</th>
+                              <th>Price</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    ) : (
-                      <p style={{ textAlign: "center", color: "#94a3b8" }}>
-                        No players purchased yet.
-                      </p>
-                    )}
+                          </thead>
+                          <tbody>
+                            {team.players.map((player) => (
+                              <tr key={player.id}>
+                                <td>{player.id}</td>
+                                <td>{player.name}</td>
+                                <td>
+                                  <span className={styles.roleBadge}>
+                                    {player.role}
+                                  </span>
+                                </td>
+                                <td className={styles.priceTag}>
+                                  ₹{player.price}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <p style={{ textAlign: "center", color: "#94a3b8" }}>
+                          No players purchased yet.
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

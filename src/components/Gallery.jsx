@@ -66,7 +66,7 @@ export const Gallery = () => {
     <div className={styles.galleryPage}>
       <div className={styles.gallerySection}>
         <h2>Gallery</h2>
-        <p className={styles.gallerySubtitle}>Moments from MPL 2024</p>
+        <p className={styles.gallerySubtitle}>Moments from MPL 2024 - 2027</p>
 
         <div className={styles.galleryGrid}>
           {currentImages.map((image) => (

@@ -30,7 +30,7 @@ export const TotalSoldOutPlayers = () => {
     // Build table rows with Retain / Sold status logic for print
     const rowsHtml = soldOutPlayers
       .map((player, index) => {
-        const isRetain = index < 12;
+        const isRetain = index < 8;
         const statusText = isRetain ? "Retain" : "Sold";
         const statusClass = isRetain ? "status retain" : "status sold";
 
